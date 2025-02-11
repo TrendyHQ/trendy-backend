@@ -147,10 +147,14 @@ public class MainController {
      */
 
     @PatchMapping("/auth0/updateUserInformation")
-    public ResponseEntity<String> updateUserInformation(@RequestBody String request) {
+    public ResponseEntity<String> updateUserInformation(@RequestBody UpdateUserRequest request) {
         try {
-            System.out.println("\n\n" + request + "\n\n"); // Debugging: Check if the request is parsed correctly
-            return ResponseEntity.ok(request);
+            String accessToken = getAccessToken();
+            setUserInformation(request.getToUpdate(), accessToken, request.getUserId());
+
+            System.out.println("\n\n" + request.getToUpdate() + "\n\n"); // Debugging: Check if the request is parsed
+                                                                         // correctly
+            return ResponseEntity.ok(request.getToUpdate());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to receive data");
@@ -382,6 +386,19 @@ public class MainController {
         }
     }
 
+    public static class UpdateUserRequest {
+        private String userId;
+        private String toUpdate;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getToUpdate() {
+            return toUpdate;
+        }
+    }
+
     private String getAccessToken() throws Exception {
 
         String jsonBody = "{\"client_id\":\"" + CLIENT_ID + "\",\"client_secret\":\"" + CLIENT_SECRET
@@ -398,7 +415,7 @@ public class MainController {
         return accessToken;
     }
 
-    private void setUserProperty(String requestBody, String accessToken, String userId) throws Exception {
+    private void setUserInformation(String requestBody, String accessToken, String userId) throws Exception {
         String encodedUserId;
         if (userId.contains("%")) {
             encodedUserId = userId;
@@ -414,6 +431,7 @@ public class MainController {
                 .header("cache-control", "no-cache")
                 .body(requestBody)
                 .asString();
+
     }
 
     private CompletableFuture<RedditPost[]> requestDataFromReddit(TopRedditData redditData, String subredditName,

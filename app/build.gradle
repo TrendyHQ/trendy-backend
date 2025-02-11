@@ -1,0 +1,85 @@
+plugins {
+    id 'application'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'java'
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url = uri("https://maven.scijava.org/content/groups/public")
+    }
+}
+
+dependencies {
+    // Spring Boot dependencies
+    implementation 'org.springframework.boot:spring-boot-starter-web:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-security:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-json:3.4.2'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.4.2'
+
+    // Auth0 Management API SDK
+    implementation 'com.auth0:auth0:2.17.0'
+
+    implementation 'com.konghq:unirest-java-core:4.4.5'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'io.github.cdimascio:dotenv-java:3.1.0'
+    implementation 'software.amazon.awssdk:s3:2.17.0'
+    implementation 'net.dean.jraw:JRAW:1.1.0'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'com.azure:azure-ai-inference:1.0.0-beta.2'
+    
+    // Optional: Spring Boot DevTools for better development experience
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Optional: Testing dependencies
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.11.4'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.11.4'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.8.2'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+        resources {
+            srcDirs = ['src/test/resources']
+        }
+    }
+}
+
+application {
+    mainClass = 'auth0.MainController'
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter('5.11.4')
+        }
+    }
+}
+
+tasks.bootRun {
+    doFirst {
+        println "Starting Spring Boot application..."
+    }
+}

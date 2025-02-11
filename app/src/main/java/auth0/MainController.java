@@ -131,32 +131,55 @@ public class MainController {
         }
     }
 
-    @GetMapping("/auth0/getLoginInformation")
-    public ResponseEntity<String> getLoginInformation(@RequestParam("userId") String userId) {
+    @GetMapping("/auth0/getUserProperty")
+    public ResponseEntity<String> getUserProperty(@RequestParam String property, @RequestParam String userId) {
+        String[] validProperties = {
+                "nickname",
+                "picture",
+        };
+        String[] validAppMetaDataProperties = {
+                "hasSetUpAccount",
+        };
+        String[] validUserMetaDataProperties = {
+                "gender",
+        };
+
         try {
-            String accessToken = getAccessToken();
-            String encodedUserId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
-            HttpResponse<String> auth0ApiResponse = Unirest
-                    .get("https://" + DOMAIN + "/api/v2/users/" + encodedUserId)
-                    .header("authorization", "Bearer " + accessToken)
-                    .header("Content-Type", "application/json")
-                    .header("cache-control", "no-cache")
-                    .asString();
+            if (Arrays.asList(validProperties).contains(property)) {
+                JsonObject jsonResponse = getAuth0Info(userId);
+                String requestedProperty = jsonResponse.get(property).getAsString();
 
-            JsonObject jsonResponse = JsonParser.parseString(auth0ApiResponse.getBody()).getAsJsonObject();
-            int loginAmount = jsonResponse.get("logins_count").getAsInt();
-            boolean hasSetUpAccount = jsonResponse.has("app_metadata") &&
-                    jsonResponse.get("app_metadata").getAsJsonObject().has("hasSetUpAccount") &&
-                    jsonResponse.get("app_metadata").getAsJsonObject().get("hasSetUpAccount").getAsBoolean();
+                return ResponseEntity.ok(requestedProperty);
+            } else {
+                if (Arrays.asList(validAppMetaDataProperties).contains(property)) {
+                    JsonObject jsonResponse = getAuth0Info(userId);
+                    String requestedProperty = "";
 
-            JsonObject result = new JsonObject();
-            result.addProperty("loginAmount", loginAmount);
-            result.addProperty("hasSetUpAccount", hasSetUpAccount);
+                    if (jsonResponse.has("app_metadata") &&
+                            jsonResponse.get("app_metadata").getAsJsonObject().has(property)) {
+                        requestedProperty = jsonResponse.get("app_metadata").getAsJsonObject().get(property)
+                                .getAsString();
+                    }
 
-            return ResponseEntity.ok(result.toString());
+                    return ResponseEntity.ok(requestedProperty);
+                } else if (Arrays.asList(validUserMetaDataProperties).contains(property)) {
+                    JsonObject jsonResponse = getAuth0Info(userId);
+                    String requestedProperty = "";
+
+                    if (jsonResponse.has("user_metadata") &&
+                            jsonResponse.get("user_metadata").getAsJsonObject().has(property)) {
+                        requestedProperty = jsonResponse.get("user_metadata").getAsJsonObject().get(property)
+                                .getAsString();
+                    }
+
+                    return ResponseEntity.ok(requestedProperty);
+                } else {
+                    return ResponseEntity.badRequest().body("Invalid user property");
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("Failed to get login information");
+            return ResponseEntity.badRequest().body("Failed to get user property");
         }
     }
 
@@ -402,6 +425,20 @@ public class MainController {
                 .body(requestBody)
                 .asString();
 
+    }
+
+    private JsonObject getAuth0Info(String userId) throws Exception {
+        String accessToken = getAccessToken();
+
+        String encodedUserId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
+        HttpResponse<String> auth0ApiResponse = Unirest
+                .get("https://" + DOMAIN + "/api/v2/users/" + encodedUserId)
+                .header("authorization", "Bearer " + accessToken)
+                .header("Content-Type", "application/json")
+                .header("cache-control", "no-cache")
+                .asString();
+
+        return JsonParser.parseString(auth0ApiResponse.getBody()).getAsJsonObject();
     }
 
     private CompletableFuture<RedditPost[]> requestDataFromReddit(TopRedditData redditData, String subredditName,

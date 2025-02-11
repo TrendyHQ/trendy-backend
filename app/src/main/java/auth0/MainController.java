@@ -12,12 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -44,117 +46,56 @@ public class MainController {
 
     Dotenv dotenv = Dotenv.load();
 
-    final String DOMAIN = dotenv.get("VITE_AUTH0_DOMAIN");
-    final String CLIENT_ID = dotenv.get("VITE_MANAGEMENT_AUTH0_CLIENT_ID");
-    final String CLIENT_SECRET = dotenv.get("VITE_MANAGEMENT_AUTH0_CLIENT_SECRET");
-
-    /*
-     * @PutMapping("/auth0/update-nickname")
-     * public ResponseEntity<String> publicEndpoint(@RequestBody UserUpdateRequest
-     * request) throws Exception {
-     * try {
-     * 
-     * String userId = request.getUserId();
-     * String newNickname = request.getNewNickname();
-     * 
-     * String accessToken = getAccessToken();
-     * 
-     * JsonObject requestBodyJson = new JsonObject();
-     * requestBodyJson.addProperty("nickname", newNickname);
-     * String requestBody = requestBodyJson.toString();
-     * 
-     * setUserProperty(requestBody, accessToken, userId);
-     * return ResponseEntity.ok("Nickname updated successfully");
-     * } catch (Exception e) {
-     * return ResponseEntity.badRequest().body("Failed to update nickname");
-     * }
-     * }
-     * 
-     * @PutMapping("/auth0/update-picture")
-     * public ResponseEntity<String> updatePicture(
-     * 
-     * @RequestParam("userId") String userId,
-     * 
-     * @RequestPart("file") MultipartFile file) throws Exception {
-     * try {
-     * MultipartFile newPicture = file;
-     * 
-     * String fileUrl = new UploadFile().uploadToS3(newPicture);
-     * 
-     * String accessToken = getAccessToken();
-     * 
-     * JsonObject requestBodyJson = new JsonObject();
-     * requestBodyJson.addProperty("picture", fileUrl);
-     * String requestBody = requestBodyJson.toString();
-     * 
-     * setUserProperty(requestBody, accessToken, userId);
-     * 
-     * return ResponseEntity.ok("Nickname updated successfully");
-     * 
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * return ResponseEntity.badRequest().body("Failed to update nickname");
-     * }
-     * 
-     * }
-     * 
-     * @PutMapping("/auth0/setHasSetUpAccount")
-     * public ResponseEntity<String> setHasSetUpAccount(@RequestBody LoginRequest
-     * request) {
-     * final boolean testing = true;
-     * try {
-     * if (!testing) {
-     * String accessToken = getAccessToken();
-     * 
-     * JsonObject requestBodyJson = new JsonObject();
-     * JsonObject appMetadata = new JsonObject();
-     * 
-     * appMetadata.addProperty("hasSetUpAccount", true);
-     * requestBodyJson.add("app_metadata", appMetadata);
-     * 
-     * String requestBody = requestBodyJson.toString();
-     * 
-     * setUserProperty(requestBody, accessToken, request.getUserId());
-     * }
-     * return ResponseEntity.ok("User has set up account");
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * return
-     * ResponseEntity.badRequest().body("Failed to set has set up account in");
-     * }
-     * }
-     * 
-     * @PutMapping("/auth0/setUserGender")
-     * public ResponseEntity<String> setUserGender(@RequestBody GenderUpdateRequest
-     * request) {
-     * try {
-     * String accessToken = getAccessToken();
-     * 
-     * JsonObject requestBodyJson = new JsonObject();
-     * JsonObject userMetadata = new JsonObject();
-     * 
-     * userMetadata.addProperty("gender", request.getGender());
-     * requestBodyJson.add("user_metadata", userMetadata);
-     * 
-     * String requestBody = requestBodyJson.toString();
-     * setUserProperty(requestBody, accessToken, request.getUserId());
-     * return ResponseEntity.ok("User gender updated successfully");
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * return ResponseEntity.badRequest().body("Failed to set user gender");
-     * }
-     * }
-     */
+    final String DOMAIN = dotenv.get("AUTH0_DOMAIN");
+    final String CLIENT_ID = dotenv.get("MANAGEMENT_AUTH0_CLIENT_ID");
+    final String CLIENT_SECRET = dotenv.get("MANAGEMENT_AUTH0_CLIENT_SECRET");
 
     @PatchMapping("/auth0/updateUserInformation")
     public ResponseEntity<String> updateUserInformation(@RequestBody UpdateUserRequest request) {
         try {
-            String accessToken = getAccessToken();
-            setUserInformation(request.getToUpdate(), accessToken, request.getUserId());
+            // String accessToken = getAccessToken();
 
-            System.out.println("\n\n" + request.getToUpdate() + "\n\n"); // Debugging: Check if the request is parsed
+            JsonObject updateJson = JsonParser.parseString(request.getToUpdate()).getAsJsonObject();
+            JsonObject filteredJson = new JsonObject();
+            
+            for (Map.Entry<String, JsonElement> entry : updateJson.entrySet()) {
+                JsonElement value = entry.getValue();
+                if (!value.isJsonNull()) {
+                    if (value.isJsonObject()) {
+                        JsonObject nestedObj = value.getAsJsonObject();
+                        JsonObject filteredNested = new JsonObject();
+                        for (Map.Entry<String, JsonElement> nestedEntry : nestedObj.entrySet()) {
+                            JsonElement nestedValue = nestedEntry.getValue();
+                            if (!nestedValue.isJsonNull()) {
+                                if (nestedValue.isJsonPrimitive() && nestedValue.getAsJsonPrimitive().isString()) {
+                                    if (!nestedValue.getAsString().isEmpty()) {
+                                        filteredNested.add(nestedEntry.getKey(), nestedValue);
+                                    }
+                                } else {
+                                    filteredNested.add(nestedEntry.getKey(), nestedValue);
+                                }
+                            }
+                        }
+                        if (filteredNested.entrySet().size() > 0) {
+                            filteredJson.add(entry.getKey(), filteredNested);
+                        }
+                    } else if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isString()) {
+                        if (!value.getAsString().isEmpty()) {
+                            filteredJson.add(entry.getKey(), value);
+                        }
+                    } else {
+                        filteredJson.add(entry.getKey(), value);
+                    }
+                }
+            }
+
+            String cleanedUpdate = filteredJson.toString();
+
+            // setUserInformation(cleanedUpdate, accessToken, request.getUserId());
+
+            System.out.println("\n\n" + cleanedUpdate + "\n\n"); // Debugging: Check if the request is parsed
                                                                          // correctly
-            return ResponseEntity.ok(request.getToUpdate());
+            return ResponseEntity.ok(cleanedUpdate); // Update response to return cleanedUpdate instead of request.getToUpdate()
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to receive data");

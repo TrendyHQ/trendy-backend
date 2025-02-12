@@ -2,10 +2,14 @@ package auth0;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -131,10 +135,37 @@ public class MainController {
         }
     }
 
+    @PutMapping("/auth0/update-picture")
+    public ResponseEntity<String> updatePicture(
+
+            @RequestParam("userId") String userId,
+
+            @RequestPart("file") MultipartFile file) throws Exception {
+        try {
+            MultipartFile newPicture = file;
+
+            String fileUrl = new UploadFile().uploadToS3(newPicture);
+
+            String accessToken = getAccessToken();
+
+            JsonObject requestBodyJson = new JsonObject();
+            requestBodyJson.addProperty("picture", fileUrl);
+            String requestBody = requestBodyJson.toString();
+
+            setUserInformation(requestBody, accessToken, userId);
+
+            return ResponseEntity.ok("Picture updated successfully");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to update picture");
+        }
+
+    }
+
     @GetMapping("/auth0/getUserProperty")
     public ResponseEntity<String> getUserProperty(@RequestParam String property, @RequestParam String userId) {
         String[] validProperties = {
-                "nickname",
                 "picture",
         };
         String[] validAppMetaDataProperties = {
@@ -142,6 +173,7 @@ public class MainController {
         };
         String[] validUserMetaDataProperties = {
                 "gender",
+                "birthDate",
         };
 
         try {

@@ -28,6 +28,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import dataManagement.UserManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import kong.unirest.core.HttpResponse;
 import kong.unirest.core.Unirest;
@@ -349,6 +350,28 @@ public class MainController {
         }
     }
 
+    UserManager userManager = new UserManager();
+
+    @PatchMapping("/users/saveTrend")
+    public ResponseEntity<String> saveTrend(@RequestBody TrendSaveRequest request) {
+        try {
+            userManager.saveTrendForUser(request.getUserId(), request.getTrendId(), request.getSaveTrend());
+
+            return ResponseEntity.ok("Trend saved successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to save trend");
+        }
+    }
+
+    @GetMapping("/users/getSavedTrends")
+    public ResponseEntity<String> getSavedTrends(@RequestParam String userId) {
+        ArrayList<String> savedTrends = userManager.getSavedTrendsForUser(userId);
+        String jsonSavedTrends = new Gson().toJson(savedTrends.toArray());
+        return ResponseEntity.ok(jsonSavedTrends);
+    }
+    
+
     public static class UserUpdateRequest {
         private String userId;
         private String newNickname;
@@ -408,6 +431,24 @@ public class MainController {
 
         public String getGender() {
             return gender;
+        }
+    }
+
+    public static class TrendSaveRequest {
+        private String userId;
+        private String trendId;
+        private boolean saveTrend;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getTrendId() {
+            return trendId;
+        }
+
+        public boolean getSaveTrend() {
+            return saveTrend;
         }
     }
 

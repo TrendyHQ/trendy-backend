@@ -85,7 +85,8 @@ public class TopRedditData {
                     RedditDataStorage storage = new RedditDataStorage();
                     storage.storeRedditPostData(post);
 
-                    posts.add(new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link));
+                    posts.add(new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link,
+                            postId));
                 }
             }
 
@@ -107,15 +108,17 @@ public class TopRedditData {
         private int moreRelevantValue;
         private String moreInfo;
         private String link;
+        private String id;
 
         public RedditPost(String title, String category, int moreRelevantValue, int score, String moreInfo,
-                String link) {
+                String link, String id) {
             this.title = title;
             this.category = category;
             this.moreRelevantValue = moreRelevantValue;
             this.score = score;
             this.moreInfo = moreInfo;
             this.link = link;
+            this.id = id;
         }
 
         public int getScore() {

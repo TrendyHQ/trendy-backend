@@ -34,8 +34,9 @@ import kong.unirest.core.HttpResponse;
 import kong.unirest.core.Unirest;
 import trendData.aiData.AiModelRequest;
 import trendData.redditData.RedditClientManager;
-import trendData.redditData.TopRedditData;
-import trendData.redditData.TopRedditData.RedditPost;
+import trendData.redditData.RedditDataFetcher;
+import trendData.redditData.RedditDataFetcher.FavoritePost;
+import trendData.redditData.RedditDataFetcher.RedditPost;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -221,7 +222,7 @@ public class MainController {
     @PostMapping("/reddit/topReddit")
     public ResponseEntity<String> getTopRedditData() throws SQLException {
         try {
-            TopRedditData redditData = new TopRedditData();
+            RedditDataFetcher redditData = new RedditDataFetcher();
 
             CompletableFuture<RedditPost[]> fashionFuture = requestDataFromReddit(redditData, "fashion",
                     redditClientManager);
@@ -314,7 +315,7 @@ public class MainController {
     public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
         try {
             int limit = 30;
-            TopRedditData redditData = new TopRedditData();
+            RedditDataFetcher redditData = new RedditDataFetcher();
             RedditPost[] posts = redditData.getData(entity, redditClientManager, limit);
 
             // Collect all posts into a single list
@@ -366,11 +367,21 @@ public class MainController {
 
     @GetMapping("/users/getSavedTrends")
     public ResponseEntity<String> getSavedTrends(@RequestParam String userId) {
-        ArrayList<String> savedTrends = userManager.getSavedTrendsForUser(userId);
+        ArrayList<String> savedTrends = userManager.getUsersFavoritePostsIds(userId);
         String jsonSavedTrends = new Gson().toJson(savedTrends.toArray());
         return ResponseEntity.ok(jsonSavedTrends);
     }
+
+    @GetMapping("/users/getUsersTrends")
+    public ResponseEntity<String> getUsersTrends(@RequestParam String userId) throws SQLException {
+        RedditDataFetcher redditData = new RedditDataFetcher();
     
+        FavoritePost[] favoritePosts = redditData.getFavoritePosts(userId, redditClientManager);
+
+        String jsonResponse = new Gson().toJson(favoritePosts);
+
+        return ResponseEntity.ok(jsonResponse);
+    }
 
     public static class UserUpdateRequest {
         private String userId;
@@ -514,7 +525,7 @@ public class MainController {
         return JsonParser.parseString(auth0ApiResponse.getBody()).getAsJsonObject();
     }
 
-    private CompletableFuture<RedditPost[]> requestDataFromReddit(TopRedditData redditData, String subredditName,
+    private CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
             RedditClientManager redditClientManager) {
         return CompletableFuture.supplyAsync(() -> {
             try {

@@ -1,5 +1,9 @@
 package trendData.redditData;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
+import dataManagement.UserManager;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Submission;
 import net.dean.jraw.models.Subreddit;
@@ -17,7 +22,7 @@ import net.dean.jraw.pagination.Paginator;
 import net.dean.jraw.references.SubredditReference;
 import net.dean.jraw.models.SubredditSort;
 
-public class TopRedditData {
+public class RedditDataFetcher {
     public RedditPost[] getData(String subredditName, RedditClientManager redditClientManager, int limit)
             throws SQLException {
 
@@ -28,6 +33,7 @@ public class TopRedditData {
         if (redditClientManager.getClient() == null) {
             redditClientManager.autherizeClient();
         }
+
         RedditClient redditClient = redditClientManager.getClient();
 
         if (redditClient != null) {
@@ -100,6 +106,46 @@ public class TopRedditData {
         return null;
     }
 
+    public FavoritePost[] getFavoritePosts(String userId, RedditClientManager redditClientManager) throws SQLException {
+        ArrayList<String> postIds = new UserManager().getUsersFavoritePostsIds(userId);
+
+        if (redditClientManager.getClient() == null) {
+            redditClientManager.autherizeClient();
+        }
+
+        RedditClient redditClient = redditClientManager.getClient();
+
+        // Collect the titles of the top posts
+        List<FavoritePost> posts = new ArrayList<>();
+
+        if (redditClient != null) {
+            postIds.forEach((postId) -> {
+                try {
+                    Submission post = redditClient.submission(postId).inspect();
+
+                    int score = post.getScore();
+                    String moreInfo = post.getSelfText();
+                    String link = post.getUrl();
+    
+                    if (!post.getTitle().contains("r/") && !post.isNsfw()) {        
+                        posts.add(new FavoritePost(post.getTitle(), score, moreInfo, link,
+                                postId));
+                    }    
+                } catch (Exception e) {
+                }
+            });
+
+            FavoritePost[] arrayOfPosts = new FavoritePost[posts.size()];
+            for (int i = 0; i < posts.size(); i++) {
+                arrayOfPosts[i] = posts.get(i);
+            }
+
+            return arrayOfPosts;
+        }
+
+        return new FavoritePost[0];
+    }
+
     @SuppressWarnings("unused")
     public static class RedditPost {
         private int score;
@@ -115,6 +161,28 @@ public class TopRedditData {
             this.title = title;
             this.category = category;
             this.moreRelevantValue = moreRelevantValue;
+            this.score = score;
+            this.moreInfo = moreInfo;
+            this.link = link;
+            this.id = id;
+        }
+
+        public int getScore() {
+            return score;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static class FavoritePost {
+        private int score;
+        private String title;
+        private String moreInfo;
+        private String link;
+        private String id;
+
+        public FavoritePost(String title, int score, String moreInfo,
+                String link, String id) {
+            this.title = title;
             this.score = score;
             this.moreInfo = moreInfo;
             this.link = link;

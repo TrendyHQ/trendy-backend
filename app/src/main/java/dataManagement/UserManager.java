@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
@@ -41,7 +40,7 @@ public class UserManager {
         }
     }
 
-    public ArrayList<String> getSavedTrendsForUser(String userId) {
+    public ArrayList<String> getUsersFavoritePostsIds(String userId) {
         ArrayList<String> savedTrends = new ArrayList<>();
 
         String query = "SELECT post_id FROM user_trends WHERE user_id = ?";

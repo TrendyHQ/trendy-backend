@@ -1,4 +1,4 @@
-package auth0;
+package controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +28,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import auth0.UploadFile;
 import dataManagement.UserManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import kong.unirest.core.HttpResponse;
@@ -140,8 +141,8 @@ public class MainController {
     @PutMapping("/auth0/update-picture")
     public ResponseEntity<String> updatePicture(
 
-            @RequestParam("userId") String userId,
-
+            @RequestParam String userId,
+    
             @RequestPart("file") MultipartFile file) throws Exception {
         try {
             MultipartFile newPicture = file;

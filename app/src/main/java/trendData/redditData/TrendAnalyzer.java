@@ -33,15 +33,14 @@ public class TrendAnalyzer {
                 int previousScore = rs.getInt("score");
                 int previousComments = rs.getInt("num_comments");
 
-                int result = -1;
+                int result = 0;
 
                 if (latestScore > previousScore && latestComments > previousComments) {
                     result = 1;
                 } else if(latestScore == previousScore && latestComments == previousComments) {
                     result = -1;
-                } else {
-                    result = 0;
-                }
+                } 
+                
                 return result;
             } else {
                 // No previous day's record found

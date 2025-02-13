@@ -1,9 +1,5 @@
 package trendData.redditData;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,36 +102,32 @@ public class RedditDataFetcher {
         return null;
     }
 
-    public FavoritePost[] getFavoritePosts(String userId, RedditClientManager redditClientManager) throws SQLException {
+    public SpecificPost[] getFavoritePosts(String userId, RedditClientManager redditClientManager) throws SQLException {
         ArrayList<String> postIds = new UserManager().getUsersFavoritePostsIds(userId);
 
-        if (redditClientManager.getClient() == null) {
-            redditClientManager.autherizeClient();
-        }
-
-        RedditClient redditClient = redditClientManager.getClient();
-
         // Collect the titles of the top posts
-        List<FavoritePost> posts = new ArrayList<>();
+        List<SpecificPost> posts = new ArrayList<>();
 
-        if (redditClient != null) {
+        if (redditClientManager != null) {
             postIds.forEach((postId) -> {
                 try {
-                    Submission post = redditClient.submission(postId).inspect();
+                    Submission post = getSpecificPost(postId, redditClientManager);
 
+                    String title = post.getTitle();
                     int score = post.getScore();
                     String moreInfo = post.getSelfText();
                     String link = post.getUrl();
-    
-                    if (!post.getTitle().contains("r/") && !post.isNsfw()) {        
-                        posts.add(new FavoritePost(post.getTitle(), score, moreInfo, link,
-                                postId));
-                    }    
+                    String subredditName = post.getSubreddit();
+
+                    if (!post.getTitle().contains("r/") && !post.isNsfw()) {
+                        posts.add(new SpecificPost(title, score, moreInfo, link,
+                                postId, subredditName));
+                    }
                 } catch (Exception e) {
                 }
             });
 
-            FavoritePost[] arrayOfPosts = new FavoritePost[posts.size()];
+            SpecificPost[] arrayOfPosts = new SpecificPost[posts.size()];
             for (int i = 0; i < posts.size(); i++) {
                 arrayOfPosts[i] = posts.get(i);
             }
@@ -143,10 +135,46 @@ public class RedditDataFetcher {
             return arrayOfPosts;
         }
 
-        return new FavoritePost[0];
+        return new SpecificPost[0];
     }
 
-    @SuppressWarnings("unused")
+    public Submission getSpecificPost(String postId, RedditClientManager redditClientManager) {
+        if (redditClientManager.getClient() == null) {
+            redditClientManager.autherizeClient();
+        }
+
+        RedditClient redditClient = redditClientManager.getClient();
+
+        if (redditClient != null) {
+            return redditClient.submission(postId).inspect();
+        }
+
+        return null;
+    }
+
+    public SpecificPost getSpecificPost(String postId, RedditClientManager redditClientManager,
+            boolean asSpecificPost) {
+        if (redditClientManager.getClient() == null) {
+            redditClientManager.autherizeClient();
+        }
+
+        RedditClient redditClient = redditClientManager.getClient();
+
+        if (redditClient != null && asSpecificPost) {
+            Submission post = redditClient.submission(postId).inspect();
+
+            String title = post.getTitle();
+            int score = post.getScore();
+            String moreInfo = post.getSelfText();
+            String link = post.getUrl();
+            String subredditName = post.getSubreddit();
+
+            return new SpecificPost(title, score, moreInfo, link, postId, subredditName);
+        }
+
+        return null;
+    }
+
     public static class RedditPost {
         private int score;
         private String title;
@@ -170,27 +198,72 @@ public class RedditDataFetcher {
         public int getScore() {
             return score;
         }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getCategory() {
+            return category;
+        }
+
+        public int getMoreRelevantValue() {
+            return moreRelevantValue;
+        }
+
+        public String getMoreInfo() {
+            return moreInfo;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getId() {
+            return id;
+        }
     }
 
-    @SuppressWarnings("unused")
-    public static class FavoritePost {
+    public static class SpecificPost {
         private int score;
         private String title;
         private String moreInfo;
         private String link;
         private String id;
+        private String category;
 
-        public FavoritePost(String title, int score, String moreInfo,
-                String link, String id) {
+        public SpecificPost(String title, int score, String moreInfo,
+                String link, String id, String category) {
             this.title = title;
             this.score = score;
             this.moreInfo = moreInfo;
             this.link = link;
             this.id = id;
+            this.category = category;
         }
 
         public int getScore() {
             return score;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getMoreInfo() {
+            return moreInfo;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public String getCategory() {
+            return category;
         }
     }
 }

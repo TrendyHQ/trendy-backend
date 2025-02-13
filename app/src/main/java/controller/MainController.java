@@ -36,7 +36,8 @@ import kong.unirest.core.Unirest;
 import trendData.aiData.AiModelRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
-import trendData.redditData.RedditDataFetcher.FavoritePost;
+import trendData.redditData.RedditDataFetcher.SpecificPost;
+import trendData.storage.StorageManager;
 import trendData.redditData.RedditDataFetcher.RedditPost;
 
 import java.util.concurrent.CompletableFuture;
@@ -58,7 +59,7 @@ public class MainController {
     final String CLIENT_ID = dotenv.get("MANAGEMENT_AUTH0_CLIENT_ID");
     final String CLIENT_SECRET = dotenv.get("MANAGEMENT_AUTH0_CLIENT_SECRET");
 
-    @PatchMapping("/auth0/updateUserInformation")
+    @PatchMapping("/users/updateUserInformation")
     public ResponseEntity<String> updateUserInformation(@RequestBody UpdateUserRequest request) {
         String[] editableUserProperties = {
                 "blocked", // Boolean flag indicating if the user is blocked
@@ -138,11 +139,11 @@ public class MainController {
         }
     }
 
-    @PutMapping("/auth0/update-picture")
+    @PutMapping("/users/update-picture")
     public ResponseEntity<String> updatePicture(
 
             @RequestParam String userId,
-    
+
             @RequestPart("file") MultipartFile file) throws Exception {
         try {
             MultipartFile newPicture = file;
@@ -166,7 +167,7 @@ public class MainController {
 
     }
 
-    @GetMapping("/auth0/getUserProperty")
+    @GetMapping("/users/getUserProperty")
     public ResponseEntity<String> getUserProperty(@RequestParam String property, @RequestParam String userId) {
         String[] validProperties = {
                 "picture",
@@ -339,6 +340,36 @@ public class MainController {
         }
     }
 
+    @GetMapping("/reddit/trend")
+    public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId) throws SQLException {
+        RedditDataFetcher redditData = new RedditDataFetcher();
+        try {
+            StorageManager storageManager = new StorageManager();
+
+            SpecificPost post = redditData.getSpecificPost(postId, redditClientManager, true);
+            PostData postData = new PostData(post.getTitle(), post.getScore(), post.getMoreInfo(), post.getLink(),
+                    post.getId(), post.getCategory(), storageManager.getCommentsOnPost(postId));
+
+            return ResponseEntity.ok(new Gson().toJson(postData));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.badRequest().body("Failed to receive data");
+    }
+
+    @PutMapping("/data/addCommentToPost")
+    public ResponseEntity<String> addCommentToPost(@RequestBody CommentRequest request) {
+        try {
+            StorageManager storageManager = new StorageManager();
+            storageManager.putCommentOnPost(request.getPostId(), request.getComment());
+
+            return ResponseEntity.ok("Comment added successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to add comment");
+        }
+    }
+
     @PostMapping("/ai/AiModelRequest")
     public ResponseEntity<String> getPhi4Data(@RequestBody AiRequest request) {
         try {
@@ -376,13 +407,13 @@ public class MainController {
     @GetMapping("/users/getUsersTrends")
     public ResponseEntity<String> getUsersTrends(@RequestParam String userId) throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
-    
-        FavoritePost[] favoritePosts = redditData.getFavoritePosts(userId, redditClientManager);
+
+        SpecificPost[] favoritePosts = redditData.getFavoritePosts(userId, redditClientManager);
 
         String jsonResponse = new Gson().toJson(favoritePosts);
 
         return ResponseEntity.ok(jsonResponse);
-    }
+    }    
 
     public static class UserUpdateRequest {
         private String userId;
@@ -474,6 +505,91 @@ public class MainController {
 
         public String getToUpdate() {
             return toUpdate;
+        }
+    }
+
+    public static class PostData {
+        private String title;
+        private int score;
+        private String moreInfo;
+        private String link;
+        private String postId;
+        private String subredditName;
+        private Object[] comments;
+
+        public PostData(String title, int score, String moreInfo, String link, String postId, String subredditName,
+                Object[] comments) {
+            this.title = title;
+            this.score = score;
+            this.moreInfo = moreInfo;
+            this.link = link;
+            this.postId = postId;
+            this.subredditName = subredditName;
+            this.comments = comments;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public String getMoreInfo() {
+            return moreInfo;
+        }
+
+        public String getLink() {
+            return link;
+        }
+
+        public String getPostId() {
+            return postId;
+        }
+
+        public String getSubredditName() {
+            return subredditName;
+        }
+
+        public Object getComments() {
+            return comments;
+        }
+    }
+
+    public static class CommentRequest {
+        private String postId;
+        private CommentObject comment;
+
+        public String getPostId() {
+            return postId;
+        }
+
+        public CommentObject getComment() {
+            return comment;
+        }
+    }
+
+    public static class CommentObject {
+        private String userId;
+        private String value;
+        private String datePublished;
+        private String nick;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public String getDatePublished() {
+            return datePublished;
+        }
+
+        public String getNick() {
+            return nick;
         }
     }
 

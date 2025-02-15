@@ -19,6 +19,25 @@ public class StorageManager {
     private final String USER = dotenv.get("DB_USER");
     private final String PASSWORD = dotenv.get("DB_PASSWORD");
 
+    public int getLikesOnPost(String postId) throws SQLException {
+        String query = "SELECT trend_likes FROM trend_information WHERE trend_id = ? LIMIT 1";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+                PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, postId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("trend_likes");
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
     public CommentObject[] getCommentsOnPost(String postId) throws SQLException {
         String query = "SELECT trend_comments FROM trend_information WHERE trend_id = ? ORDER BY created_at DESC LIMIT 1";
 
@@ -40,6 +59,13 @@ public class StorageManager {
             e.printStackTrace();
             return new CommentObject[0];
         }
+    }
+
+    public PostInfoObject getInformationOnPost(String postId) throws SQLException {
+        int postLikes = getLikesOnPost(postId);
+        CommentObject[] postComments = getCommentsOnPost(postId);
+
+        return new PostInfoObject(postLikes, postComments);
     }
 
     public void putCommentOnPost(String postId, CommentObject comment) throws SQLException {
@@ -67,6 +93,40 @@ public class StorageManager {
             stmt.setString(1, postId);
             stmt.setString(2, new Gson().toJson(updatedComments));
             stmt.executeUpdate();
+        }
+    }
+
+    public int putLikeOnPost(String postId) throws SQLException {
+        int postLikes = getLikesOnPost(postId);
+
+        String query = "INSERT INTO trend_information (trend_id, trend_likes) VALUES (?, ?) " +
+                "ON DUPLICATE KEY UPDATE trend_likes = VALUES(trend_likes)";
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+                PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, postId);
+            stmt.setInt(2, postLikes + 1);
+            stmt.executeUpdate();
+        }
+
+        return postLikes + 1;
+    }
+
+    public static class PostInfoObject {
+        private int likes;
+        private CommentObject[] comments;
+
+        public PostInfoObject(int likes, CommentObject[] comments) {
+            this.likes = likes;
+            this.comments = comments;
+        }
+
+        public int getLikes() {
+            return likes;
+        }
+
+        public CommentObject[] getComments() {
+            return comments;
         }
     }
 }

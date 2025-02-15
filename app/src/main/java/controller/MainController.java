@@ -38,12 +38,15 @@ import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
 import trendData.redditData.RedditDataFetcher.SpecificPost;
 import trendData.storage.StorageManager;
+import trendData.storage.StorageManager.PostInfoObject;
 import trendData.redditData.RedditDataFetcher.RedditPost;
 
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @RestController
@@ -340,7 +343,7 @@ public class MainController {
         }
     }
 
-    @GetMapping("/reddit/trend")
+    @GetMapping("/data/trend")
     public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId) throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
         try {
@@ -348,7 +351,7 @@ public class MainController {
 
             SpecificPost post = redditData.getSpecificPost(postId, redditClientManager, true);
             PostData postData = new PostData(post.getTitle(), post.getScore(), post.getMoreInfo(), post.getLink(),
-                    post.getId(), post.getCategory(), storageManager.getCommentsOnPost(postId));
+                    post.getId(), post.getCategory(), storageManager.getInformationOnPost(postId));
 
             return ResponseEntity.ok(new Gson().toJson(postData));
         } catch (Exception e) {
@@ -367,6 +370,20 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body("Failed to add comment");
+        }
+    }
+
+    @PutMapping("/data/addLikeToPost")
+    public ResponseEntity<String> addLikeToPost(@RequestBody String postId) {
+        try {
+            System.out.println(postId);
+            StorageManager storageManager = new StorageManager();
+            int updatedLikes = storageManager.putLikeOnPost(postId);
+
+            return ResponseEntity.ok("Like added successfully. New amount: " + updatedLikes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to add like");
         }
     }
 
@@ -413,7 +430,7 @@ public class MainController {
         String jsonResponse = new Gson().toJson(favoritePosts);
 
         return ResponseEntity.ok(jsonResponse);
-    }    
+    }
 
     public static class UserUpdateRequest {
         private String userId;
@@ -515,17 +532,17 @@ public class MainController {
         private String link;
         private String postId;
         private String subredditName;
-        private Object[] comments;
+        private PostInfoObject otherInformation;
 
         public PostData(String title, int score, String moreInfo, String link, String postId, String subredditName,
-                Object[] comments) {
+                PostInfoObject otherInformation) {
             this.title = title;
             this.score = score;
             this.moreInfo = moreInfo;
             this.link = link;
             this.postId = postId;
             this.subredditName = subredditName;
-            this.comments = comments;
+            this.otherInformation = otherInformation;
         }
 
         public String getTitle() {
@@ -552,8 +569,8 @@ public class MainController {
             return subredditName;
         }
 
-        public Object getComments() {
-            return comments;
+        public PostInfoObject getOtherInformation() {
+            return otherInformation;
         }
     }
 

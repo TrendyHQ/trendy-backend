@@ -36,17 +36,19 @@ import kong.unirest.core.Unirest;
 import trendData.aiData.AiModelRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
-import trendData.redditData.RedditDataFetcher.SpecificPost;
 import trendData.storage.StorageManager;
-import trendData.storage.StorageManager.PostInfoObject;
-import trendData.redditData.RedditDataFetcher.RedditPost;
-
 import java.util.concurrent.CompletableFuture;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
+import structure.TrendyClasses.AiRequest;
+import structure.TrendyClasses.CommentRequest;
+import structure.TrendyClasses.PostData;
+import structure.TrendyClasses.RedditPost;
+import structure.TrendyClasses.SpecificPost;
+import structure.TrendyClasses.TrendSaveRequest;
+import structure.TrendyClasses.UpdateUserRequest;
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @RestController
@@ -225,44 +227,47 @@ public class MainController {
     RedditClientManager redditClientManager = new RedditClientManager();
 
     @PostMapping("/reddit/topReddit")
-    public ResponseEntity<String> getTopRedditData() throws SQLException {
+    public ResponseEntity<String> getTopRedditData(@RequestBody String requestAmount) throws SQLException {
         try {
+            int amount = Integer.parseInt(requestAmount);
+
             RedditDataFetcher redditData = new RedditDataFetcher();
 
             CompletableFuture<RedditPost[]> fashionFuture = requestDataFromReddit(redditData, "fashion",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> technologyFuture = requestDataFromReddit(redditData, "technology",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
-            CompletableFuture<RedditPost[]> foodFuture = requestDataFromReddit(redditData, "food", redditClientManager);
+            CompletableFuture<RedditPost[]> foodFuture = requestDataFromReddit(redditData, "food",
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> entertainmentFuture = requestDataFromReddit(redditData, "entertainment",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> socialMediaFuture = requestDataFromReddit(redditData, "socialmedia",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> fitnessFuture = requestDataFromReddit(redditData, "fitness",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> wellnessFuture = requestDataFromReddit(redditData, "wellness",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> musicFuture = requestDataFromReddit(redditData, "music",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> politicsFuture = requestDataFromReddit(redditData, "politics",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> travelFuture = requestDataFromReddit(redditData, "travel",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> scienceFuture = requestDataFromReddit(redditData, "science",
-                    redditClientManager);
+                    redditClientManager, amount);
             waitForSeconds();
             CompletableFuture<RedditPost[]> sportsFuture = requestDataFromReddit(redditData, "sports",
-                    redditClientManager);
+                    redditClientManager, amount);
 
             CompletableFuture.allOf(
                     fashionFuture, technologyFuture, foodFuture, entertainmentFuture,
@@ -303,8 +308,8 @@ public class MainController {
                 return 0; // If either p1 or p2 is null, consider them equal for sorting purposes
             });
 
-            // Take top 6 posts or as many as are available
-            RedditPost[] topPosts = new RedditPost[Math.min(6, allPosts.size())];
+            // Take top 'amount' posts or as many as are available
+            RedditPost[] topPosts = new RedditPost[Math.min(amount, allPosts.size())];
             for (int i = 0; i < topPosts.length; i++) {
                 topPosts[i] = allPosts.get(i);
             }
@@ -312,7 +317,7 @@ public class MainController {
             return ResponseEntity.ok(new Gson().toJson(topPosts));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("Failed to recieve data");
+            return ResponseEntity.badRequest().body("Failed to receive data");
         }
     }
 
@@ -390,8 +395,8 @@ public class MainController {
     @PostMapping("/ai/AiModelRequest")
     public ResponseEntity<String> getPhi4Data(@RequestBody AiRequest request) {
         try {
-            AiModelRequest phi4 = new AiModelRequest();
-            String response = phi4.getPhi4Data(request.getMessage(), request.getUserLocation(),
+            AiModelRequest aiController = new AiModelRequest();
+            String response = aiController.getAiData(request.getMessage(), request.getUserLocation(),
                     request.getUserBirthdate(),
                     request.getUserGender(), request.getIsFutureRequest());
             return ResponseEntity.ok(response);
@@ -430,184 +435,6 @@ public class MainController {
         String jsonResponse = new Gson().toJson(favoritePosts);
 
         return ResponseEntity.ok(jsonResponse);
-    }
-
-    public static class UserUpdateRequest {
-        private String userId;
-        private String newNickname;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getNewNickname() {
-            return newNickname;
-        }
-    }
-
-    public static class AiRequest {
-        private String message;
-        private String userLocation;
-        private String userBirthdate;
-        private String userGender;
-        private boolean isFutureRequest;
-
-        public String getMessage() {
-            return message;
-        }
-
-        public String getUserLocation() {
-            return userLocation;
-        }
-
-        public String getUserBirthdate() {
-            return userBirthdate;
-        }
-
-        public String getUserGender() {
-            return userGender;
-        }
-
-        public boolean getIsFutureRequest() {
-            return isFutureRequest;
-        }
-    }
-
-    public static class LoginRequest {
-        private String userId;
-
-        public String getUserId() {
-            return userId;
-        }
-    }
-
-    public static class GenderUpdateRequest {
-        private String userId;
-        private String gender;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getGender() {
-            return gender;
-        }
-    }
-
-    public static class TrendSaveRequest {
-        private String userId;
-        private String trendId;
-        private boolean saveTrend;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getTrendId() {
-            return trendId;
-        }
-
-        public boolean getSaveTrend() {
-            return saveTrend;
-        }
-    }
-
-    public static class UpdateUserRequest {
-        private String userId;
-        private String toUpdate;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getToUpdate() {
-            return toUpdate;
-        }
-    }
-
-    public static class PostData {
-        private String title;
-        private int score;
-        private String moreInfo;
-        private String link;
-        private String postId;
-        private String subredditName;
-        private PostInfoObject otherInformation;
-
-        public PostData(String title, int score, String moreInfo, String link, String postId, String subredditName,
-                PostInfoObject otherInformation) {
-            this.title = title;
-            this.score = score;
-            this.moreInfo = moreInfo;
-            this.link = link;
-            this.postId = postId;
-            this.subredditName = subredditName;
-            this.otherInformation = otherInformation;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
-        public String getMoreInfo() {
-            return moreInfo;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public String getPostId() {
-            return postId;
-        }
-
-        public String getSubredditName() {
-            return subredditName;
-        }
-
-        public PostInfoObject getOtherInformation() {
-            return otherInformation;
-        }
-    }
-
-    public static class CommentRequest {
-        private String postId;
-        private CommentObject comment;
-
-        public String getPostId() {
-            return postId;
-        }
-
-        public CommentObject getComment() {
-            return comment;
-        }
-    }
-
-    public static class CommentObject {
-        private String userId;
-        private String value;
-        private String datePublished;
-        private String nick;
-
-        public String getUserId() {
-            return userId;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public String getDatePublished() {
-            return datePublished;
-        }
-
-        public String getNick() {
-            return nick;
-        }
     }
 
     private String getAccessToken() throws Exception {
@@ -660,10 +487,11 @@ public class MainController {
     }
 
     private CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
-            RedditClientManager redditClientManager) {
+            RedditClientManager redditClientManager, int amount) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                return redditData.getData(subredditName, redditClientManager, 2);
+                int limit = Math.round(amount / 3);
+                return redditData.getData(subredditName, redditClientManager, limit);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

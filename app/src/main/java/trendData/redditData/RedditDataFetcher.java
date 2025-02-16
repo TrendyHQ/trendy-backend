@@ -18,6 +18,9 @@ import net.dean.jraw.pagination.Paginator;
 import net.dean.jraw.references.SubredditReference;
 import net.dean.jraw.models.SubredditSort;
 
+import structure.TrendyClasses.RedditPost;
+import structure.TrendyClasses.SpecificPost;
+
 public class RedditDataFetcher {
     public RedditPost[] getData(String subredditName, RedditClientManager redditClientManager, int limit)
             throws SQLException {
@@ -173,97 +176,5 @@ public class RedditDataFetcher {
         }
 
         return null;
-    }
-
-    public static class RedditPost {
-        private int score;
-        private String title;
-        private String category;
-        private int moreRelevantValue;
-        private String moreInfo;
-        private String link;
-        private String id;
-
-        public RedditPost(String title, String category, int moreRelevantValue, int score, String moreInfo,
-                String link, String id) {
-            this.title = title;
-            this.category = category;
-            this.moreRelevantValue = moreRelevantValue;
-            this.score = score;
-            this.moreInfo = moreInfo;
-            this.link = link;
-            this.id = id;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getCategory() {
-            return category;
-        }
-
-        public int getMoreRelevantValue() {
-            return moreRelevantValue;
-        }
-
-        public String getMoreInfo() {
-            return moreInfo;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public String getId() {
-            return id;
-        }
-    }
-
-    public static class SpecificPost {
-        private int score;
-        private String title;
-        private String moreInfo;
-        private String link;
-        private String id;
-        private String category;
-
-        public SpecificPost(String title, int score, String moreInfo,
-                String link, String id, String category) {
-            this.title = title;
-            this.score = score;
-            this.moreInfo = moreInfo;
-            this.link = link;
-            this.id = id;
-            this.category = category;
-        }
-
-        public int getScore() {
-            return score;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getMoreInfo() {
-            return moreInfo;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public String getCategory() {
-            return category;
-        }
     }
 }

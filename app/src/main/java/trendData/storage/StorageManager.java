@@ -9,8 +9,10 @@ import java.util.Arrays;
 
 import com.google.gson.Gson;
 
-import controller.MainController.CommentObject;
 import io.github.cdimascio.dotenv.Dotenv;
+
+import structure.TrendyClasses.CommentObject;
+import structure.TrendyClasses.PostInfoObject;
 
 public class StorageManager {
     Dotenv dotenv = Dotenv.load();
@@ -110,23 +112,5 @@ public class StorageManager {
         }
 
         return postLikes + 1;
-    }
-
-    public static class PostInfoObject {
-        private int likes;
-        private CommentObject[] comments;
-
-        public PostInfoObject(int likes, CommentObject[] comments) {
-            this.likes = likes;
-            this.comments = comments;
-        }
-
-        public int getLikes() {
-            return likes;
-        }
-
-        public CommentObject[] getComments() {
-            return comments;
-        }
     }
 }

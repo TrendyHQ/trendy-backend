@@ -14,7 +14,7 @@ import com.azure.core.credential.AzureKeyCredential;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class AiModelRequest {
-    public String getPhi4Data(String message, String userLocation, String userBirthdate, String userGender,
+    public String getAiData(String message, String userLocation, String userBirthdate, String userGender,
             boolean isFutureRequest) {
         Dotenv dotenv = Dotenv.load();
         String key = dotenv.get("GITHUB_TOKEN");

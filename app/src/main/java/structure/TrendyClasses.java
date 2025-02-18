@@ -17,9 +17,8 @@ public class TrendyClasses {
     public static class AiRequest {
         private String message;
         private String userLocation;
-        private String userBirthdate;
-        private String userGender;
         private boolean isFutureRequest;
+        private String userId;
 
         public String getMessage() {
             return message;
@@ -29,16 +28,12 @@ public class TrendyClasses {
             return userLocation;
         }
 
-        public String getUserBirthdate() {
-            return userBirthdate;
-        }
-
-        public String getUserGender() {
-            return userGender;
-        }
-
         public boolean getIsFutureRequest() {
             return isFutureRequest;
+        }
+
+        public String getUserId() {
+            return userId;
         }
     }
 

@@ -29,6 +29,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import auth0.UploadFile;
+import dataManagement.FeedbackManager;
 import dataManagement.UserManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import kong.unirest.core.HttpResponse;
@@ -44,6 +45,8 @@ import org.springframework.web.bind.annotation.PatchMapping;
 
 import structure.TrendyClasses.AiRequest;
 import structure.TrendyClasses.CommentRequest;
+import structure.TrendyClasses.FeedbackObject;
+import structure.TrendyClasses.FeedbackRequest;
 import structure.TrendyClasses.PostData;
 import structure.TrendyClasses.RedditPost;
 import structure.TrendyClasses.SpecificPost;
@@ -232,6 +235,20 @@ public class MainController {
         }
     }
 
+    @PutMapping("/data/addFeedbackToDatabase")
+    public ResponseEntity<String> addFeedbackToDatabase(@RequestBody FeedbackRequest feedback) {
+        try {
+            FeedbackManager feedbackManager = new FeedbackManager();
+            feedbackManager.addFeedbackToDatabase(new FeedbackObject(feedback.getUserId(), feedback.getFeedback()),
+                    feedback.getIsReport());
+
+            return ResponseEntity.ok("Feedback added successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to add feedback");
+        }
+    }
+
     @PostMapping("/ai/AiModelRequest")
     public ResponseEntity<String> getAiData(@RequestBody AiRequest request) {
         try {
@@ -239,8 +256,8 @@ public class MainController {
             String userGender = getUserProperty("gender", request.getUserId()).getBody();
 
             AiModelRequest aiController = new AiModelRequest();
-            String response = aiController.getAiData(request.getMessage(), request.getUserLocation(), 
-            userBirthDate,
+            String response = aiController.getAiData(request.getMessage(), request.getUserLocation(),
+                    userBirthDate,
                     userGender, request.getIsFutureRequest());
             return ResponseEntity.ok(response);
         } catch (Exception e) {

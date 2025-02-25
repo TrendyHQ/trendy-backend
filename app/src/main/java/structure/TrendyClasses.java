@@ -283,4 +283,40 @@ public class TrendyClasses {
             return comments;
         }
     }
+
+    public static class FeedbackObject {
+        private String userId;
+        private String feedback;
+
+        public FeedbackObject(String userId, String feedback) {
+            this.userId = userId;
+            this.feedback = feedback;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getFeedback() {
+            return feedback;
+        }
+    }
+
+    public static class FeedbackRequest {
+        private String userId;
+        private String feedback;
+        private boolean isReport;
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public String getFeedback() {
+            return feedback;
+        }
+
+        public boolean getIsReport() {
+            return isReport;
+        }
+    }
 }

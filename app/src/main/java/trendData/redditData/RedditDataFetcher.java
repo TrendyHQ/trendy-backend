@@ -45,12 +45,12 @@ public class RedditDataFetcher {
                         .sorting(SubredditSearchSort.RELEVANCE)
                         .build();
 
-                int maxSubscribers = 100000;
+                int minSubscribers = 100000;
 
                 for (Subreddit subreddit : paginator.next()) {
                     try {
-                        if (subreddit.getSubscribers() > maxSubscribers) {
-                            maxSubscribers = subreddit.getSubscribers();
+                        if (subreddit.getSubscribers() > minSubscribers) {
+                            minSubscribers = subreddit.getSubscribers();
                             closestMatch = subreddit;
                         }
                     } catch (Exception e) {
@@ -59,10 +59,8 @@ public class RedditDataFetcher {
             } catch (Exception e) {
             }
 
-            String query;
-            if (closestMatch == null) {
-                query = subredditName;
-            } else {
+            String query = subredditName;
+            if (closestMatch != null) {
                 query = closestMatch.getName();
             }
 

@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,6 +40,7 @@ import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
 import trendData.storage.StorageManager;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -73,89 +75,51 @@ public class MainController {
     public ResponseEntity<String> getTopRedditData(@RequestBody String requestAmount) throws SQLException {
         try {
             int amount = Integer.parseInt(requestAmount);
-
             RedditDataFetcher redditData = new RedditDataFetcher();
 
-            CompletableFuture<RedditPost[]> fashionFuture = requestDataFromReddit(redditData, "fashion",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> technologyFuture = requestDataFromReddit(redditData, "technology",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> foodFuture = requestDataFromReddit(redditData, "food",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> entertainmentFuture = requestDataFromReddit(redditData, "entertainment",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> socialMediaFuture = requestDataFromReddit(redditData, "socialmedia",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> fitnessFuture = requestDataFromReddit(redditData, "fitness",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> wellnessFuture = requestDataFromReddit(redditData, "wellness",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> musicFuture = requestDataFromReddit(redditData, "music",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> politicsFuture = requestDataFromReddit(redditData, "politics",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> travelFuture = requestDataFromReddit(redditData, "travel",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> scienceFuture = requestDataFromReddit(redditData, "science",
-                    redditClientManager, amount);
-            waitForSeconds();
-            CompletableFuture<RedditPost[]> sportsFuture = requestDataFromReddit(redditData, "sports",
-                    redditClientManager, amount);
+            String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia", 
+                                    "fitness", "wellness", "music", "politics", "travel", "science", "sports" };
 
-            CompletableFuture.allOf(
-                    fashionFuture, technologyFuture, foodFuture, entertainmentFuture,
-                    socialMediaFuture, fitnessFuture, wellnessFuture, musicFuture,
-                    politicsFuture, travelFuture, scienceFuture, sportsFuture).join();
+            // Map subreddit names to their request futures
+            List<CompletableFuture<RedditPost[]>> futures = new ArrayList<>();
+            int limitPerSubreddit = Math.round(amount / 3);
+            for (String subreddit : subreddits) {
+                futures.add(requestDataFromReddit(redditData, subreddit, redditClientManager, limitPerSubreddit));
+            }
 
-            RedditPost[] fashionData = fashionFuture.get();
-            RedditPost[] technologyData = technologyFuture.get();
-            RedditPost[] foodData = foodFuture.get();
-            RedditPost[] entertainmentData = entertainmentFuture.get();
-            RedditPost[] socialMediaData = socialMediaFuture.get();
-            RedditPost[] fitnessData = fitnessFuture.get();
-            RedditPost[] wellnessData = wellnessFuture.get();
-            RedditPost[] musicData = musicFuture.get();
-            RedditPost[] politicsData = politicsFuture.get();
-            RedditPost[] travelData = travelFuture.get();
-            RedditPost[] scienceData = scienceFuture.get();
-            RedditPost[] sportsData = sportsFuture.get();
+            // Wait for all futures to complete
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-            RedditPost[][] data = {
-                    fashionData, technologyData, foodData, entertainmentData, socialMediaData,
-                    fitnessData, wellnessData, musicData, politicsData, travelData, scienceData, sportsData
-            };
+            // Combine results from futures
+            List<RedditPost> allPosts = futures.stream()
+                    .map(future -> {
+                        try {
+                            return future.get();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return new RedditPost[0];
+                        }
+                    })
+                    .filter(data -> data != null)
+                    .flatMap(Arrays::stream)
+                    .filter(post -> post != null)
+                    .collect(Collectors.toList());
 
-            // Collect all posts into a single list
-            List<RedditPost> allPosts = new ArrayList<>();
-            for (RedditPost[] subredditData : data) {
-                if (subredditData != null) { // Ensure that the subredditData is not null
-                    Collections.addAll(allPosts, subredditData);
+            // Remove duplicates by post id, keeping the post with the highest score if duplicates exist
+            Map<String, RedditPost> uniquePosts = new LinkedHashMap<>();
+            for (RedditPost post : allPosts) {
+                String postId = post.getId();
+                if (!uniquePosts.containsKey(postId) || post.getScore() > uniquePosts.get(postId).getScore()) {
+                    uniquePosts.put(postId, post);
                 }
             }
+            allPosts = new ArrayList<>(uniquePosts.values());
 
             // Sort posts by score in descending order
-            allPosts.sort((p1, p2) -> {
-                if (p1 != null && p2 != null) {
-                    return Integer.compare(p2.getScore(), p1.getScore());
-                }
-                return 0; // If either p1 or p2 is null, consider them equal for sorting purposes
-            });
+            allPosts.sort((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()));
 
-            // Take top 'amount' posts or as many as are available
-            RedditPost[] topPosts = new RedditPost[Math.min(amount, allPosts.size())];
-            for (int i = 0; i < topPosts.length; i++) {
-                topPosts[i] = allPosts.get(i);
-            }
+            // Take top 'amount' posts
+            RedditPost[] topPosts = allPosts.stream().limit(amount).toArray(RedditPost[]::new);
 
             return ResponseEntity.ok(new Gson().toJson(topPosts));
         } catch (Exception e) {

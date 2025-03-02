@@ -69,7 +69,11 @@ public class StorageManager {
         int postLikes = getLikesOnPost(postId).getLikes();
         String[] usersThatLiked = getLikesOnPost(postId).getUsersThatLiked();
 
-        boolean userHasLiked = Arrays.asList(usersThatLiked).contains(userId);
+        boolean userHasLiked = false;
+        if (usersThatLiked != null) {
+            userHasLiked = Arrays.asList(usersThatLiked).contains(userId);
+        }
+
         CommentObject[] postComments = getCommentsOnPost(postId);
 
         return new PostInfoObject(postLikes, postComments, userHasLiked);
@@ -104,6 +108,9 @@ public class StorageManager {
         int postLikes = postLikesInfo.getLikes();
 
         String[] usersThatLikedArray = postLikesInfo.getUsersThatLiked();
+        if (usersThatLikedArray == null) {
+            usersThatLikedArray = new String[0];
+        }
         // Create a new array with length+1 to accommodate all existing users plus the
         // new one
         String[] updatedUsersThatLikedArray = new String[usersThatLikedArray.length + 1];

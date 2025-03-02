@@ -158,14 +158,13 @@ public class MainController {
     }
 
     @GetMapping("/data/trend")
-    public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId) throws SQLException {
+    public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId, @RequestParam String userId)
+            throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
         try {
-            StorageManager storageManager = new StorageManager();
-
             SpecificPost post = redditData.getSpecificPost(postId, redditClientManager, true);
             PostData postData = new PostData(post.getTitle(), post.getScore(), post.getMoreInfo(), post.getLink(),
-                    post.getId(), post.getCategory(), storageManager.getInformationOnPost(postId));
+                    post.getId(), post.getCategory(), new StorageManager().getInformationOnPost(postId, userId));
 
             return ResponseEntity.ok(new Gson().toJson(postData));
         } catch (Exception e) {
@@ -188,13 +187,8 @@ public class MainController {
     }
 
     @PutMapping("/data/setLikesOnPost")
-    public ResponseEntity<String> setLikesOnPost(@RequestBody(required = false) LikeRequest request) {
+    public ResponseEntity<String> setLikesOnPost(@RequestBody LikeRequest request) {
         try {
-            if (request == null) {
-                return ResponseEntity.badRequest()
-                        .body("{\"status\":\"error\",\"message\":\"Request body is required\"}");
-            }
-
             String userId = request.getUserId();
             String postId = request.getPostId();
             boolean isLike = request.isLike();

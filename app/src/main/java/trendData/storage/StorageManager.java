@@ -31,8 +31,8 @@ public class StorageManager {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return new PostLikesObject(rs.getInt("trend_likes"), 
-                    new Gson().fromJson(rs.getString("users_that_liked"), String[].class));
+                return new PostLikesObject(rs.getInt("trend_likes"),
+                        new Gson().fromJson(rs.getString("users_that_liked"), String[].class));
             } else {
                 return new PostLikesObject(0, new String[0]);
             }
@@ -65,11 +65,14 @@ public class StorageManager {
         }
     }
 
-    public PostInfoObject getInformationOnPost(String postId) throws SQLException {
+    public PostInfoObject getInformationOnPost(String postId, String userId) throws SQLException {
         int postLikes = getLikesOnPost(postId).getLikes();
+        String[] usersThatLiked = getLikesOnPost(postId).getUsersThatLiked();
+
+        boolean userHasLiked = Arrays.asList(usersThatLiked).contains(userId);
         CommentObject[] postComments = getCommentsOnPost(postId);
 
-        return new PostInfoObject(postLikes, postComments);
+        return new PostInfoObject(postLikes, postComments, userHasLiked);
     }
 
     public void putCommentOnPost(String postId, CommentObject comment) throws SQLException {
@@ -101,12 +104,13 @@ public class StorageManager {
         int postLikes = postLikesInfo.getLikes();
 
         String[] usersThatLikedArray = postLikesInfo.getUsersThatLiked();
-        // Create a new array with length+1 to accommodate all existing users plus the new one
+        // Create a new array with length+1 to accommodate all existing users plus the
+        // new one
         String[] updatedUsersThatLikedArray = new String[usersThatLikedArray.length + 1];
-        
+
         // Copy all existing users to the new array
         System.arraycopy(usersThatLikedArray, 0, updatedUsersThatLikedArray, 0, usersThatLikedArray.length);
-        
+
         // Add the new userId at the end
         updatedUsersThatLikedArray[updatedUsersThatLikedArray.length - 1] = userId;
 

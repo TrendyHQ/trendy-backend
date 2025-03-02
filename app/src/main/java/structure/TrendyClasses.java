@@ -269,10 +269,12 @@ public class TrendyClasses {
     public static class PostInfoObject {
         private int likes;
         private CommentObject[] comments;
+        private boolean userHasLiked;
 
-        public PostInfoObject(int likes, CommentObject[] comments) {
+        public PostInfoObject(int likes, CommentObject[] comments, boolean userHasLiked) {
             this.likes = likes;
             this.comments = comments;
+            this.userHasLiked = userHasLiked;
         }
 
         public int getLikes() {
@@ -281,6 +283,10 @@ public class TrendyClasses {
 
         public CommentObject[] getComments() {
             return comments;
+        }
+        
+        public boolean getUserHasLiked() {
+            return userHasLiked;
         }
     }
 
@@ -323,7 +329,7 @@ public class TrendyClasses {
     public static class LikeRequest {
         private String userId;
         private String postId;
-        private boolean isLike;
+        private boolean like;
 
         public String getPostId() {
             return postId;
@@ -334,7 +340,7 @@ public class TrendyClasses {
         }
 
         public boolean isLike() {
-            return isLike;
+            return like;
         }
     }
 

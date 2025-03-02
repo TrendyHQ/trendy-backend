@@ -17,23 +17,17 @@ import net.dean.jraw.pagination.DefaultPaginator;
 import net.dean.jraw.pagination.Paginator;
 import net.dean.jraw.references.SubredditReference;
 import net.dean.jraw.models.SubredditSort;
-
+import structure.TrendyClasses.FavoritePostObject;
 import structure.TrendyClasses.RedditPost;
 import structure.TrendyClasses.SpecificPost;
 
 public class RedditDataFetcher {
-    public RedditPost[] getData(String subredditName, RedditClientManager redditClientManager, int limit)
+    public RedditPost[] getData(String subredditName, RedditClient redditClient, int limit)
             throws SQLException {
 
         // Disable logging for JRAW
         Logger jrawLogger = (Logger) LoggerFactory.getLogger("net.dean.jraw");
         jrawLogger.setLevel(Level.OFF);
-
-        if (redditClientManager.getClient() == null) {
-            redditClientManager.autherizeClient();
-        }
-
-        RedditClient redditClient = redditClientManager.getClient();
 
         if (redditClient != null) {
             // Access a subreddit
@@ -103,16 +97,16 @@ public class RedditDataFetcher {
         return null;
     }
 
-    public SpecificPost[] getFavoritePosts(String userId, RedditClientManager redditClientManager) throws SQLException {
-        ArrayList<String> postIds = new UserManager().getUsersFavoritePostsIds(userId);
+    public SpecificPost[] getFavoritePosts(String userId, RedditClient redditClient) throws SQLException {
+        ArrayList<FavoritePostObject> postIds = new UserManager().getUsersFavoritePostsIds(userId);
 
         // Collect the titles of the top posts
         List<SpecificPost> posts = new ArrayList<>();
 
-        if (redditClientManager != null) {
-            postIds.forEach((postId) -> {
+        if (redditClient != null) {
+            postIds.forEach((favoritePostObject) -> {
                 try {
-                    Submission post = getSpecificPost(postId, redditClientManager);
+                    Submission post = getSpecificPost(favoritePostObject.getPostId(), redditClient);
 
                     String title = post.getTitle();
                     int score = post.getScore();
@@ -122,7 +116,7 @@ public class RedditDataFetcher {
 
                     if (!post.getTitle().contains("r/") && !post.isNsfw()) {
                         posts.add(new SpecificPost(title, score, moreInfo, link,
-                                postId, subredditName));
+                                favoritePostObject.getPostId(), subredditName));
                     }
                 } catch (Exception e) {
                 }
@@ -139,13 +133,7 @@ public class RedditDataFetcher {
         return new SpecificPost[0];
     }
 
-    public Submission getSpecificPost(String postId, RedditClientManager redditClientManager) {
-        if (redditClientManager.getClient() == null) {
-            redditClientManager.autherizeClient();
-        }
-
-        RedditClient redditClient = redditClientManager.getClient();
-
+    public Submission getSpecificPost(String postId, RedditClient redditClient) {
         if (redditClient != null) {
             return redditClient.submission(postId).inspect();
         }
@@ -153,14 +141,8 @@ public class RedditDataFetcher {
         return null;
     }
 
-    public SpecificPost getSpecificPost(String postId, RedditClientManager redditClientManager,
+    public SpecificPost getSpecificPost(String postId, RedditClient redditClient,
             boolean asSpecificPost) {
-        if (redditClientManager.getClient() == null) {
-            redditClientManager.autherizeClient();
-        }
-
-        RedditClient redditClient = redditClientManager.getClient();
-
         if (redditClient != null && asSpecificPost) {
             Submission post = redditClient.submission(postId).inspect();
 

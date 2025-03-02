@@ -1,4 +1,4 @@
-package trendData.storage;
+package dataManagement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

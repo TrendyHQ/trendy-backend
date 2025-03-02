@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import io.github.cdimascio.dotenv.Dotenv;
 
+import structure.TrendyClasses.FavoritePostObject;;
+
 public class UserManager {
     Dotenv dotenv = Dotenv.load();
 
@@ -16,17 +18,18 @@ public class UserManager {
     private final String USER = dotenv.get("DB_USER");
     private final String PASSWORD = dotenv.get("DB_PASSWORD");
 
-    public void saveTrendForUser(String userId, String trendId, boolean saveTrend) throws SQLException {
+    public void saveTrendForUser(String userId, String trendId, boolean saveTrend, String trendCategory) throws SQLException {
         String date = java.time.LocalDate.now().toString();
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
             if (saveTrend) {
-                String postInsertQuery = "INSERT INTO user_trends (user_id, post_id, date) VALUES (?, ?, ?) " +
+                String postInsertQuery = "INSERT INTO user_trends (user_id, post_id, date, post_category) VALUES (?, ?, ?, ?) " +
                         "ON DUPLICATE KEY UPDATE post_id = post_id";
                 try (PreparedStatement postStmt = connection.prepareStatement(postInsertQuery)) {
                     postStmt.setString(1, userId);
                     postStmt.setString(2, trendId);
                     postStmt.setString(3, date);
+                    postStmt.setString(4, trendCategory);
                     postStmt.executeUpdate();
                 }
             } else {
@@ -40,10 +43,11 @@ public class UserManager {
         }
     }
 
-    public ArrayList<String> getUsersFavoritePostsIds(String userId) {
-        ArrayList<String> savedTrends = new ArrayList<>();
+    public ArrayList<FavoritePostObject> getUsersFavoritePostsIds(String userId) {
+        ArrayList<FavoritePostObject> savedTrends = new ArrayList<>();
 
-        String query = "SELECT post_id FROM user_trends WHERE user_id = ?";
+        String query = "SELECT post_id, post_category FROM user_trends WHERE user_id = ?";
+
 
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
                 PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -51,7 +55,7 @@ public class UserManager {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                savedTrends.add(rs.getString("post_id"));
+                savedTrends.add(new FavoritePostObject(rs.getString("post_id"), rs.getString("post_category")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

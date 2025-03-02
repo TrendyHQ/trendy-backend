@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,14 +32,16 @@ import com.google.gson.JsonParser;
 
 import auth0.UploadFile;
 import dataManagement.FeedbackManager;
+import dataManagement.StorageManager;
 import dataManagement.UserManager;
 import io.github.cdimascio.dotenv.Dotenv;
 import kong.unirest.core.HttpResponse;
 import kong.unirest.core.Unirest;
+import net.dean.jraw.RedditClient;
 import trendData.aiData.AiModelRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
-import trendData.storage.StorageManager;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -47,12 +50,14 @@ import org.springframework.web.bind.annotation.PatchMapping;
 
 import structure.TrendyClasses.AiRequest;
 import structure.TrendyClasses.CommentRequest;
+import structure.TrendyClasses.FavoritePostObject;
 import structure.TrendyClasses.FeedbackObject;
 import structure.TrendyClasses.FeedbackRequest;
 import structure.TrendyClasses.LikeRequest;
 import structure.TrendyClasses.PostData;
 import structure.TrendyClasses.RedditPost;
 import structure.TrendyClasses.SpecificPost;
+import structure.TrendyClasses.TopRedditRequest;
 import structure.TrendyClasses.TrendSaveRequest;
 import structure.TrendyClasses.UpdateUserRequest;
 
@@ -73,9 +78,15 @@ public class MainController {
     RedditClientManager redditClientManager = new RedditClientManager();
 
     @PostMapping("/reddit/topReddit")
-    public ResponseEntity<String> getTopRedditData(@RequestBody String requestAmount) throws SQLException {
+    public ResponseEntity<String> getTopRedditData(@RequestBody TopRedditRequest request) throws SQLException {
         try {
-            int amount = Integer.parseInt(requestAmount);
+            if (redditClientManager.getClient() == null) {
+                redditClientManager.autherizeClient();
+            }
+
+            RedditClient redditClient = redditClientManager.getClient();
+
+            int amount = request.getRequestAmount();
             RedditDataFetcher redditData = new RedditDataFetcher();
 
             String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia",
@@ -83,9 +94,55 @@ public class MainController {
 
             // Map subreddit names to their request futures
             List<CompletableFuture<RedditPost[]>> futures = new ArrayList<>();
-            int limitPerSubreddit = Math.round(amount / 3);
+            int limitPerSubreddit;
+            String userId = request.getUserId();
+            // Get user's favorite posts
+            ArrayList<FavoritePostObject> usersFavorites = new UserManager().getUsersFavoritePostsIds(userId);
+
+            // Count posts by category
+            Map<String, Integer> categoryCounts = new HashMap<>();
+            // Initialize all subreddits with 0 to ensure all categories are included
             for (String subreddit : subreddits) {
-                futures.add(requestDataFromReddit(redditData, subreddit, redditClientManager, limitPerSubreddit));
+                categoryCounts.put(subreddit, 0);
+            }
+
+            // Count user's favorites by category
+            for (FavoritePostObject favorite : usersFavorites) {
+                String category = favorite.getPostCategory();
+                categoryCounts.put(category, categoryCounts.getOrDefault(category, 0) + 1);
+            }
+
+            // Calculate total favorites and prepare for proportional allocation
+            int totalFavorites = categoryCounts.values().stream().mapToInt(Integer::intValue).sum();
+            int totalToAllocate = amount;
+
+            // Minimum posts per category to ensure diversity
+            int minPostsPerCategory = Math.round(totalToAllocate / subreddits.length);
+            int reservedPosts = minPostsPerCategory * subreddits.length / 2;
+            int remainingToAllocate = Math.max(0, totalToAllocate - reservedPosts);
+
+            // Request data from each subreddit with proportional limits
+            for (String subreddit : subreddits) {
+                // Calculate limit proportionally to favorites, with a minimum
+                if (categoryCounts.get(subreddit) + 5 < Collections.max(categoryCounts.values())) {
+                    if (Math.random() > 0.5) {
+                        continue;
+                    } else {
+                        limitPerSubreddit = minPostsPerCategory;
+                    }
+                } else if ((totalFavorites > 0 && remainingToAllocate > 0) || categoryCounts.get(subreddit) > 0) {
+                    double proportion = (double) categoryCounts.get(subreddit) / totalFavorites;
+                    // Set minimum to 2 for categories with favorites
+                    int categoryMin = categoryCounts.get(subreddit) > 0 ? minPostsPerCategory * 2 : minPostsPerCategory;
+                    limitPerSubreddit = categoryMin + (int) Math.round(proportion * remainingToAllocate);
+                } else {
+                    limitPerSubreddit = minPostsPerCategory;
+                }
+
+                System.out.println("Subreddit: " + subreddit + ", Favorites: " +
+                        categoryCounts.get(subreddit) + ", Limit: " + limitPerSubreddit);
+
+                futures.add(requestDataFromReddit(redditData, subreddit, redditClient, limitPerSubreddit));
             }
 
             // Wait for all futures to complete
@@ -133,9 +190,15 @@ public class MainController {
     @PostMapping("/reddit/topTrendsForCategory")
     public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
         try {
+            if (redditClientManager.getClient() == null) {
+                redditClientManager.autherizeClient();
+            }
+
+            RedditClient redditClient = redditClientManager.getClient();
+
             int limit = 30;
             RedditDataFetcher redditData = new RedditDataFetcher();
-            RedditPost[] posts = redditData.getData(entity, redditClientManager, limit);
+            RedditPost[] posts = redditData.getData(entity, redditClient, limit);
 
             // Collect all posts into a single list
             List<RedditPost> allPosts = new ArrayList<>();
@@ -162,7 +225,13 @@ public class MainController {
             throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
         try {
-            SpecificPost post = redditData.getSpecificPost(postId, redditClientManager, true);
+            if (redditClientManager.getClient() == null) {
+                redditClientManager.autherizeClient();
+            }
+
+            RedditClient redditClient = redditClientManager.getClient();
+
+            SpecificPost post = redditData.getSpecificPost(postId, redditClient, true);
             PostData postData = new PostData(post.getTitle(), post.getScore(), post.getMoreInfo(), post.getLink(),
                     post.getId(), post.getCategory(), new StorageManager().getInformationOnPost(postId, userId));
 
@@ -398,7 +467,8 @@ public class MainController {
     @PatchMapping("/users/saveTrend")
     public ResponseEntity<String> saveTrend(@RequestBody TrendSaveRequest request) {
         try {
-            userManager.saveTrendForUser(request.getUserId(), request.getTrendId(), request.getSaveTrend());
+            userManager.saveTrendForUser(request.getUserId(), request.getTrendId(), request.getSaveTrend(),
+                    request.getTrendCategory());
 
             return ResponseEntity.ok("Trend saved successfully");
         } catch (Exception e) {
@@ -409,7 +479,7 @@ public class MainController {
 
     @GetMapping("/users/getSavedTrends")
     public ResponseEntity<String> getSavedTrends(@RequestParam String userId) {
-        ArrayList<String> savedTrends = userManager.getUsersFavoritePostsIds(userId);
+        ArrayList<FavoritePostObject> savedTrends = userManager.getUsersFavoritePostsIds(userId);
         String jsonSavedTrends = new Gson().toJson(savedTrends.toArray());
         return ResponseEntity.ok(jsonSavedTrends);
     }
@@ -418,7 +488,13 @@ public class MainController {
     public ResponseEntity<String> getUsersTrends(@RequestParam String userId) throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
 
-        SpecificPost[] favoritePosts = redditData.getFavoritePosts(userId, redditClientManager);
+        if (redditClientManager.getClient() == null) {
+            redditClientManager.autherizeClient();
+        }
+
+        RedditClient redditClient = redditClientManager.getClient();
+
+        SpecificPost[] favoritePosts = redditData.getFavoritePosts(userId, redditClient);
 
         String jsonResponse = new Gson().toJson(favoritePosts);
 
@@ -475,11 +551,11 @@ public class MainController {
     }
 
     private CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
-            RedditClientManager redditClientManager, int amount) {
+            RedditClient redditClient, int amount) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 int limit = Math.round(amount / 3);
-                return redditData.getData(subredditName, redditClientManager, limit);
+                return redditData.getData(subredditName, redditClient, limit);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

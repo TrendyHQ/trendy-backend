@@ -61,6 +61,7 @@ public class TrendyClasses {
     public static class TrendSaveRequest {
         private String userId;
         private String trendId;
+        private String trendCategory;
         private boolean saveTrend;
 
         public String getUserId() {
@@ -74,8 +75,29 @@ public class TrendyClasses {
         public boolean getSaveTrend() {
             return saveTrend;
         }
+
+        public String getTrendCategory() {
+            return trendCategory;
+        }
     }
 
+    public static class FavoritePostObject {
+        private String postId;
+        private String postCategory;
+
+        public FavoritePostObject(String postId, String postCategory) {
+            this.postId = postId;
+            this.postCategory = postCategory;
+        }
+
+        public String getPostId() {
+            return postId;
+        }
+
+        public String getPostCategory() {
+            return postCategory;
+        }
+    }
     public static class UpdateUserRequest {
         private String userId;
         private String toUpdate;
@@ -359,6 +381,19 @@ public class TrendyClasses {
 
         public String[] getUsersThatLiked() {
             return usersThatLiked;
+        }
+    }
+
+    public static class TopRedditRequest {
+        private int requestAmount;
+        private String userId;
+
+        public int getRequestAmount() {
+            return requestAmount;
+        }
+
+        public String getUserId() {
+            return userId;
         }
     }
 }

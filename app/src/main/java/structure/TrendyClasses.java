@@ -319,4 +319,40 @@ public class TrendyClasses {
             return isReport;
         }
     }
+
+    public static class LikeRequest {
+        private String userId;
+        private String postId;
+        private boolean isLike;
+
+        public String getPostId() {
+            return postId;
+        }
+
+        public String getUserId() {
+            return userId;
+        }
+
+        public boolean isLike() {
+            return isLike;
+        }
+    }
+
+    public static class PostLikesObject {
+        private int likes;
+        private String[] usersThatLiked;
+
+        public PostLikesObject(int likes, String[] usersThatLiked) {
+            this.usersThatLiked = usersThatLiked;
+            this.likes = likes;
+        }
+
+        public int getLikes() {
+            return likes;
+        }
+
+        public String[] getUsersThatLiked() {
+            return usersThatLiked;
+        }
+    }
 }

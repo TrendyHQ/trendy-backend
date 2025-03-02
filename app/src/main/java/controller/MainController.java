@@ -49,6 +49,7 @@ import structure.TrendyClasses.AiRequest;
 import structure.TrendyClasses.CommentRequest;
 import structure.TrendyClasses.FeedbackObject;
 import structure.TrendyClasses.FeedbackRequest;
+import structure.TrendyClasses.LikeRequest;
 import structure.TrendyClasses.PostData;
 import structure.TrendyClasses.RedditPost;
 import structure.TrendyClasses.SpecificPost;
@@ -77,8 +78,8 @@ public class MainController {
             int amount = Integer.parseInt(requestAmount);
             RedditDataFetcher redditData = new RedditDataFetcher();
 
-            String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia", 
-                                    "fitness", "wellness", "music", "politics", "travel", "science", "sports" };
+            String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia",
+                    "fitness", "wellness", "music", "politics", "travel", "science", "sports" };
 
             // Map subreddit names to their request futures
             List<CompletableFuture<RedditPost[]>> futures = new ArrayList<>();
@@ -105,7 +106,8 @@ public class MainController {
                     .filter(post -> post != null)
                     .collect(Collectors.toList());
 
-            // Remove duplicates by post id, keeping the post with the highest score if duplicates exist
+            // Remove duplicates by post id, keeping the post with the highest score if
+            // duplicates exist
             Map<String, RedditPost> uniquePosts = new LinkedHashMap<>();
             for (RedditPost post : allPosts) {
                 String postId = post.getId();
@@ -185,17 +187,25 @@ public class MainController {
         }
     }
 
-    @PutMapping("/data/addLikeToPost")
-    public ResponseEntity<String> addLikeToPost(@RequestBody String postId) {
+    @PutMapping("/data/setLikesOnPost")
+    public ResponseEntity<String> setLikesOnPost(@RequestBody(required = false) LikeRequest request) {
         try {
-            System.out.println(postId);
-            StorageManager storageManager = new StorageManager();
-            int updatedLikes = storageManager.putLikeOnPost(postId);
+            if (request == null) {
+                return ResponseEntity.badRequest()
+                        .body("{\"status\":\"error\",\"message\":\"Request body is required\"}");
+            }
 
-            return ResponseEntity.ok("Like added successfully. New amount: " + updatedLikes);
+            String userId = request.getUserId();
+            String postId = request.getPostId();
+            boolean isLike = request.isLike();
+
+            StorageManager storageManager = new StorageManager();
+            int updatedLikes = storageManager.setLikesOnPost(userId, postId, isLike);
+
+            return ResponseEntity.ok("{\"status\":\"success\",\"likes\":" + updatedLikes + "}");
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.badRequest().body("Failed to add like");
+            return ResponseEntity.ok("{\"status\":\"error\",\"message\":\"" + e.getMessage() + "\"}");
         }
     }
 
@@ -481,13 +491,5 @@ public class MainController {
             }
             return null;
         });
-    }
-
-    private void waitForSeconds() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -139,9 +139,6 @@ public class MainController {
                     limitPerSubreddit = minPostsPerCategory;
                 }
 
-                System.out.println("Subreddit: " + subreddit + ", Favorites: " +
-                        categoryCounts.get(subreddit) + ", Limit: " + limitPerSubreddit);
-
                 futures.add(requestDataFromReddit(redditData, subreddit, redditClient, limitPerSubreddit));
             }
 
@@ -175,7 +172,52 @@ public class MainController {
             allPosts = new ArrayList<>(uniquePosts.values());
 
             // Sort posts by score in descending order
-            allPosts.sort((p1, p2) -> Integer.compare(p2.getScore(), p1.getScore()));
+            allPosts.sort((p1, p2) -> {
+                // Get category counts for each post's category
+                int p1CategoryCount = categoryCounts.getOrDefault(p1.getCategory(), 0);
+                int p2CategoryCount = categoryCounts.getOrDefault(p2.getCategory(), 0);
+
+                // Calculate weighted scores that include category preference
+                double p1WeightedScore = p1.getScore() * (1 + (p1CategoryCount * 0.5));
+                double p2WeightedScore = p2.getScore() * (1 + (p2CategoryCount * 0.5));
+
+                // Sort by weighted score
+                return Double.compare(p2WeightedScore, p1WeightedScore);
+            });
+            
+            // Find the user's top favorite category
+            String topFavoriteCategory = null;
+            int maxFavorites = -1;
+            
+            for (Map.Entry<String, Integer> entry : categoryCounts.entrySet()) {
+                if (entry.getValue() > maxFavorites) {
+                    maxFavorites = entry.getValue();
+                    topFavoriteCategory = entry.getKey();
+                }
+            }
+            
+            // Check if top favorite category has a significant margin (5+ favorites)
+            if (maxFavorites > 5) {
+                // Create a final copy of topFavoriteCategory for use in lambda
+                final String finalTopFavoriteCategory = topFavoriteCategory;
+                
+                // Check if this category is represented in the top trends
+                boolean topCategoryPresent = allPosts.stream()
+                    .limit(amount)
+                    .anyMatch(post -> post.getCategory().equals(finalTopFavoriteCategory));
+                
+                // If not present, add the most popular post from that category
+                if (!topCategoryPresent) {
+                    try {
+                        RedditPost[] topCategoryPosts = redditData.getData(topFavoriteCategory, redditClient, 1);
+                        if (topCategoryPosts != null && topCategoryPosts.length > 0) {
+                            allPosts.add(topCategoryPosts[0]);
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
 
             // Take top 'amount' posts
             RedditPost[] topPosts = allPosts.stream().limit(amount).toArray(RedditPost[]::new);

@@ -69,22 +69,25 @@ public class RedditDataFetcher {
             // Collect the titles of the top posts
             List<RedditPost> posts = new ArrayList<>();
 
-            for (Submission post : topPosts.next()) {
-                String postId = post.getId();
-                int score = post.getScore();
-                String moreInfo = post.getSelfText();
-                String link = post.getUrl();
+            try {
+                for (Submission post : topPosts.next()) {
+                    String postId = post.getId();
+                    int score = post.getScore();
+                    String moreInfo = post.getSelfText();
+                    String link = post.getUrl();
 
-                // Store updated post data
-                if (!post.getTitle().contains("r/") && !post.isNsfw()) {
-                    int moreRelevantValue = new TrendAnalyzer().isPostGoingUp(postId, post);
+                    // Store updated post data
+                    if (!post.getTitle().contains("r/") && !post.isNsfw()) {
+                        int moreRelevantValue = new TrendAnalyzer().isPostGoingUp(postId, post);
 
-                    RedditDataStorage storage = new RedditDataStorage();
-                    storage.storeRedditPostData(post);
+                        RedditDataStorage storage = new RedditDataStorage();
+                        storage.storeRedditPostData(post);
 
-                    posts.add(new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link,
-                            postId));
+                        posts.add(new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link,
+                                postId));
+                    }
                 }
+            } catch (Exception e) {
             }
 
             RedditPost[] arrayOfPosts = new RedditPost[posts.size()];

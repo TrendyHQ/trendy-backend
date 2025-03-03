@@ -34,7 +34,7 @@ dependencies {
     implementation 'software.amazon.awssdk:s3:2.30.26'
     implementation 'net.dean.jraw:JRAW:1.1.0'
     implementation 'mysql:mysql-connector-java:8.0.33'
-    implementation 'com.azure:azure-ai-inference:1.0.0-beta.2'
+    implementation 'com.azure:azure-ai-inference:1.0.0-beta.3'
     
     // Optional: Spring Boot DevTools for better development experience
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

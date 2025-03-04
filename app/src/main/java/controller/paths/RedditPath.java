@@ -45,7 +45,7 @@ public class RedditPath {
             RedditDataFetcher redditData = new RedditDataFetcher();
 
             String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia",
-                    "fitness", "wellness", "music", "politics", "travel", "science", "sports" };
+                    "fitness", "health", "music", "politics", "travel", "science", "sports" };
 
             // Map subreddit names to their request futures
             List<CompletableFuture<RedditPost[]>> futures = new ArrayList<>();

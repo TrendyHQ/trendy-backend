@@ -44,10 +44,11 @@ public class RedditDataFetcher {
                 for (Subreddit subreddit : paginator.next()) {
                     try {
                         if (subreddit.getSubscribers() > minSubscribers) {
-                            minSubscribers = subreddit.getSubscribers();
                             closestMatch = subreddit;
+                            break;
                         }
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             } catch (Exception e) {
@@ -83,8 +84,9 @@ public class RedditDataFetcher {
                         RedditDataStorage storage = new RedditDataStorage();
                         storage.storeRedditPostData(post);
 
-                        posts.add(new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link,
-                                postId));
+                        posts.add(
+                                new RedditPost(post.getTitle(), subredditName, moreRelevantValue, score, moreInfo, link,
+                                        postId));
                     }
                 }
             } catch (Exception e) {
@@ -115,11 +117,10 @@ public class RedditDataFetcher {
                     int score = post.getScore();
                     String moreInfo = post.getSelfText();
                     String link = post.getUrl();
-                    String subredditName = post.getSubreddit();
 
                     if (!post.getTitle().contains("r/") && !post.isNsfw()) {
                         posts.add(new SpecificPost(title, score, moreInfo, link,
-                                favoritePostObject.getPostId(), subredditName));
+                                favoritePostObject.getPostId(), favoritePostObject.getPostCategory()));
                     }
                 } catch (Exception e) {
                 }

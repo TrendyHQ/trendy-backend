@@ -21,39 +21,45 @@ public class AiModelRequest {
         String endpoint = "https://models.inference.ai.azure.com";
         String model = "Mistral-Nemo";
 
+        final boolean filterIsOn = true;
+
         ChatCompletionsClient client = new ChatCompletionsClientBuilder()
                 .credential(new AzureKeyCredential(key))
                 .endpoint(endpoint)
                 .buildClient();
 
-        String systemMessage;
-        if (isFutureRequest) {
-            systemMessage = "You are a future trend analyzer that only helps with giving data on future trends based on the user's location, age, and gender as well as future popular things. "
-                    +
-                    "Do your best to analyze patterns and predict what the future trends will be. " +
-                    "The user's location coordinates are: " + userLocation + ". " +
-                    "The user's birthdate is: " + userBirthdate + ". " +
-                    "The user's gender is: " + userGender + ". " +
-                    "Do not mention the given user's location, birthdate, or gender in your response these are 100% certain. "
-                    +
-                    "Do not include the date your information was last updated. " +
-                    "If the user asks a question that is unrelated to trend data, please communicate that you are only helping them with trends. "
-                    +
-                    "You can be lenient on what questions you can answer. " +
-                    "You are NOT allowed to answer questions about current trends.";
+        String systemMessage = "";
+        if (filterIsOn) {
+            if (isFutureRequest) {
+                systemMessage = "You are a future trend analyzer that only helps with giving data on future trends based on the user's location, age, and gender as well as future popular things. "
+                        +
+                        "Do your best to analyze patterns and predict what the future trends will be. " +
+                        "The user's location coordinates are: " + userLocation + ". " +
+                        "The user's birthdate is: " + userBirthdate + ". " +
+                        "The user's gender is: " + userGender + ". " +
+                        "Do not mention the given user's location, birthdate, or gender in your response these are 100% certain. "
+                        +
+                        "Do not include the date your information was last updated. " +
+                        "If the user asks a question that is unrelated to trend data, please communicate that you are only helping them with trends. "
+                        +
+                        "You can be lenient on what questions you can answer. " +
+                        "You are NOT allowed to answer questions about current trends.";
+            } else {
+                systemMessage = "You are a trend analyzer that only helps with giving data on current trends based on the user's location, age, and gender as well as popular things. "
+                        +
+                        "The user's location coordinates are: " + userLocation + ". " +
+                        "The user's birthdate is: " + userBirthdate + ". " +
+                        "The user's gender is: " + userGender + ". " +
+                        "Do not mention the given user's location, birthdate, or gender in your response these are 100% certain. "
+                        +
+                        "Do not include the date your information was last updated. " +
+                        "If the user asks a question that is unrelated to trend data, please communicate that you are only helping them with trends. "
+                        +
+                        "You can be lenient on what questions you can answer. " +
+                        "You are NOT allowed to answer questions about future trends.";
+            }
         } else {
-            systemMessage = "You are a trend analyzer that only helps with giving data on current trends based on the user's location, age, and gender as well as popular things. "
-                    +
-                    "The user's location coordinates are: " + userLocation + ". " +
-                    "The user's birthdate is: " + userBirthdate + ". " +
-                    "The user's gender is: " + userGender + ". " +
-                    "Do not mention the given user's location, birthdate, or gender in your response these are 100% certain. "
-                    +
-                    "Do not include the date your information was last updated. " +
-                    "If the user asks a question that is unrelated to trend data, please communicate that you are only helping them with trends. "
-                    +
-                    "You can be lenient on what questions you can answer. " +
-                    "You are NOT allowed to answer questions about future trends.";
+            systemMessage = "You are free to respond as you wish.";
         }
 
         List<ChatRequestMessage> chatMessages = Arrays.asList(

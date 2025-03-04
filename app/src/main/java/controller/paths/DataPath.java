@@ -77,7 +77,7 @@ public class DataPath {
             return ResponseEntity.ok("{\"status\":\"success\",\"likes\":" + updatedLikes + "}");
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.ok("{\"status\":\"error\",\"message\":\"" + e.getMessage() + "\"}");
+            return ResponseEntity.ok("{\"status\":\"error\",\"message\":\"" + "Error setting likes on post" + "\"}");
         }
     }
 

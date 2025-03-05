@@ -292,11 +292,13 @@ public class TrendyClasses {
         private int likes;
         private CommentObject[] comments;
         private boolean userHasLiked;
+        private boolean userHasDisliked;
 
-        public PostInfoObject(int likes, CommentObject[] comments, boolean userHasLiked) {
+        public PostInfoObject(int likes, CommentObject[] comments, boolean userHasLiked, boolean userHasDisliked) {
             this.likes = likes;
             this.comments = comments;
             this.userHasLiked = userHasLiked;
+            this.userHasDisliked = userHasDisliked;
         }
 
         public int getLikes() {
@@ -309,6 +311,10 @@ public class TrendyClasses {
         
         public boolean getUserHasLiked() {
             return userHasLiked;
+        }
+    
+        public boolean getUserHasDisliked() {
+            return userHasDisliked;
         }
     }
 
@@ -369,9 +375,11 @@ public class TrendyClasses {
     public static class PostLikesObject {
         private int likes;
         private String[] usersThatLiked;
+        private String[] usersThatDisliked;
 
-        public PostLikesObject(int likes, String[] usersThatLiked) {
+        public PostLikesObject(int likes, String[] usersThatLiked, String[] usersThatDisliked) {
             this.usersThatLiked = usersThatLiked;
+            this.usersThatDisliked = usersThatDisliked;
             this.likes = likes;
         }
 
@@ -381,6 +389,10 @@ public class TrendyClasses {
 
         public String[] getUsersThatLiked() {
             return usersThatLiked;
+        }
+    
+        public String[] getUsersThatDisliked() {
+            return usersThatDisliked;
         }
     }
 

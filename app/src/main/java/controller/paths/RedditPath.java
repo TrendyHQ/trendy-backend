@@ -79,7 +79,7 @@ public class RedditPath {
             // Request data from each subreddit with proportional limits
             for (String subreddit : subreddits) {
                 // Calculate limit proportionally to favorites, with a minimum
-                if (categoryCounts.get(subreddit) + 5 < Collections.max(categoryCounts.values())) {
+                if (categoryCounts.get(subreddit) + 5 <= Collections.max(categoryCounts.values())) {
                     if (Math.random() > 0.5) {
                         continue;
                     } else {

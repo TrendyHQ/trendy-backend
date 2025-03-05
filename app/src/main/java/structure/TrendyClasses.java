@@ -351,7 +351,7 @@ public class TrendyClasses {
     public static class LikeRequest {
         private String userId;
         private String postId;
-        private boolean like;
+        private int like;
 
         public String getPostId() {
             return postId;
@@ -361,7 +361,7 @@ public class TrendyClasses {
             return userId;
         }
 
-        public boolean isLike() {
+        public int getLike() {
             return like;
         }
     }

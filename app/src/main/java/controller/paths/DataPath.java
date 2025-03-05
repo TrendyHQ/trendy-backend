@@ -69,8 +69,7 @@ public class DataPath {
         try {
             String userId = request.getUserId();
             String postId = request.getPostId();
-            boolean isLike = request.isLike();
-
+            int isLike = request.getLike(); // 1 for like, 0 for neutral, -1 for dislike
             StorageManager storageManager = new StorageManager();
             int updatedLikes = storageManager.setLikesOnPost(userId, postId, isLike);
 

@@ -101,44 +101,86 @@ public class StorageManager {
         }
     }
 
-    public int setLikesOnPost(String userId, String postId, boolean isLike) throws SQLException {
+    public int setLikesOnPost(String userId, String postId, int likeState) throws SQLException {
         Gson gson = new Gson();
 
-        PostLikesObject postLikesInfo = getLikesOnPost(postId);
-        int postLikes = postLikesInfo.getLikes();
-
-        String[] usersThatLikedArray = postLikesInfo.getUsersThatLiked();
-        if (usersThatLikedArray == null) {
-            usersThatLikedArray = new String[0];
-        }
-        // Create a new array with length+1 to accommodate all existing users plus the
-        // new one
-        String[] updatedUsersThatLikedArray = new String[usersThatLikedArray.length + 1];
-
-        // Copy all existing users to the new array
-        System.arraycopy(usersThatLikedArray, 0, updatedUsersThatLikedArray, 0, usersThatLikedArray.length);
-
-        // Add the new userId at the end
-        updatedUsersThatLikedArray[updatedUsersThatLikedArray.length - 1] = userId;
-
-        String query = "INSERT INTO trend_information (trend_id, trend_likes, users_that_liked) VALUES (?, ?, ?) " +
-                "ON DUPLICATE KEY UPDATE trend_likes = VALUES(trend_likes), users_that_liked = VALUES(users_that_liked)";
-
+        // Get current post information
+        String query = "SELECT trend_likes, users_that_liked, users_that_disliked FROM trend_information WHERE trend_id = ? LIMIT 1";
+        int currentLikes = 0;
+        String[] usersThatLiked = new String[0];
+        String[] usersThatDisliked = new String[0];
+        
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-                PreparedStatement stmt = connection.prepareStatement(query)) {
+             PreparedStatement stmt = connection.prepareStatement(query)) {
             stmt.setString(1, postId);
-            if (isLike) {
-                stmt.setInt(2, postLikes + 1);
-                stmt.setString(3,
-                        gson.toJson(Arrays.stream(updatedUsersThatLikedArray).distinct().toArray(String[]::new)));
-            } else {
-                stmt.setInt(2, postLikes - 1);
-                stmt.setString(3, gson.toJson(Arrays.stream(usersThatLikedArray).filter(user -> !user.equals(userId))
-                        .toArray(String[]::new)));
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                currentLikes = rs.getInt("trend_likes");
+                
+                String likedJson = rs.getString("users_that_liked");
+                if (likedJson != null && !likedJson.isEmpty()) {
+                    usersThatLiked = gson.fromJson(likedJson, String[].class);
+                }
+                
+                String dislikedJson = rs.getString("users_that_disliked");
+                if (dislikedJson != null && !dislikedJson.isEmpty()) {
+                    usersThatDisliked = gson.fromJson(dislikedJson, String[].class);
+                }
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Check current user state
+        boolean userHasLiked = Arrays.asList(usersThatLiked).contains(userId);
+        boolean userHasDisliked = Arrays.asList(usersThatDisliked).contains(userId);
+        
+        // Calculate the change in likes count
+        int likesChange = 0;
+        
+        // Remove user from both arrays initially
+        usersThatLiked = Arrays.stream(usersThatLiked)
+            .filter(id -> !id.equals(userId))
+            .toArray(String[]::new);
+            
+        usersThatDisliked = Arrays.stream(usersThatDisliked)
+            .filter(id -> !id.equals(userId))
+            .toArray(String[]::new);
+        
+        // Add user to appropriate array based on new state
+        if (likeState > 0) {  // Like
+            usersThatLiked = appendToArray(usersThatLiked, userId);
+            likesChange = userHasLiked ? 0 : (userHasDisliked ? 2 : 1);
+        } else if (likeState < 0) { // Dislike
+            usersThatDisliked = appendToArray(usersThatDisliked, userId);
+            likesChange = userHasDisliked ? 0 : (userHasLiked ? -2 : -1);
+        } else { // Neutral
+            likesChange = userHasLiked ? -1 : (userHasDisliked ? 1 : 0);
+        }
+        
+        // Update the database
+        int newLikesCount = currentLikes + likesChange;
+        
+        String updateQuery = "INSERT INTO trend_information (trend_id, trend_likes, users_that_liked, users_that_disliked) " +
+                "VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE trend_likes = VALUES(trend_likes), " +
+                "users_that_liked = VALUES(users_that_liked), users_that_disliked = VALUES(users_that_disliked)";
+                
+        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+             PreparedStatement stmt = connection.prepareStatement(updateQuery)) {
+            stmt.setString(1, postId);
+            stmt.setInt(2, newLikesCount);
+            stmt.setString(3, gson.toJson(usersThatLiked));
+            stmt.setString(4, gson.toJson(usersThatDisliked));
             stmt.executeUpdate();
         }
-
-        return isLike ? postLikes + 1 : postLikes - 1;
+        
+        return newLikesCount;
+    }
+    
+    private String[] appendToArray(String[] array, String value) {
+        String[] newArray = Arrays.copyOf(array, array.length + 1);
+        newArray[array.length] = value;
+        return newArray;
     }
 }

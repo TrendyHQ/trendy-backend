@@ -31,7 +31,6 @@ public class StorageManager {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                System.out.println(rs.getString("users_that_disliked"));
                 return new PostLikesObject(rs.getInt("trend_likes"),
                         new Gson().fromJson(rs.getString("users_that_liked"), String[].class),
                         new Gson().fromJson(rs.getString("users_that_disliked"), String[].class));

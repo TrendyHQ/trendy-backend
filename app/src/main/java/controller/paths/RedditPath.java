@@ -69,31 +69,26 @@ public class RedditPath {
 
             // Calculate total favorites and prepare for proportional allocation
             int totalFavorites = categoryCounts.values().stream().mapToInt(Integer::intValue).sum();
-            int totalToAllocate = amount;
+            
+            // Request more posts than needed to ensure we have enough after filtering
+            int requestBuffer = Math.max(20, amount);
+            int totalToAllocate = amount + requestBuffer;
 
-            // Minimum posts per category to ensure diversity
-            int minPostsPerCategory = Math.round(totalToAllocate / subreddits.length);
-            int reservedPosts = minPostsPerCategory * subreddits.length / 2;
-            int remainingToAllocate = Math.max(0, totalToAllocate - reservedPosts);
-
-            // Request data from each subreddit with proportional limits
+            // Request data from each subreddit with proportional limits - never skip subreddits
             for (String subreddit : subreddits) {
-                // Calculate limit proportionally to favorites, with a minimum
-                if (categoryCounts.get(subreddit) + 5 <= Collections.max(categoryCounts.values())) {
-                    if (Math.random() > 0.5) {
-                        continue;
-                    } else {
-                        limitPerSubreddit = minPostsPerCategory;
-                    }
-                } else if ((totalFavorites > 0 && remainingToAllocate > 0) || categoryCounts.get(subreddit) > 0) {
-                    double proportion = (double) categoryCounts.get(subreddit) / totalFavorites;
-                    // Set minimum to 2 for categories with favorites
-                    int categoryMin = categoryCounts.get(subreddit) > 0 ? minPostsPerCategory * 2 : minPostsPerCategory;
-                    limitPerSubreddit = categoryMin + (int) Math.round(proportion * remainingToAllocate);
+                // Calculate proportional limit based on user preferences
+                if (totalFavorites > 0) {
+                    double proportion = (double) categoryCounts.getOrDefault(subreddit, 0) / totalFavorites;
+                    // Ensure at least some minimum posts from each category
+                    limitPerSubreddit = 5 + (int) Math.round(proportion * totalToAllocate);
                 } else {
-                    limitPerSubreddit = minPostsPerCategory;
+                    // Equal distribution if no favorites
+                    limitPerSubreddit = totalToAllocate / subreddits.length;
                 }
-
+                
+                // Ensure minimum value
+                limitPerSubreddit = Math.max(5, limitPerSubreddit);
+                
                 futures.add(requestDataFromReddit(redditData, subreddit, redditClient, limitPerSubreddit));
             }
 
@@ -133,8 +128,8 @@ public class RedditPath {
                 int p2CategoryCount = categoryCounts.getOrDefault(p2.getCategory(), 0);
 
                 // Calculate weighted scores that include category preference
-                double p1WeightedScore = p1.getScore() * (1 + (p1CategoryCount * 0.5));
-                double p2WeightedScore = p2.getScore() * (1 + (p2CategoryCount * 0.5));
+                double p1WeightedScore = p1.getScore() * (1 + (p1CategoryCount * 0.3));
+                double p2WeightedScore = p2.getScore() * (1 + (p2CategoryCount * 0.3));
 
                 // Sort by weighted score
                 return Double.compare(p2WeightedScore, p1WeightedScore);
@@ -174,8 +169,13 @@ public class RedditPath {
                 }
             }
 
-            // Take top 'amount' posts
+            // Take exactly the requested number of posts
             RedditPost[] topPosts = allPosts.stream().limit(amount).toArray(RedditPost[]::new);
+            
+            // If we still don't have enough posts, log an error
+            if (topPosts.length < amount) {
+                System.err.println("Warning: Requested " + amount + " posts but only returned " + topPosts.length);
+            }
 
             return ResponseEntity.ok(new Gson().toJson(topPosts));
         } catch (Exception e) {
@@ -221,8 +221,8 @@ public class RedditPath {
             RedditClient redditClient, int amount) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                int limit = Math.round(amount / 3);
-                return redditData.getData(subredditName, redditClient, limit);
+                // Request the full amount - remove the division by 3
+                return redditData.getData(subredditName, redditClient, amount);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

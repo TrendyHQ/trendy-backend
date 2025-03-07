@@ -1,7 +1,5 @@
 package controller.paths;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,9 +23,6 @@ import com.google.gson.JsonParser;
 
 import auth0.UploadFile;
 import dataManagement.UserManager;
-import io.github.cdimascio.dotenv.Dotenv;
-import kong.unirest.core.HttpResponse;
-import kong.unirest.core.Unirest;
 import net.dean.jraw.RedditClient;
 import structure.TrendyClasses.FavoritePostObject;
 import structure.TrendyClasses.SpecificPost;
@@ -35,16 +30,11 @@ import structure.TrendyClasses.TrendSaveRequest;
 import structure.TrendyClasses.UpdateUserRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
+import auth0.AuthRequestManager;
 
 @RestController
 @RequestMapping("/api/users") // Define the base URL for your endpoints
 public class UsersPath {
-    Dotenv dotenv = Dotenv.load();
-
-    final String DOMAIN = dotenv.get("AUTH0_DOMAIN");
-    final String CLIENT_ID = dotenv.get("MANAGEMENT_AUTH0_CLIENT_ID");
-    final String CLIENT_SECRET = dotenv.get("MANAGEMENT_AUTH0_CLIENT_SECRET");
-
     UserManager userManager = new UserManager();
     RedditClientManager redditClientManager = new RedditClientManager();
 
@@ -69,7 +59,7 @@ public class UsersPath {
         };
 
         try {
-            String accessToken = getAccessToken();
+            String accessToken = AuthRequestManager.getAccessToken();
 
             JsonObject updateJson = JsonParser.parseString(request.getToUpdate()).getAsJsonObject();
             JsonObject filteredJson = new JsonObject();
@@ -118,7 +108,7 @@ public class UsersPath {
 
             String cleanedUpdate = filteredJson.toString();
 
-            setUserInformation(cleanedUpdate, accessToken, request.getUserId());
+            AuthRequestManager.setUserInformation(cleanedUpdate, accessToken, request.getUserId());
 
             return ResponseEntity.ok(cleanedUpdate); // Update response to return cleanedUpdate instead of
                                                      // request.getToUpdate()
@@ -139,13 +129,13 @@ public class UsersPath {
 
             String fileUrl = new UploadFile().uploadToS3(newPicture);
 
-            String accessToken = getAccessToken();
+            String accessToken = AuthRequestManager.getAccessToken();
 
             JsonObject requestBodyJson = new JsonObject();
             requestBodyJson.addProperty("picture", fileUrl);
             String requestBody = requestBodyJson.toString();
 
-            setUserInformation(requestBody, accessToken, userId);
+            AuthRequestManager.setUserInformation(requestBody, accessToken, userId);
 
             return ResponseEntity.ok("Picture updated successfully");
 
@@ -171,13 +161,13 @@ public class UsersPath {
 
         try {
             if (Arrays.asList(validProperties).contains(property)) {
-                JsonObject jsonResponse = getAuth0Info(userId);
+                JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
                 String requestedProperty = jsonResponse.get(property).getAsString();
 
                 return ResponseEntity.ok(requestedProperty);
             } else {
                 if (Arrays.asList(validAppMetaDataProperties).contains(property)) {
-                    JsonObject jsonResponse = getAuth0Info(userId);
+                    JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
                     String requestedProperty = "";
 
                     if (jsonResponse.has("app_metadata") &&
@@ -188,7 +178,7 @@ public class UsersPath {
 
                     return ResponseEntity.ok(requestedProperty);
                 } else if (Arrays.asList(validUserMetaDataProperties).contains(property)) {
-                    JsonObject jsonResponse = getAuth0Info(userId);
+                    JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
                     String requestedProperty = "";
 
                     if (jsonResponse.has("user_metadata") &&
@@ -243,54 +233,5 @@ public class UsersPath {
         String jsonResponse = new Gson().toJson(favoritePosts);
 
         return ResponseEntity.ok(jsonResponse);
-    }
-
-    private String getAccessToken() throws Exception {
-
-        String jsonBody = "{\"client_id\":\"" + CLIENT_ID + "\",\"client_secret\":\"" + CLIENT_SECRET
-                + "\",\"audience\":\"https://" + DOMAIN + "/api/v2/\",\"grant_type\":\"client_credentials\"}";
-
-        HttpResponse<String> response = Unirest.post("https://" + DOMAIN + "/oauth/token")
-                .header("content-type", "application/json")
-                .body(jsonBody)
-                .asString();
-
-        JsonObject jsonResponse = JsonParser.parseString(response.getBody()).getAsJsonObject();
-        String accessToken = jsonResponse.get("access_token").getAsString();
-
-        return accessToken;
-    }
-
-    private void setUserInformation(String requestBody, String accessToken, String userId) throws Exception {
-        String encodedUserId;
-        if (userId.contains("%")) {
-            encodedUserId = userId;
-        } else {
-            encodedUserId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
-        }
-
-        @SuppressWarnings("unused")
-        HttpResponse<String> auth0ApiResponse = Unirest
-                .patch("https://" + DOMAIN + "/api/v2/users/" + encodedUserId)
-                .header("authorization", "Bearer " + accessToken)
-                .header("Content-Type", "application/json")
-                .header("cache-control", "no-cache")
-                .body(requestBody)
-                .asString();
-
-    }
-
-    private JsonObject getAuth0Info(String userId) throws Exception {
-        String accessToken = getAccessToken();
-
-        String encodedUserId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
-        HttpResponse<String> auth0ApiResponse = Unirest
-                .get("https://" + DOMAIN + "/api/v2/users/" + encodedUserId)
-                .header("authorization", "Bearer " + accessToken)
-                .header("Content-Type", "application/json")
-                .header("cache-control", "no-cache")
-                .asString();
-
-        return JsonParser.parseString(auth0ApiResponse.getBody()).getAsJsonObject();
     }
 }

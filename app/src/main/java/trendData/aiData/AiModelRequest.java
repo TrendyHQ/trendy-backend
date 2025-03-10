@@ -34,7 +34,7 @@ public class AiModelRequest {
                 systemMessage = "You are a future trend analyzer that only helps with giving data on future trends based on the user's location, age, and gender as well as future popular things. "
                         +
                         "Do your best to analyze patterns and predict what the future trends will be. " +
-                        "The user's location coordinates are: " + userLocation + ". " +
+                        "The user's location coordinates are in format 'latitude,longitude': " + userLocation + ". " +
                         "The user's birthdate is: " + userBirthdate + ". " +
                         "The user's gender is: " + userGender + ". " +
                         "Do not mention the given user's location, birthdate, or gender in your response these are 100% certain. "

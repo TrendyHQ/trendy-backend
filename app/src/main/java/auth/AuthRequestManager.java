@@ -1,4 +1,4 @@
-package auth0;
+package auth;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

@@ -21,7 +21,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import auth0.UploadFile;
+import auth.AuthRequestManager;
+import auth.UploadFile;
 import dataManagement.UserManager;
 import net.dean.jraw.RedditClient;
 import structure.TrendyClasses.FavoritePostObject;
@@ -30,7 +31,6 @@ import structure.TrendyClasses.TrendSaveRequest;
 import structure.TrendyClasses.UpdateUserRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
-import auth0.AuthRequestManager;
 
 @RestController
 @RequestMapping("/api/users") // Define the base URL for your endpoints

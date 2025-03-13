@@ -128,12 +128,52 @@ public class GoogleManager {
                 .header("cache-control", "no-cache")
                 .asString();
 
-        System.out.println("Response: " + serpResponse.getBody());
+        int totalScore = getTotalScore(serpResponse.getBody());
 
         if (serpResponse.getStatus() == 200) {
-            return JsonParser.parseString(serpResponse.getBody()).getAsJsonObject();
+            JsonObject jsonResponse = JsonParser.parseString(serpResponse.getBody()).getAsJsonObject();
+            jsonResponse.addProperty("score", totalScore);
+            return jsonResponse;
         } else {
-            throw new RuntimeException("Failed to fetch data: " + serpResponse.getStatusText());
+            throw new RuntimeException("Failed to fetch data: " + serpResponse.getBody());
         }
+    }
+
+    private int getTotalScore(String responseBody) {
+        JsonObject response = JsonParser.parseString(responseBody).getAsJsonObject();
+
+        int totalScore = 0;
+
+        if (response.has("interest_over_time") &&
+                !response.get("interest_over_time").isJsonNull()) {
+
+            JsonObject interestOverTime = response.getAsJsonObject("interest_over_time");
+
+            if (interestOverTime.has("timeline_data") &&
+                    !interestOverTime.get("timeline_data").isJsonNull()) {
+
+                for (JsonElement timelineElement : interestOverTime.getAsJsonArray("timeline_data")) {
+                    JsonObject timelineObject = timelineElement.getAsJsonObject();
+
+                    if (timelineObject.has("values") &&
+                            !timelineObject.get("values").isJsonNull()) {
+
+                        for (JsonElement valueElement : timelineObject.getAsJsonArray("values")) {
+                            JsonObject valueObject = valueElement.getAsJsonObject();
+
+                            if (valueObject.has("value") &&
+                                    !valueObject.get("value").isJsonNull()) {
+
+                                totalScore += valueObject.get("value").getAsInt();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        System.out.println("Total Score: " + totalScore);
+
+        return totalScore;
     }
 }

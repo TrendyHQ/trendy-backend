@@ -126,27 +126,20 @@ public class GooglePath {
 
     private String updateData(String location) throws SQLException {
         GoogleManager googleManager = new GoogleManager();
-        JsonObject response1 = googleManager.fetchInfo("cats", location);
-        JsonObject response2 = googleManager.fetchInfo("dogs", location);
-        // JsonObject response3 = googleManager.fetchInfo("", location);
-        // JsonObject response4 = googleManager.fetchInfo("", location);
-        // JsonObject response5 = googleManager.fetchInfo("", location);
-        // JsonObject response6 = googleManager.fetchInfo("", location);
-        // JsonObject response7 = googleManager.fetchInfo("", location);
-        // JsonObject response8 = googleManager.fetchInfo("", location);
-        // JsonObject response9 = googleManager.fetchInfo("", location);
-        // JsonObject response10 = googleManager.fetchInfo("", location);
-        // JsonObject response11 = googleManager.fetchInfo("", location);
-        // JsonObject response12 = googleManager.fetchInfo("", location);
+
+        String[] searchQueries = {
+                "fashion", "technology", "food", "entertainment",
+                "media", "fitness", "health", "music",
+                "politics", "travel", "science", "sports"
+        };
 
         // Create a JSON object to hold all responses
         JsonObject responseData = new JsonObject();
-        responseData.add("cats", response1);
-        responseData.add("dogs", response2);
-        // When you uncomment the other responses, add them to the jsonData object like:
-        // responseData.add("category3", response3);
-        // responseData.add("category4", response4);
-        // etc.
+
+        for (String category : searchQueries) {
+            JsonObject response = googleManager.fetchInfo(category, location);
+            responseData.add(category, response);
+        }
 
         String jsonData = responseData.toString();
 

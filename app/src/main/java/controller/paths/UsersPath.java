@@ -223,7 +223,7 @@ public class UsersPath {
         RedditDataFetcher redditData = new RedditDataFetcher();
 
         if (redditClientManager.getClient() == null) {
-            redditClientManager.autherizeClient();
+            redditClientManager.authorizeClient();
         }
 
         RedditClient redditClient = redditClientManager.getClient();

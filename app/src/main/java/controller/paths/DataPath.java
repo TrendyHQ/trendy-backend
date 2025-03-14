@@ -35,7 +35,7 @@ public class DataPath {
         RedditDataFetcher redditData = new RedditDataFetcher();
         try {
             if (redditClientManager.getClient() == null) {
-                redditClientManager.autherizeClient();
+                redditClientManager.authorizeClient();
             }
 
             RedditClient redditClient = redditClientManager.getClient();

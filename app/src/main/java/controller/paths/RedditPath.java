@@ -36,7 +36,7 @@ public class RedditPath {
     public ResponseEntity<String> getTopRedditData(@RequestBody TopRedditRequest request) throws SQLException {
         try {
             if (redditClientManager.getClient() == null) {
-                redditClientManager.autherizeClient();
+                redditClientManager.authorizeClient();
             }
 
             RedditClient redditClient = redditClientManager.getClient();
@@ -188,7 +188,7 @@ public class RedditPath {
     public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
         try {
             if (redditClientManager.getClient() == null) {
-                redditClientManager.autherizeClient();
+                redditClientManager.authorizeClient();
             }
 
             RedditClient redditClient = redditClientManager.getClient();

@@ -37,8 +37,7 @@ public class RedditClientManager {
         return new UserAgent("bot", "com.trendy.dataFetcher", "v1.0", username);
     }
 
-    public void autherizeClient(){
-        System.out.println("Authenticating Reddit client...");
+    public void authorizeClient(){
         redditClient = OAuthHelper.automatic(new OkHttpNetworkAdapter(getAgent()), getCredentials());
     }
 }

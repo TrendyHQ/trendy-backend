@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -33,11 +35,11 @@ public class GooglePath {
             @RequestParam(required = true) String location) {
 
         try {
-            JsonObject currentGoogleData = getCurrentGoogleData(location);
+            JsonArray currentGoogleData = getCurrentGoogleData(location);
             if (currentGoogleData != null) {
                 // Return current data immediately and update in the background
-                if (currentGoogleData.has("updated_at")) {
-                    String lastUpdated = currentGoogleData.get("updated_at").getAsString();
+                if (currentGoogleData.get(currentGoogleData.size() - 1).getAsString() == "updated_at") {
+                    String lastUpdated = currentGoogleData.get(currentGoogleData.size() - 1).getAsString();
                     // Check when this data was last updated
                     LocalDateTime lastUpdatedTime = LocalDateTime.parse(lastUpdated.replace(" ", "T"));
                     LocalDateTime now = LocalDateTime.now();
@@ -67,7 +69,7 @@ public class GooglePath {
         }
     }
 
-    private JsonObject getCurrentGoogleData(String location) throws SQLException {
+    private JsonArray getCurrentGoogleData(String location) throws SQLException {
         // Method that checks the sql database to see if there is stored information
         // about the 12 categories and returns it
 
@@ -88,13 +90,13 @@ public class GooglePath {
                     String jsonData = rs.getString("json_data");
                     String timeStamp = rs.getString("updated_at");
 
-                    JsonObject result = JsonParser.parseString(jsonData).getAsJsonObject();
-                    result.addProperty("updated_at", timeStamp);
+                    JsonArray result = JsonParser.parseString(jsonData).getAsJsonArray();
+                    result.add(timeStamp);
                     return result;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
-                return new JsonObject();
+                return new JsonArray();
             }
         }
 
@@ -134,11 +136,14 @@ public class GooglePath {
         };
 
         // Create a JSON object to hold all responses
-        JsonObject responseData = new JsonObject();
+        JsonArray responseData = new JsonArray();
 
         for (String category : searchQueries) {
             JsonObject response = googleManager.fetchInfo(category, location);
-            responseData.add(category, response);
+            response.addProperty("title", category);
+            // convert JsonObject to JsonElement
+            JsonElement responseElement = JsonParser.parseString(response.toString());
+            responseData.add(responseElement);
         }
 
         String jsonData = responseData.toString();

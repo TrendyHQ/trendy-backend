@@ -17,6 +17,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.JsonSyntaxException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import trendData.googleTrendsData.GoogleManager;
@@ -138,12 +139,18 @@ public class GooglePath {
         // Create a JSON object to hold all responses
         JsonArray responseData = new JsonArray();
 
-        for (String category : searchQueries) {
-            JsonObject response = googleManager.fetchInfo(category, location);
-            response.addProperty("title", category);
-            // convert JsonObject to JsonElement
-            JsonElement responseElement = JsonParser.parseString(response.toString());
-            responseData.add(responseElement);
+        try {
+            for (String category : searchQueries) {
+                JsonObject response = googleManager.fetchInfo(category, location);
+                response.addProperty("title", category);
+                // convert JsonObject to JsonElement
+                JsonElement responseElement = JsonParser.parseString(response.toString());
+                responseData.add(responseElement);
+            }
+        } catch (JsonSyntaxException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         String jsonData = responseData.toString();

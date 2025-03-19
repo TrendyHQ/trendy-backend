@@ -39,14 +39,14 @@ public class GooglePath {
             JsonArray currentGoogleData = getCurrentGoogleData(location);
             if (currentGoogleData != null) {
                 // Return current data immediately and update in the background
-                if (currentGoogleData.get(currentGoogleData.size() - 1).getAsString() == "updated_at") {
+                if (currentGoogleData.get(currentGoogleData.size() - 1).getAsString() != null) {
                     String lastUpdated = currentGoogleData.get(currentGoogleData.size() - 1).getAsString();
                     // Check when this data was last updated
                     LocalDateTime lastUpdatedTime = LocalDateTime.parse(lastUpdated.replace(" ", "T"));
                     LocalDateTime now = LocalDateTime.now();
 
                     // Only update data if it’s more than 1 hour old
-                    if (lastUpdatedTime.plusHours(1).isBefore(now)) {
+                    if (lastUpdatedTime.plusHours(1).isBefore(now) || true) {
                         new Thread(() -> {
                             try {
                                 String newData = updateData(location);

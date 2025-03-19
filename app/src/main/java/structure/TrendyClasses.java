@@ -408,4 +408,16 @@ public class TrendyClasses {
             return userId;
         }
     }
+
+    public class TimelineData {
+        public String date;
+        public String timestamp;
+        public ValueObject[] values;
+    }
+
+    public class ValueObject{
+        public int extracted_value;
+        public String query;
+        public String value;
+    }
 }

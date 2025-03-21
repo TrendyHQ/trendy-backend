@@ -169,7 +169,7 @@ public class GoogleManager {
 
                 return data;
             } else {
-                throw new RuntimeException("Failed to fetch data: " + serpResponse.getStatusText());
+                throw new RuntimeException("Failed to fetch data: " + serpResponse.getBody());
             }
         } catch (NumberFormatException e) {
             e.printStackTrace();

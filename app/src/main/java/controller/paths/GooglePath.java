@@ -25,11 +25,17 @@ import trendData.googleTrendsData.GoogleManager;
 @RestController
 @RequestMapping("/api/google")
 public class GooglePath {
+
+    private final AiPath aiPath;
     Dotenv dotenv = Dotenv.load();
 
     private final String DB_URL = dotenv.get("DB_URL");
     private final String USER = dotenv.get("DB_USER");
     private final String PASSWORD = dotenv.get("DB_PASSWORD");
+
+    GooglePath(AiPath aiPath) {
+        this.aiPath = aiPath;
+    }
 
     @GetMapping("/info")
     public ResponseEntity<String> getGoogleInfo(
@@ -106,23 +112,26 @@ public class GooglePath {
 
     private void setCurrentGoogleData(String location, String jsonData) throws SQLException {
         // Method that sets the sql database with the 12 categories and their data
-        String locationCode;
-        try {
-            locationCode = new GoogleManager().getLocationCode(location);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
-            String postInsertQuery = "INSERT INTO google_data (location_code, json_data) VALUES (?, ?) ON DUPLICATE KEY UPDATE json_data = ?";
-            try (PreparedStatement postStmt = connection.prepareStatement(postInsertQuery)) {
-                postStmt.setString(1, locationCode); // Use the actual location code
-                postStmt.setString(2, jsonData);
-                postStmt.setString(3, jsonData);
-                postStmt.executeUpdate();
-            } catch (SQLException e) {
+        JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
+        if (jsonArray.size() > 1) {
+            String locationCode;
+            try {
+                locationCode = new GoogleManager().getLocationCode(location);
+            } catch (Exception e) {
                 e.printStackTrace();
+                return;
+            }
+
+            try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD)) {
+                String postInsertQuery = "INSERT INTO google_data (location_code, json_data) VALUES (?, ?) ON DUPLICATE KEY UPDATE json_data = ?";
+                try (PreparedStatement postStmt = connection.prepareStatement(postInsertQuery)) {
+                    postStmt.setString(1, locationCode); // Use the actual location code
+                    postStmt.setString(2, jsonData);
+                    postStmt.setString(3, jsonData);
+                    postStmt.executeUpdate();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -29,6 +29,14 @@ import trendData.redditData.RedditDataFetcher;
 public class DataPath {
     RedditClientManager redditClientManager = new RedditClientManager();
 
+    /**
+     * Retrieves data for a specific trend based on the post ID and user ID.
+     * 
+     * @param postId The unique identifier of the post to retrieve
+     * @param userId The ID of the user requesting the trend data
+     * @return ResponseEntity containing JSON data of the specific post or an error message
+     * @throws SQLException If a database access error occurs
+     */
     @GetMapping("/trend")
     public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId, @RequestParam String userId)
             throws SQLException {
@@ -51,6 +59,12 @@ public class DataPath {
         return ResponseEntity.badRequest().body("Failed to receive data");
     }
 
+    /**
+     * Adds a comment to a specific post.
+     * 
+     * @param request CommentRequest object containing postId and comment text
+     * @return ResponseEntity with success message or error message
+     */
     @PutMapping("/addCommentToPost")
     public ResponseEntity<String> addCommentToPost(@RequestBody CommentRequest request) {
         try {
@@ -64,6 +78,12 @@ public class DataPath {
         }
     }
 
+    /**
+     * Sets a like/dislike status for a post by a specific user.
+     * 
+     * @param request LikeRequest object containing userId, postId, and like value
+     * @return ResponseEntity with JSON containing updated like count or error message
+     */
     @PutMapping("/setLikesOnPost")
     public ResponseEntity<String> setLikesOnPost(@RequestBody LikeRequest request) {
         try {
@@ -80,6 +100,12 @@ public class DataPath {
         }
     }
 
+    /**
+     * Adds user feedback or report to the database.
+     * 
+     * @param feedback FeedbackRequest object containing userId, feedback text, and isReport flag
+     * @return ResponseEntity with success message or error message
+     */
     @PutMapping("/addFeedbackToDatabase")
     public ResponseEntity<String> addFeedbackToDatabase(@RequestBody FeedbackRequest feedback) {
         try {

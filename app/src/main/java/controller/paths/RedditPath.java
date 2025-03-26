@@ -32,6 +32,14 @@ import trendData.redditData.RedditDataFetcher;
 public class RedditPath {
     RedditClientManager redditClientManager = new RedditClientManager();
 
+    /**
+     * Retrieves top Reddit data based on user preferences and post popularity.
+     * Uses user's favorite posts to personalize the content selection.
+     * 
+     * @param request TopRedditRequest object containing userId and requestAmount
+     * @return ResponseEntity with JSON array of personalized Reddit posts or error message
+     * @throws SQLException If a database access error occurs
+     */
     @PostMapping("/topReddit")
     public ResponseEntity<String> getTopRedditData(@RequestBody TopRedditRequest request) throws SQLException {
         try {
@@ -184,6 +192,12 @@ public class RedditPath {
         }
     }
 
+    /**
+     * Retrieves top trends for a specific category/entity from Reddit.
+     * 
+     * @param entity The category or entity name to fetch trends for
+     * @return ResponseEntity with JSON array of posts from the specified category or error message
+     */
     @PostMapping("/topTrendsForCategory")
     public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
         try {
@@ -217,6 +231,15 @@ public class RedditPath {
         }
     }
 
+    /**
+     * Asynchronously requests Reddit data for a specific subreddit.
+     * 
+     * @param redditData The RedditDataFetcher instance to use for fetching data
+     * @param subredditName The name of the subreddit to fetch data from
+     * @param redditClient The authenticated RedditClient instance
+     * @param amount The number of posts to request from the subreddit
+     * @return CompletableFuture that will contain the array of RedditPost objects when completed
+     */
     private CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
             RedditClient redditClient, int amount) {
         return CompletableFuture.supplyAsync(() -> {

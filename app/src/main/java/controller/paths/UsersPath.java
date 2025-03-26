@@ -38,6 +38,13 @@ public class UsersPath {
     UserManager userManager = new UserManager();
     RedditClientManager redditClientManager = new RedditClientManager();
 
+    /**
+     * Updates user information in Auth0 based on the provided request.
+     * Filters out null, empty values, and only allows updates to predefined editable properties.
+     *
+     * @param request UpdateUserRequest containing userId and JSON string with fields to update
+     * @return ResponseEntity with the cleaned update JSON string or error message
+     */
     @PatchMapping("/updateUserInformation")
     public ResponseEntity<String> updateUserInformation(@RequestBody UpdateUserRequest request) {
         String[] editableUserProperties = {
@@ -118,11 +125,18 @@ public class UsersPath {
         }
     }
 
+    /**
+     * Updates a user's profile picture by uploading the provided file to S3 and 
+     * updating the user's Auth0 profile with the new picture URL.
+     *
+     * @param userId ID of the user whose picture is being updated
+     * @param file MultipartFile containing the new profile picture image
+     * @return ResponseEntity with success message or error message
+     * @throws Exception If an error occurs during file upload or profile update
+     */
     @PutMapping("/update-picture")
     public ResponseEntity<String> updatePicture(
-
             @RequestParam String userId,
-
             @RequestPart("file") MultipartFile file) throws Exception {
         try {
             MultipartFile newPicture = file;
@@ -146,6 +160,14 @@ public class UsersPath {
 
     }
 
+    /**
+     * Retrieves a specific property from a user's Auth0 profile.
+     * Supports accessing properties from the main profile, app_metadata, or user_metadata.
+     *
+     * @param property Name of the property to retrieve (must be in predefined valid properties)
+     * @param userId ID of the user whose property is being requested
+     * @return ResponseEntity with the property value as a string or error message
+     */
     @GetMapping("/getUserProperty")
     public ResponseEntity<String> getUserProperty(@RequestParam String property, @RequestParam String userId) {
         String[] validProperties = {
@@ -198,6 +220,12 @@ public class UsersPath {
         }
     }
 
+    /**
+     * Saves or removes a trend (post) as a favorite for a specific user.
+     *
+     * @param request TrendSaveRequest containing userId, trendId, saveTrend flag, and trendCategory
+     * @return ResponseEntity with success message or error message
+     */
     @PatchMapping("/saveTrend")
     public ResponseEntity<String> saveTrend(@RequestBody TrendSaveRequest request) {
         try {
@@ -211,6 +239,12 @@ public class UsersPath {
         }
     }
 
+    /**
+     * Retrieves all trends (posts) saved as favorites by a specific user.
+     *
+     * @param userId ID of the user whose saved trends are being requested
+     * @return ResponseEntity with JSON array of favorite post objects or error message
+     */
     @GetMapping("/getSavedTrends")
     public ResponseEntity<String> getSavedTrends(@RequestParam String userId) {
         ArrayList<FavoritePostObject> savedTrends = userManager.getUsersFavoritePostsIds(userId);
@@ -218,6 +252,14 @@ public class UsersPath {
         return ResponseEntity.ok(jsonSavedTrends);
     }
 
+    /**
+     * Retrieves detailed information about trends (posts) saved by a specific user.
+     * Fetches complete post data from Reddit for each saved trend ID.
+     *
+     * @param userId ID of the user whose trends are being requested
+     * @return ResponseEntity with JSON array of specific post objects or error message
+     * @throws SQLException If a database access error occurs
+     */
     @GetMapping("/getUsersTrends")
     public ResponseEntity<String> getUsersTrends(@RequestParam String userId) throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();

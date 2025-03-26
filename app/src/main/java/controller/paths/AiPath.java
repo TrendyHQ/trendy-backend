@@ -12,6 +12,12 @@ import trendData.aiData.AiModelRequest;
 @RestController
 @RequestMapping("api/ai") // Define the base URL for your endpoints
 public class AiPath {
+    /**
+     * Processes an AI data request and generates a response based on user attributes and message content.
+     * 
+     * @param request AiRequest object containing userId, message, userLocation, and isFutureRequest flag
+     * @return ResponseEntity with AI-generated response or error message
+     */
     @PostMapping("/AiModelRequest")
     public ResponseEntity<String> getAiData(@RequestBody AiRequest request) {
         try {
@@ -28,5 +34,4 @@ public class AiPath {
             return ResponseEntity.status(500).body("Error generating response, please try again later or contact support.");
         }
     }
-
 }

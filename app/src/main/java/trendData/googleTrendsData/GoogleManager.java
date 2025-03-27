@@ -155,12 +155,13 @@ public class GoogleManager {
             }
 
             HttpResponse<String> serpResponse = Unirest
-                    .get("https://serpapi.com/search")
+                    .get("https://searchapi.io/api/v1/search")
                     .queryString(parameters)
                     .header("Content-Type", "application/json")
                     .header("cache-control", "no-cache")
                     .asString();
 
+            // Check if the response status is 200 (OK)
             if (serpResponse.getStatus() == 200) {
                 JsonObject data = JsonParser.parseString(serpResponse.getBody()).getAsJsonObject();
                 boolean dataIsTrending = processData(data);

@@ -124,7 +124,8 @@ public class GooglePath {
     private void setCurrentGoogleData(String location, String jsonData) throws SQLException {
         // Method that sets the sql database with the 12 categories and their data
         JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
-        if (jsonArray.size() > 1) {
+        System.out.println(jsonArray.size());
+        if (jsonArray.size() == 12) {
             String locationCode;
             try {
                 locationCode = new GoogleManager().getLocationCode(location);

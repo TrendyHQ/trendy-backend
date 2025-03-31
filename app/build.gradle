@@ -31,7 +31,7 @@ dependencies {
     implementation 'com.konghq:unirest-java-core:4.4.5'
     implementation 'com.google.code.gson:gson:2.12.1'
     implementation 'io.github.cdimascio:dotenv-java:3.1.0'
-    implementation 'software.amazon.awssdk:s3:2.30.26'
+    implementation 'software.amazon.awssdk:s3:2.31.6'
     implementation 'net.dean.jraw:JRAW:1.1.0'
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.azure:azure-ai-inference:1.0.0-beta.2'

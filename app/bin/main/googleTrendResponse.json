@@ -1,0 +1,4237 @@
+[
+  {
+    "search_metadata": {
+      "id": "search_Y16dWXw4JOrI0DGOwvqoKNGl",
+      "status": "Success",
+      "created_at": "2025-03-27T14:09:08Z",
+      "request_time_taken": 27.98,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 27.98,
+      "request_url": "https://trends.google.com/trends/explore?q=fashion&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_Y16dWXw4JOrI0DGOwvqoKNGl.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_Y16dWXw4JOrI0DGOwvqoKNGl"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "fashion",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "fashion", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "fashion", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "fashion", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "fashion", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "fashion", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "fashion", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "fashion", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "fashion", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "fashion", "value": "54", "extracted_value": 54 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "fashion", "value": "55", "extracted_value": 55 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "fashion", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "fashion", "value": "56", "extracted_value": 56 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "fashion", "value": "55", "extracted_value": 55 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "fashion", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "fashion", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "fashion", "value": "66", "extracted_value": 66 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "fashion", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "fashion", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "fashion", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "fashion", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "fashion", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "fashion", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "fashion", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "fashion", "value": "59", "extracted_value": 59 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "fashion", "value": "54", "extracted_value": 54 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "fashion", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "fashion", "value": "76", "extracted_value": 76 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "fashion", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "fashion", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "fashion", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "fashion", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "fashion", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "fashion", "value": "59", "extracted_value": 59 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "fashion", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "fashion", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "fashion", "value": "61", "extracted_value": 61 }
+          ]
+        }
+      ]
+    },
+    "isTrending": false,
+    "title": "fashion"
+  },
+  {
+    "search_metadata": {
+      "id": "search_6Lpb2Z8vDqds7m5D5kVgQzRy",
+      "status": "Success",
+      "created_at": "2025-03-27T14:09:36Z",
+      "request_time_taken": 12.87,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 12.88,
+      "request_url": "https://trends.google.com/trends/explore?q=technology&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_6Lpb2Z8vDqds7m5D5kVgQzRy.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_6Lpb2Z8vDqds7m5D5kVgQzRy"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "technology",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "technology", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "technology", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "technology", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "technology", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "technology", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "technology", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "technology", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "technology", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "technology", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "technology", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "technology", "value": "76", "extracted_value": 76 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "technology", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "technology", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "technology", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "technology", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "technology", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "technology", "value": "70", "extracted_value": 70 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "technology", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "technology", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "technology", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "technology", "value": "77", "extracted_value": 77 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "technology", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "technology", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "technology", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "technology", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "technology", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "technology", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "technology", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "technology", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "technology", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "technology", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "technology", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "technology", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "technology", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "technology", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "technology", "value": "66", "extracted_value": 66 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "technology", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "technology", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "technology", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "technology", "value": "51", "extracted_value": 51 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "technology", "value": "59", "extracted_value": 59 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "technology", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "technology", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "technology", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "technology", "value": "99", "extracted_value": 99 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "technology", "value": "97", "extracted_value": 97 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "technology", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "technology", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "technology", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "technology", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "technology", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "technology", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "technology", "value": "93", "extracted_value": 93 }
+          ]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "technology"
+  },
+  {
+    "search_metadata": {
+      "id": "search_dKMjqpW46ERuxnJQyenbZ3LV",
+      "status": "Success",
+      "created_at": "2025-03-27T14:09:50Z",
+      "request_time_taken": 2.58,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 2.59,
+      "request_url": "https://trends.google.com/trends/explore?q=food&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_dKMjqpW46ERuxnJQyenbZ3LV.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_dKMjqpW46ERuxnJQyenbZ3LV"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "food",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [{ "query": "food", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [{ "query": "food", "value": "91", "extracted_value": 91 }]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [{ "query": "food", "value": "93", "extracted_value": 93 }]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [{ "query": "food", "value": "95", "extracted_value": 95 }]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [{ "query": "food", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [{ "query": "food", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [{ "query": "food", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [{ "query": "food", "value": "91", "extracted_value": 91 }]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [{ "query": "food", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [{ "query": "food", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [{ "query": "food", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [{ "query": "food", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [{ "query": "food", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [{ "query": "food", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [{ "query": "food", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [{ "query": "food", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [{ "query": "food", "value": "78", "extracted_value": 78 }]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [{ "query": "food", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [{ "query": "food", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [{ "query": "food", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [{ "query": "food", "value": "81", "extracted_value": 81 }]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [{ "query": "food", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "food", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [{ "query": "food", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [{ "query": "food", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [{ "query": "food", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [{ "query": "food", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [{ "query": "food", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [{ "query": "food", "value": "81", "extracted_value": 81 }]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [{ "query": "food", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [{ "query": "food", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [{ "query": "food", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [{ "query": "food", "value": "91", "extracted_value": 91 }]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [{ "query": "food", "value": "88", "extracted_value": 88 }]
+        }
+      ]
+    },
+    "isTrending": false,
+    "title": "food"
+  },
+  {
+    "search_metadata": {
+      "id": "search_x6dAL2p4KqYs0mwM7k7wnGOm",
+      "status": "Success",
+      "created_at": "2025-03-27T14:09:53Z",
+      "request_time_taken": 36.84,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 36.84,
+      "request_url": "https://trends.google.com/trends/explore?q=entertainment&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_x6dAL2p4KqYs0mwM7k7wnGOm.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_x6dAL2p4KqYs0mwM7k7wnGOm"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "entertainment",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "entertainment", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "entertainment", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "entertainment", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "entertainment", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "entertainment", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "entertainment", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "entertainment", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "entertainment", "value": "97", "extracted_value": 97 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "entertainment", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "entertainment", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "entertainment", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "entertainment", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "entertainment", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "entertainment", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "entertainment", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "entertainment", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "entertainment", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "entertainment", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "entertainment", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "entertainment", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "entertainment", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "entertainment", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "entertainment", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "entertainment", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "entertainment", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "entertainment", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "entertainment", "value": "97", "extracted_value": 97 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "entertainment", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "entertainment", "value": "99", "extracted_value": 99 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "entertainment", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "entertainment", "value": "96", "extracted_value": 96 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "entertainment", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "entertainment", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "entertainment", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "entertainment", "value": "90", "extracted_value": 90 }
+          ]
+        }
+      ]
+    },
+    "isTrending": false,
+    "title": "entertainment"
+  },
+  {
+    "search_metadata": {
+      "id": "search_omMjwVJvBznTJmWNnvynp5OY",
+      "status": "Success",
+      "created_at": "2025-03-27T14:10:31Z",
+      "request_time_taken": 4.28,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 4.28,
+      "request_url": "https://trends.google.com/trends/explore?q=media&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_omMjwVJvBznTJmWNnvynp5OY.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_omMjwVJvBznTJmWNnvynp5OY"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "media",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [{ "query": "media", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [{ "query": "media", "value": "91", "extracted_value": 91 }]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [{ "query": "media", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [{ "query": "media", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [{ "query": "media", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [{ "query": "media", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [{ "query": "media", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [{ "query": "media", "value": "75", "extracted_value": 75 }]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [{ "query": "media", "value": "74", "extracted_value": 74 }]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [{ "query": "media", "value": "69", "extracted_value": 69 }]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [{ "query": "media", "value": "72", "extracted_value": 72 }]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [{ "query": "media", "value": "69", "extracted_value": 69 }]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [{ "query": "media", "value": "68", "extracted_value": 68 }]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [{ "query": "media", "value": "72", "extracted_value": 72 }]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [{ "query": "media", "value": "68", "extracted_value": 68 }]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [{ "query": "media", "value": "67", "extracted_value": 67 }]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [{ "query": "media", "value": "73", "extracted_value": 73 }]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [{ "query": "media", "value": "73", "extracted_value": 73 }]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [{ "query": "media", "value": "69", "extracted_value": 69 }]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [{ "query": "media", "value": "68", "extracted_value": 68 }]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [{ "query": "media", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [{ "query": "media", "value": "80", "extracted_value": 80 }]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [{ "query": "media", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [{ "query": "media", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [{ "query": "media", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [{ "query": "media", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [{ "query": "media", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [{ "query": "media", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [{ "query": "media", "value": "81", "extracted_value": 81 }]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [{ "query": "media", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [{ "query": "media", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [{ "query": "media", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [{ "query": "media", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [{ "query": "media", "value": "91", "extracted_value": 91 }]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [{ "query": "media", "value": "89", "extracted_value": 89 }]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [{ "query": "media", "value": "71", "extracted_value": 71 }]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [{ "query": "media", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [{ "query": "media", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [{ "query": "media", "value": "75", "extracted_value": 75 }]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [{ "query": "media", "value": "55", "extracted_value": 55 }]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [{ "query": "media", "value": "63", "extracted_value": 63 }]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [{ "query": "media", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [{ "query": "media", "value": "87", "extracted_value": 87 }]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [{ "query": "media", "value": "88", "extracted_value": 88 }]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [{ "query": "media", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "media", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [{ "query": "media", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [{ "query": "media", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [{ "query": "media", "value": "90", "extracted_value": 90 }]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [{ "query": "media", "value": "92", "extracted_value": 92 }]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [{ "query": "media", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [{ "query": "media", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [{ "query": "media", "value": "89", "extracted_value": 89 }]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "media"
+  },
+  {
+    "search_metadata": {
+      "id": "search_9p1LMWreyyWIzDQnJeZYDKaP",
+      "status": "Success",
+      "created_at": "2025-03-27T14:10:36Z",
+      "request_time_taken": 23.57,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 23.57,
+      "request_url": "https://trends.google.com/trends/explore?q=fitness&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_9p1LMWreyyWIzDQnJeZYDKaP.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_9p1LMWreyyWIzDQnJeZYDKaP"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "fitness",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "fitness", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "fitness", "value": "70", "extracted_value": 70 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "fitness", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "fitness", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "fitness", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "fitness", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "fitness", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "fitness", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "fitness", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "fitness", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "fitness", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "fitness", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "fitness", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "fitness", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "fitness", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "fitness", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "fitness", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "fitness", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "fitness", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "fitness", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "fitness", "value": "59", "extracted_value": 59 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "fitness", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "fitness", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "fitness", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "fitness", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "fitness", "value": "56", "extracted_value": 56 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "fitness", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "fitness", "value": "53", "extracted_value": 53 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "fitness", "value": "52", "extracted_value": 52 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "fitness", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "fitness", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "fitness", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "fitness", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "fitness", "value": "57", "extracted_value": 57 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "fitness", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "fitness", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "fitness", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "fitness", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "fitness", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "fitness", "value": "75", "extracted_value": 75 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "fitness", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "fitness", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "fitness", "value": "64", "extracted_value": 64 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "fitness", "value": "69", "extracted_value": 69 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "fitness", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "fitness", "value": "65", "extracted_value": 65 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "fitness", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "fitness", "value": "66", "extracted_value": 66 }
+          ]
+        }
+      ]
+    },
+    "isTrending": false,
+    "title": "fitness"
+  },
+  {
+    "search_metadata": {
+      "id": "search_mWDz0ZKeWNOc0maZ1kQyABpo",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:00Z",
+      "request_time_taken": 7.16,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 7.16,
+      "request_url": "https://trends.google.com/trends/explore?q=health&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_mWDz0ZKeWNOc0maZ1kQyABpo.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_mWDz0ZKeWNOc0maZ1kQyABpo"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "health",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "health", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "health", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "health", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "health", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "health", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "health", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "health", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "health", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "health", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "health", "value": "75", "extracted_value": 75 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "health", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "health", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "health", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "health", "value": "75", "extracted_value": 75 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "health", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "health", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "health", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "health", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "health", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "health", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "health", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "health", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "health", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "health", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "health", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "health", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "health", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "health", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "health", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "health", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "health", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "health", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "health", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "health", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "health", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "health", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "health", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "health", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "health", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "health", "value": "59", "extracted_value": 59 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "health", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "health", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "health", "value": "98", "extracted_value": 98 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "health", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "health", "value": "97", "extracted_value": 97 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "health", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "health", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "health", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "health", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "health", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "health", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "health", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "health", "value": "91", "extracted_value": 91 }
+          ]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "health"
+  },
+  {
+    "search_metadata": {
+      "id": "search_omMjwVJvBznTJmWQPvynp5OY",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:07Z",
+      "request_time_taken": 4.16,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 4.16,
+      "request_url": "https://trends.google.com/trends/explore?q=music&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_omMjwVJvBznTJmWQPvynp5OY.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_omMjwVJvBznTJmWQPvynp5OY"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "music",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [{ "query": "music", "value": "75", "extracted_value": 75 }]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [{ "query": "music", "value": "78", "extracted_value": 78 }]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [{ "query": "music", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [{ "query": "music", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [{ "query": "music", "value": "79", "extracted_value": 79 }]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [{ "query": "music", "value": "80", "extracted_value": 80 }]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [{ "query": "music", "value": "74", "extracted_value": 74 }]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [{ "query": "music", "value": "71", "extracted_value": 71 }]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [{ "query": "music", "value": "71", "extracted_value": 71 }]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [{ "query": "music", "value": "69", "extracted_value": 69 }]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [{ "query": "music", "value": "70", "extracted_value": 70 }]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [{ "query": "music", "value": "72", "extracted_value": 72 }]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [{ "query": "music", "value": "74", "extracted_value": 74 }]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [{ "query": "music", "value": "80", "extracted_value": 80 }]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [{ "query": "music", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [{ "query": "music", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [{ "query": "music", "value": "81", "extracted_value": 81 }]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [{ "query": "music", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [{ "query": "music", "value": "78", "extracted_value": 78 }]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [{ "query": "music", "value": "79", "extracted_value": 79 }]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [{ "query": "music", "value": "78", "extracted_value": 78 }]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [{ "query": "music", "value": "80", "extracted_value": 80 }]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [{ "query": "music", "value": "71", "extracted_value": 71 }]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [{ "query": "music", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [{ "query": "music", "value": "76", "extracted_value": 76 }]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "music", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [{ "query": "music", "value": "93", "extracted_value": 93 }]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [{ "query": "music", "value": "93", "extracted_value": 93 }]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [{ "query": "music", "value": "78", "extracted_value": 78 }]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [{ "query": "music", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [{ "query": "music", "value": "77", "extracted_value": 77 }]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [{ "query": "music", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [{ "query": "music", "value": "82", "extracted_value": 82 }]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [{ "query": "music", "value": "84", "extracted_value": 84 }]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [{ "query": "music", "value": "83", "extracted_value": 83 }]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [{ "query": "music", "value": "85", "extracted_value": 85 }]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [{ "query": "music", "value": "86", "extracted_value": 86 }]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [{ "query": "music", "value": "78", "extracted_value": 78 }]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "music"
+  },
+  {
+    "search_metadata": {
+      "id": "search_bJ70QVB41KphOzxbbkqLy9mx",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:12Z",
+      "request_time_taken": 14.96,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 14.96,
+      "request_url": "https://trends.google.com/trends/explore?q=politics&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_bJ70QVB41KphOzxbbkqLy9mx.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_bJ70QVB41KphOzxbbkqLy9mx"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "politics",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "politics", "value": "24", "extracted_value": 24 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "politics", "value": "23", "extracted_value": 23 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "politics", "value": "24", "extracted_value": 24 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "politics", "value": "26", "extracted_value": 26 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "politics", "value": "26", "extracted_value": 26 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "politics", "value": "26", "extracted_value": 26 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "politics", "value": "26", "extracted_value": 26 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "politics", "value": "23", "extracted_value": 23 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "politics", "value": "21", "extracted_value": 21 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "politics", "value": "24", "extracted_value": 24 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "politics", "value": "31", "extracted_value": 31 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "politics", "value": "23", "extracted_value": 23 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "politics", "value": "21", "extracted_value": 21 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "politics", "value": "27", "extracted_value": 27 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "politics", "value": "31", "extracted_value": 31 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "politics", "value": "28", "extracted_value": 28 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "politics", "value": "43", "extracted_value": 43 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "politics", "value": "53", "extracted_value": 53 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "politics", "value": "44", "extracted_value": 44 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "politics", "value": "45", "extracted_value": 45 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "politics", "value": "40", "extracted_value": 40 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "politics", "value": "56", "extracted_value": 56 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "politics", "value": "47", "extracted_value": 47 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "politics", "value": "43", "extracted_value": 43 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "politics", "value": "44", "extracted_value": 44 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "politics", "value": "42", "extracted_value": 42 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "politics", "value": "49", "extracted_value": 49 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "politics", "value": "62", "extracted_value": 62 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "politics", "value": "74", "extracted_value": 74 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "politics", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "politics", "value": "49", "extracted_value": 49 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "politics", "value": "36", "extracted_value": 36 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "politics", "value": "26", "extracted_value": 26 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "politics", "value": "29", "extracted_value": 29 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "politics", "value": "27", "extracted_value": 27 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "politics", "value": "25", "extracted_value": 25 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "politics", "value": "19", "extracted_value": 19 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "politics", "value": "19", "extracted_value": 19 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "politics", "value": "24", "extracted_value": 24 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "politics", "value": "27", "extracted_value": 27 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "politics", "value": "37", "extracted_value": 37 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "politics", "value": "37", "extracted_value": 37 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "politics", "value": "37", "extracted_value": 37 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "politics", "value": "38", "extracted_value": 38 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "politics", "value": "32", "extracted_value": 32 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "politics", "value": "31", "extracted_value": 31 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "politics", "value": "31", "extracted_value": 31 }
+          ]
+        }
+      ]
+    },
+    "isTrending": false,
+    "title": "politics"
+  },
+  {
+    "search_metadata": {
+      "id": "search_oDWmO1QkoEbuDx0m64J2r8Ga",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:28Z",
+      "request_time_taken": 6.45,
+      "parsing_time_taken": 0.01,
+      "total_time_taken": 6.47,
+      "request_url": "https://trends.google.com/trends/explore?q=travel&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_oDWmO1QkoEbuDx0m64J2r8Ga.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_oDWmO1QkoEbuDx0m64J2r8Ga"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "travel",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "travel", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "travel", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "travel", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "travel", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "travel", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "travel", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "travel", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "travel", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "travel", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "travel", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "travel", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "travel", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "travel", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "travel", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "travel", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "travel", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "travel", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "travel", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "travel", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "travel", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "travel", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "travel", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "travel", "value": "74", "extracted_value": 74 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "travel", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "travel", "value": "75", "extracted_value": 75 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "travel", "value": "77", "extracted_value": 77 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "travel", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "travel", "value": "73", "extracted_value": 73 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "travel", "value": "74", "extracted_value": 74 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "travel", "value": "72", "extracted_value": 72 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "travel", "value": "71", "extracted_value": 71 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "travel", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "travel", "value": "68", "extracted_value": 68 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "travel", "value": "76", "extracted_value": 76 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "travel", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "travel", "value": "77", "extracted_value": 77 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "travel", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "travel", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "travel", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "travel", "value": "76", "extracted_value": 76 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "travel", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "travel", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "travel", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "travel", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "travel", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "travel", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "travel", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "travel", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "travel", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "travel", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "travel", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "travel", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "travel", "value": "94", "extracted_value": 94 }
+          ]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "travel"
+  },
+  {
+    "search_metadata": {
+      "id": "search_dmxzD17vdE2urbnWXklRw056",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:35Z",
+      "request_time_taken": 18.88,
+      "parsing_time_taken": 0.0,
+      "total_time_taken": 18.88,
+      "request_url": "https://trends.google.com/trends/explore?q=science&geo=US&tz=-5&date=today 12-m&cat=0",
+      "html_url": "https://www.searchapi.io/api/v1/searches/search_dmxzD17vdE2urbnWXklRw056.html",
+      "json_url": "https://www.searchapi.io/api/v1/searches/search_dmxzD17vdE2urbnWXklRw056"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "science",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": {
+      "timeline_data": [
+        {
+          "date": "Mar 24???30, 2024",
+          "timestamp": "1711238400",
+          "values": [
+            { "query": "science", "value": "79", "extracted_value": 79 }
+          ]
+        },
+        {
+          "date": "Mar 31???Apr 6, 2024",
+          "timestamp": "1711843200",
+          "values": [
+            { "query": "science", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Apr 7???13, 2024",
+          "timestamp": "1712448000",
+          "values": [
+            { "query": "science", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Apr 14???20, 2024",
+          "timestamp": "1713052800",
+          "values": [
+            { "query": "science", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Apr 21???27, 2024",
+          "timestamp": "1713657600",
+          "values": [
+            { "query": "science", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "Apr 28???May 4, 2024",
+          "timestamp": "1714262400",
+          "values": [
+            { "query": "science", "value": "84", "extracted_value": 84 }
+          ]
+        },
+        {
+          "date": "May 5???11, 2024",
+          "timestamp": "1714867200",
+          "values": [
+            { "query": "science", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "May 12???18, 2024",
+          "timestamp": "1715472000",
+          "values": [
+            { "query": "science", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "May 19???25, 2024",
+          "timestamp": "1716076800",
+          "values": [
+            { "query": "science", "value": "70", "extracted_value": 70 }
+          ]
+        },
+        {
+          "date": "May 26???Jun 1, 2024",
+          "timestamp": "1716681600",
+          "values": [
+            { "query": "science", "value": "63", "extracted_value": 63 }
+          ]
+        },
+        {
+          "date": "Jun 2???8, 2024",
+          "timestamp": "1717286400",
+          "values": [
+            { "query": "science", "value": "67", "extracted_value": 67 }
+          ]
+        },
+        {
+          "date": "Jun 9???15, 2024",
+          "timestamp": "1717891200",
+          "values": [
+            { "query": "science", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Jun 16???22, 2024",
+          "timestamp": "1718496000",
+          "values": [
+            { "query": "science", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jun 23???29, 2024",
+          "timestamp": "1719100800",
+          "values": [
+            { "query": "science", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Jun 30???Jul 6, 2024",
+          "timestamp": "1719705600",
+          "values": [
+            { "query": "science", "value": "52", "extracted_value": 52 }
+          ]
+        },
+        {
+          "date": "Jul 7???13, 2024",
+          "timestamp": "1720310400",
+          "values": [
+            { "query": "science", "value": "56", "extracted_value": 56 }
+          ]
+        },
+        {
+          "date": "Jul 14???20, 2024",
+          "timestamp": "1720915200",
+          "values": [
+            { "query": "science", "value": "54", "extracted_value": 54 }
+          ]
+        },
+        {
+          "date": "Jul 21???27, 2024",
+          "timestamp": "1721520000",
+          "values": [
+            { "query": "science", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jul 28???Aug 3, 2024",
+          "timestamp": "1722124800",
+          "values": [
+            { "query": "science", "value": "60", "extracted_value": 60 }
+          ]
+        },
+        {
+          "date": "Aug 4???10, 2024",
+          "timestamp": "1722729600",
+          "values": [
+            { "query": "science", "value": "66", "extracted_value": 66 }
+          ]
+        },
+        {
+          "date": "Aug 11???17, 2024",
+          "timestamp": "1723334400",
+          "values": [
+            { "query": "science", "value": "78", "extracted_value": 78 }
+          ]
+        },
+        {
+          "date": "Aug 18???24, 2024",
+          "timestamp": "1723939200",
+          "values": [
+            { "query": "science", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Aug 25???31, 2024",
+          "timestamp": "1724544000",
+          "values": [
+            { "query": "science", "value": "100", "extracted_value": 100 }
+          ]
+        },
+        {
+          "date": "Sep 1???7, 2024",
+          "timestamp": "1725148800",
+          "values": [
+            { "query": "science", "value": "90", "extracted_value": 90 }
+          ]
+        },
+        {
+          "date": "Sep 8???14, 2024",
+          "timestamp": "1725753600",
+          "values": [
+            { "query": "science", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Sep 15???21, 2024",
+          "timestamp": "1726358400",
+          "values": [
+            { "query": "science", "value": "95", "extracted_value": 95 }
+          ]
+        },
+        {
+          "date": "Sep 22???28, 2024",
+          "timestamp": "1726963200",
+          "values": [
+            { "query": "science", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Sep 29???Oct 5, 2024",
+          "timestamp": "1727568000",
+          "values": [
+            { "query": "science", "value": "89", "extracted_value": 89 }
+          ]
+        },
+        {
+          "date": "Oct 6???12, 2024",
+          "timestamp": "1728172800",
+          "values": [
+            { "query": "science", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Oct 13???19, 2024",
+          "timestamp": "1728777600",
+          "values": [
+            { "query": "science", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Oct 20???26, 2024",
+          "timestamp": "1729382400",
+          "values": [
+            { "query": "science", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Oct 27???Nov 2, 2024",
+          "timestamp": "1729987200",
+          "values": [
+            { "query": "science", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Nov 3???9, 2024",
+          "timestamp": "1730592000",
+          "values": [
+            { "query": "science", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Nov 10???16, 2024",
+          "timestamp": "1731196800",
+          "values": [
+            { "query": "science", "value": "85", "extracted_value": 85 }
+          ]
+        },
+        {
+          "date": "Nov 17???23, 2024",
+          "timestamp": "1731801600",
+          "values": [
+            { "query": "science", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Nov 24???30, 2024",
+          "timestamp": "1732406400",
+          "values": [
+            { "query": "science", "value": "61", "extracted_value": 61 }
+          ]
+        },
+        {
+          "date": "Dec 1???7, 2024",
+          "timestamp": "1733011200",
+          "values": [
+            { "query": "science", "value": "92", "extracted_value": 92 }
+          ]
+        },
+        {
+          "date": "Dec 8???14, 2024",
+          "timestamp": "1733616000",
+          "values": [
+            { "query": "science", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Dec 15???21, 2024",
+          "timestamp": "1734220800",
+          "values": [
+            { "query": "science", "value": "80", "extracted_value": 80 }
+          ]
+        },
+        {
+          "date": "Dec 22???28, 2024",
+          "timestamp": "1734825600",
+          "values": [
+            { "query": "science", "value": "47", "extracted_value": 47 }
+          ]
+        },
+        {
+          "date": "Dec 29, 2024???Jan 4, 2025",
+          "timestamp": "1735430400",
+          "values": [
+            { "query": "science", "value": "58", "extracted_value": 58 }
+          ]
+        },
+        {
+          "date": "Jan 5???11, 2025",
+          "timestamp": "1736035200",
+          "values": [
+            { "query": "science", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Jan 12???18, 2025",
+          "timestamp": "1736640000",
+          "values": [
+            { "query": "science", "value": "91", "extracted_value": 91 }
+          ]
+        },
+        {
+          "date": "Jan 19???25, 2025",
+          "timestamp": "1737244800",
+          "values": [
+            { "query": "science", "value": "83", "extracted_value": 83 }
+          ]
+        },
+        {
+          "date": "Jan 26???Feb 1, 2025",
+          "timestamp": "1737849600",
+          "values": [
+            { "query": "science", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Feb 2???8, 2025",
+          "timestamp": "1738454400",
+          "values": [
+            { "query": "science", "value": "93", "extracted_value": 93 }
+          ]
+        },
+        {
+          "date": "Feb 9???15, 2025",
+          "timestamp": "1739059200",
+          "values": [
+            { "query": "science", "value": "86", "extracted_value": 86 }
+          ]
+        },
+        {
+          "date": "Feb 16???22, 2025",
+          "timestamp": "1739664000",
+          "values": [
+            { "query": "science", "value": "87", "extracted_value": 87 }
+          ]
+        },
+        {
+          "date": "Feb 23???Mar 1, 2025",
+          "timestamp": "1740268800",
+          "values": [
+            { "query": "science", "value": "88", "extracted_value": 88 }
+          ]
+        },
+        {
+          "date": "Mar 2???8, 2025",
+          "timestamp": "1740873600",
+          "values": [
+            { "query": "science", "value": "94", "extracted_value": 94 }
+          ]
+        },
+        {
+          "date": "Mar 9???15, 2025",
+          "timestamp": "1741478400",
+          "values": [
+            { "query": "science", "value": "82", "extracted_value": 82 }
+          ]
+        },
+        {
+          "date": "Mar 16???22, 2025",
+          "timestamp": "1742083200",
+          "values": [
+            { "query": "science", "value": "81", "extracted_value": 81 }
+          ]
+        },
+        {
+          "date": "Mar 23???29, 2025",
+          "timestamp": "1742688000",
+          "values": [
+            { "query": "science", "value": "82", "extracted_value": 82 }
+          ]
+        }
+      ]
+    },
+    "isTrending": true,
+    "title": "science"
+  },
+  {
+    "search_metadata": {
+      "id": "search_6Lpb2Z8vDqds7m5QVkVgQzRy",
+      "status": "Success",
+      "created_at": "2025-03-27T14:11:54Z",
+      "request_time_taken": 24.89,
+      "total_time_taken": 24.89,
+      "request_url": "https://trends.google.com/trends/explore?q=sports&geo=US&tz=-5&date=today 12-m&cat=0"
+    },
+    "search_parameters": {
+      "engine": "google_trends",
+      "q": "sports",
+      "geo": "US",
+      "tz": "-5",
+      "data_type": "TIMESERIES",
+      "cat": "0",
+      "region": "CITY",
+      "time": "today 12-m"
+    },
+    "interest_over_time": [
+      {
+        "date": "Mar 24-30, 2024",
+        "timestamp": 1711238400,
+        "value": 88
+      },
+      {
+        "date": "Mar 31-Apr 6, 2024",
+        "timestamp": 1711843200,
+        "value": 85
+      },
+      {
+        "date": "Apr 7-13, 2024",
+        "timestamp": 1712448000,
+        "value": 86
+      },
+      {
+        "date": "Apr 14-20, 2024",
+        "timestamp": 1713052800,
+        "value": 87
+      },
+      {
+        "date": "Apr 21-27, 2024",
+        "timestamp": 1713657600,
+        "value": 88
+      },
+      {
+        "date": "Apr 28-May 4, 2024",
+        "timestamp": 1714262400,
+        "value": 87
+      },
+      {
+        "date": "May 5-11, 2024",
+        "timestamp": 1714867200,
+        "value": 83
+      },
+      {
+        "date": "May 12-18, 2024",
+        "timestamp": 1715472000,
+        "value": 87
+      },
+      {
+        "date": "May 19-25, 2024",
+        "timestamp": 1716076800,
+        "value": 83
+      },
+      {
+        "date": "May 26-Jun 1, 2024",
+        "timestamp": 1716681600,
+        "value": 83
+      },
+      {
+        "date": "Jun 2-8, 2024",
+        "timestamp": 1717286400,
+        "value": 80
+      },
+      {
+        "date": "Jun 9-15, 2024",
+        "timestamp": 1717891200,
+        "value": 85
+      },
+      {
+        "date": "Jun 16-22, 2024",
+        "timestamp": 1718496000,
+        "value": 85
+      },
+      {
+        "date": "Jun 23-29, 2024",
+        "timestamp": 1719100800,
+        "value": 82
+      },
+      {
+        "date": "Jun 30-Jul 6, 2024",
+        "timestamp": 1719705600,
+        "value": 81
+      },
+      {
+        "date": "Jul 7-13, 2024",
+        "timestamp": 1720310400,
+        "value": 78
+      },
+      {
+        "date": "Jul 14-20, 2024",
+        "timestamp": 1720915200,
+        "value": 79
+      },
+      {
+        "date": "Jul 21-27, 2024",
+        "timestamp": 1721520000,
+        "value": 83
+      },
+      {
+        "date": "Jul 28-Aug 3, 2024",
+        "timestamp": 1722124800,
+        "value": 91
+      },
+      {
+        "date": "Aug 4-10, 2024",
+        "timestamp": 1722729600,
+        "value": 83
+      },
+      {
+        "date": "Aug 11-17, 2024",
+        "timestamp": 1723334400,
+        "value": 88
+      },
+      {
+        "date": "Aug 18-24, 2024",
+        "timestamp": 1723939200,
+        "value": 85
+      },
+      {
+        "date": "Aug 25-31, 2024",
+        "timestamp": 1724544000,
+        "value": 91
+      },
+      {
+        "date": "Sep 1-7, 2024",
+        "timestamp": 1725148800,
+        "value": 100
+      },
+      {
+        "date": "Sep 8-14, 2024",
+        "timestamp": 1725753600,
+        "value": 93
+      }
+    ]
+  }
+]

@@ -420,4 +420,12 @@ public class TrendyClasses {
         public String query;
         public String value;
     }
+
+    public class RequestEntityForTrend {
+        private String categoryName;
+
+        public String getCategoryName() {
+            return categoryName;
+        }
+    }
 }

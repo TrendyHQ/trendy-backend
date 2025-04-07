@@ -34,7 +34,7 @@ public class GooglePath {
 
     @GetMapping("/info")
     public ResponseEntity<String> getGoogleInfo(
-            @RequestParam(required = true) String location) {
+            @RequestParam(name="location", required=true) String location) {
 
         try {
             JsonArray currentGoogleData = getCurrentGoogleData(location);

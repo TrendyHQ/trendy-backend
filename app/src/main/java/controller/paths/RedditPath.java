@@ -12,9 +12,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
@@ -23,6 +25,7 @@ import dataManagement.UserManager;
 import net.dean.jraw.RedditClient;
 import structure.TrendyClasses.FavoritePostObject;
 import structure.TrendyClasses.RedditPost;
+import structure.TrendyClasses.RequestEntityForTrend;
 import structure.TrendyClasses.TopRedditRequest;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
@@ -199,7 +202,7 @@ public class RedditPath {
      * @return ResponseEntity with JSON array of posts from the specified category or error message
      */
     @PostMapping("/topTrendsForCategory")
-    public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
+    public ResponseEntity<String> getTopTrendsForCategory(@RequestBody RequestEntityForTrend entity) {
         try {
             if (redditClientManager.getClient() == null) {
                 redditClientManager.authorizeClient();
@@ -209,7 +212,7 @@ public class RedditPath {
 
             int limit = 30;
             RedditDataFetcher redditData = new RedditDataFetcher();
-            RedditPost[] posts = redditData.getData(entity, redditClient, limit);
+            RedditPost[] posts = redditData.getData(entity.getCategoryName(), redditClient, limit);
 
             // Collect all posts into a single list
             List<RedditPost> allPosts = new ArrayList<>();
@@ -251,5 +254,13 @@ public class RedditPath {
             }
             return null;
         });
+    }
+
+    // For any GET methods with String parameters, add explicit names:
+    @GetMapping("/someEndpoint")
+    public ResponseEntity<String> someMethod(
+            @RequestParam(name="paramName") String paramName) {
+        // ...existing code...
+        return ResponseEntity.ok("Response for " + paramName);
     }
 }

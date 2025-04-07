@@ -86,7 +86,7 @@ public class UsersPath {
                             // Skip nested entry if its value is null
                             if (!nestedValue.isJsonNull()) {
                                 // If the nested value is a primitive string, check for non-emptiness
-                                if (nestedValue.isJsonPrimitive() && nestedValue.getAsJsonPrimitive().isString()) {
+                                if (nestedValue.getAsJsonPrimitive().isString()) {
                                     if (!nestedValue.getAsString().isEmpty()) {
                                         // Add non-empty string to the filtered nested object
                                         filteredNested.add(nestedEntry.getKey(), nestedValue);
@@ -169,7 +169,9 @@ public class UsersPath {
      * @return ResponseEntity with the property value as a string or error message
      */
     @GetMapping("/getUserProperty")
-    public ResponseEntity<String> getUserProperty(@RequestParam String property, @RequestParam String userId) {
+    public ResponseEntity<String> getUserProperty(
+            @RequestParam(name="property") String property, 
+            @RequestParam(name="userId") String userId) {
         String[] validProperties = {
                 "picture",
         };

@@ -21,6 +21,21 @@ import kong.unirest.core.Unirest;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class AiModelRequest {
+    /**
+     * Generates trend analysis data using an AI model based on user information and preferences.
+     * The method connects to the Azure OpenAI service and uses the Mistral-Nemo model to generate
+     * responses about current or future trends tailored to the user's demographics.
+     * 
+     * @param message The user's query or message about trends they want information on
+     * @param userLocation The user's location coordinates in string format (expected format: "latitude,longitude")
+     * @param userBirthdate The user's birthdate in a format that can be processed by calculateAge method
+     * @param userGender The user's gender identification
+     * @param isFutureRequest Boolean flag indicating whether the request is for future trends (true) 
+     *                        or current trends (false)
+     * @return A string containing the AI-generated response about trends relevant to the user.
+     *         Returns error messages if the AI service connection fails.
+     * @throws Exception May throw exceptions related to API connection, authentication, or response processing
+     */
     public String getAiData(String message, String userLocation, String userBirthdate, String userGender,
             boolean isFutureRequest) {
         Dotenv dotenv = Dotenv.load();
@@ -101,6 +116,20 @@ public class AiModelRequest {
     }
 
     // Method to get city name from coordinates using GeoNames API
+    /**
+     * Retrieves the city name from geographic coordinates using the GeoNames API.
+     * 
+     * This method takes a string containing latitude and longitude coordinates separated by a comma,
+     * and attempts to find the nearest populated place using the GeoNames web service.
+     * 
+     * @param coordinates A string in the format "latitude,longitude" (e.g., "47.6062,-122.3321")
+     * @return A string containing the city name and country (e.g., "Seattle, United States"),
+     *         or one of the following error messages:
+     *         - "Unknown Location" if the coordinates are null, empty, or the API request fails
+     *         - "Invalid Location Format" if the coordinates string is not properly formatted
+     * @throws Exception May throw various exceptions during parsing or API communication,
+     *                   which are caught and handled internally (resulting in "Unknown Location" return)
+     */
     private String getCityFromCoordinates(String coordinates) {
         if (coordinates == null || coordinates.isEmpty()) {
             return "Unknown Location";

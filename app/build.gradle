@@ -86,7 +86,6 @@ tasks.bootRun {
     }
 }
 
-// Remove duplicate compiler configurations and use a single, clear approach
 tasks.withType(JavaCompile).configureEach {
     // Clear any previous settings and set parameters flag consistently
     options.compilerArgs = ['-parameters']

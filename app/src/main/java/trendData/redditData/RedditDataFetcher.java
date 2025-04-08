@@ -4,10 +4,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.Logger;
 import dataManagement.UserManager;
 import net.dean.jraw.RedditClient;
 import net.dean.jraw.models.Submission;
@@ -24,11 +20,6 @@ import structure.TrendyClasses.SpecificPost;
 public class RedditDataFetcher {
     public RedditPost[] getData(String subredditName, RedditClient redditClient, int limit)
             throws SQLException {
-
-        // Disable logging for JRAW
-        Logger jrawLogger = (Logger) LoggerFactory.getLogger("net.dean.jraw");
-        jrawLogger.setLevel(Level.OFF);
-
         if (redditClient != null) {
             // Access a subreddit
             Subreddit closestMatch = null;

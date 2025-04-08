@@ -47,7 +47,7 @@ public class GooglePath {
                     LocalDateTime now = LocalDateTime.now();
 
                     // Only update data if it’s more than 1 hour old or if the data size is not 13
-                    if (lastUpdatedTime.plusHours(1).isBefore(now) || currentGoogleData.size() != 13) {
+                    if (lastUpdatedTime.plusHours(1).isBefore(now) || currentGoogleData.size() != 13 && false) {
                         new Thread(() -> {
                             try {
                                 String newData = updateData(location);

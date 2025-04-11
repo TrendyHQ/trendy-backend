@@ -151,9 +151,9 @@ public class GooglePath {
         GoogleManager googleManager = new GoogleManager();
 
         String[] searchQueries = {
-                "fashion", "technology", "food", "entertainment",
-                "media", "fitness", "health", "music",
-                "politics", "travel", "science", "sports"
+                "Fashion", "Technology", "Food", "Entertainment",
+                "Media", "Fitness", "Health", "Music",
+                "Politics", "Travel", "Science", "Sports"
         };
 
         // Create a JSON object to hold all responses

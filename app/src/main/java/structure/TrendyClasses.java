@@ -421,7 +421,7 @@ public class TrendyClasses {
         public String value;
     }
 
-    public class RequestEntityForTrend {
+    public static class RequestEntityForTrend {
         private String categoryName;
 
         public String getCategoryName() {

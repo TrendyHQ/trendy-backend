@@ -178,6 +178,7 @@ public class TrendyClasses {
         private String value;
         private String datePublished;
         private String nick;
+        private String avatar;
 
         public String getUserId() {
             return userId;
@@ -193,6 +194,10 @@ public class TrendyClasses {
 
         public String getNick() {
             return nick;
+        }
+    
+        public String getAvatar() {
+            return avatar;
         }
     }
 

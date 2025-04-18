@@ -53,12 +53,10 @@ public class StorageManager {
             ResultSet rs = stmt.executeQuery();
 
             // Check if there is a previous day's record
-            if (rs.next()) {
+            if (rs.next() && rs.getString("trend_comments") != null) {
                 CommentObject[] result = new Gson().fromJson(rs.getString("trend_comments"), CommentObject[].class);
-
                 return result;
             } else {
-                // No previous day's record found
                 return new CommentObject[0];
             }
         } catch (SQLException e) {

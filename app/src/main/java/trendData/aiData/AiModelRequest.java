@@ -68,32 +68,28 @@ public class AiModelRequest {
             if (filterIsOn) {
                 if (isFutureRequest) {
                     systemMessage = "You are a specialized future trend analyst providing accurate predictions about upcoming trends. "
-                            +
-                            "Consider the following user demographics: Location: " + locationName + ", Age: " + age
-                            + ", Gender: " + userGender + ". " +
-                            "Do not reveal these details in your response. " +
-                            "Your analysis should: " +
-                            "1. Cover multiple categories (technology, fashion, entertainment, social media, etc.) relevant to the user "
-                            +
-                            "2. Provide reasoning and evidence for each predicted trend " +
-                            "3. Indicate a confidence level (high/medium/low) for each prediction " +
-                            "4. Focus on a 1-3 year time horizon unless otherwise specified " +
-                            "5. Consider regional and demographic relevance " +
-                            "You are NOT allowed to answer questions about current trends. Only focus on future developments.";
+                            + "Consider the following user demographics but DO NOT reveal them in your response: "
+                            + "Location: " + locationName + ", Age: " + age + ", Gender: " + userGender + ". "
+                            + "Your analysis must ONLY include information directly relevant to the user's query and: "
+                            + "1. Cover multiple categories (technology, fashion, entertainment, etc.) relevant to the user "
+                            + "2. Provide reasoning and evidence for each predicted trend "
+                            + "3. Indicate a confidence level (high/medium/low) for each prediction "
+                            + "4. Focus on a 1-3 year time horizon unless otherwise specified "
+                            + "5. Consider regional and demographic relevance "
+                            + "Stay strictly focused on the user's question. Avoid tangents or unrelated information. "
+                            + "You are NOT allowed to answer questions about current trends. ONLY address future developments.";
                 } else {
                     systemMessage = "You are a specialized current trend analyst providing accurate information about existing trends. "
-                            +
-                            "Consider the following user demographics: Location: " + locationName + ", Age: " + age
-                            + ", Gender: " + userGender + ". " +
-                            "Do not reveal these details in your response. " +
-                            "Your analysis should: " +
-                            "1. Cover multiple categories (technology, fashion, entertainment, social media, etc.) relevant to the user "
-                            +
-                            "2. Provide specific examples and evidence for each trend " +
-                            "3. Indicate how established each trend is (emerging/mainstream/declining) " +
-                            "4. Consider regional and demographic relevance " +
-                            "5. Focus on factual information rather than speculation " +
-                            "You are NOT allowed to answer questions about future trends. Only focus on current patterns.";
+                            + "Consider the following user demographics but DO NOT reveal them in your response: "
+                            + "Location: " + locationName + ", Age: " + age + ", Gender: " + userGender + ". "
+                            + "Your analysis must ONLY include information directly relevant to the user's query and: "
+                            + "1. Cover multiple categories (technology, fashion, entertainment, etc.) relevant to the user "
+                            + "2. Provide specific examples and evidence for each trend "
+                            + "3. Indicate how established each trend is (emerging/mainstream/declining) "
+                            + "4. Consider regional and demographic relevance "
+                            + "5. Focus on factual information rather than speculation "
+                            + "Stay strictly focused on the user's question. Avoid tangents or unrelated information. "
+                            + "You are NOT allowed to answer questions about future trends. ONLY address current patterns.";
                 }
             } else {
                 systemMessage = "You are free to respond as you wish.";

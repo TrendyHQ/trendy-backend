@@ -30,7 +30,7 @@ dependencies {
     // Auth0 Management API SDK
     implementation 'com.auth0:auth0:2.19.0'
 
-    implementation 'com.konghq:unirest-java-core:4.4.5'
+    implementation 'com.konghq:unirest-java-core:4.4.6'
     implementation 'com.google.code.gson:gson:2.13.0'
     implementation 'io.github.cdimascio:dotenv-java:3.2.0'
     implementation 'software.amazon.awssdk:s3:2.31.25'

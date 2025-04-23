@@ -84,10 +84,12 @@ public class TrendyClasses {
     public static class FavoritePostObject {
         private String postId;
         private String postCategory;
+        private String dateSaved;
 
-        public FavoritePostObject(String postId, String postCategory) {
+        public FavoritePostObject(String postId, String postCategory, String dateSaved) {
             this.postId = postId;
             this.postCategory = postCategory;
+            this.dateSaved = dateSaved;
         }
 
         public String getPostId() {
@@ -97,7 +99,12 @@ public class TrendyClasses {
         public String getPostCategory() {
             return postCategory;
         }
+
+        public String getDateSaved() {
+            return dateSaved;
+        }
     }
+
     public static class UpdateUserRequest {
         private String userId;
         private String toUpdate;
@@ -195,7 +202,7 @@ public class TrendyClasses {
         public String getNick() {
             return nick;
         }
-    
+
         public String getAvatar() {
             return avatar;
         }
@@ -313,11 +320,11 @@ public class TrendyClasses {
         public CommentObject[] getComments() {
             return comments;
         }
-        
+
         public boolean getUserHasLiked() {
             return userHasLiked;
         }
-    
+
         public boolean getUserHasDisliked() {
             return userHasDisliked;
         }
@@ -395,7 +402,7 @@ public class TrendyClasses {
         public String[] getUsersThatLiked() {
             return usersThatLiked;
         }
-    
+
         public String[] getUsersThatDisliked() {
             return usersThatDisliked;
         }
@@ -420,7 +427,7 @@ public class TrendyClasses {
         public ValueObject[] values;
     }
 
-    public class ValueObject{
+    public class ValueObject {
         public int extracted_value;
         public String query;
         public String value;

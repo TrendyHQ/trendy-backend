@@ -34,7 +34,7 @@ public class GooglePath {
 
     @GetMapping("/info")
     public ResponseEntity<String> getGoogleInfo(
-            @RequestParam(name="location", required=true) String location) {
+            @RequestParam(name = "location", required = true) String location) {
 
         try {
             JsonArray currentGoogleData = getCurrentGoogleData(location);
@@ -46,8 +46,8 @@ public class GooglePath {
                     LocalDateTime lastUpdatedTime = LocalDateTime.parse(lastUpdated.replace(" ", "T"));
                     LocalDateTime now = LocalDateTime.now();
 
-                    // Only update data if it’s more than 1 hour old or if the data size is not 13
-                    if (lastUpdatedTime.plusHours(1).isBefore(now) || currentGoogleData.size() != 13 && false) {
+                    // Only update data if it’s more than 1 day old or if the data size is not 13
+                    if (lastUpdatedTime.plusDays(1).isBefore(now) || currentGoogleData.size() != 13 && false) {
                         new Thread(() -> {
                             try {
                                 String newData = updateData(location);
@@ -72,13 +72,15 @@ public class GooglePath {
     }
 
     /**
-     * Retrieves current Google Trends data for a specific location from the database.
+     * Retrieves current Google Trends data for a specific location from the
+     * database.
      * 
      * @param location The geographical location to get trend data for
-     * @return JsonArray containing trend data and timestamp, or null if no data exists
+     * @return JsonArray containing trend data and timestamp, or null if no data
+     *         exists
      * @throws SQLException If a database access error occurs
      */
-    private JsonArray getCurrentGoogleData(String location) throws SQLException {
+    public JsonArray getCurrentGoogleData(String location) throws SQLException {
         // Method that checks the sql database to see if there is stored information
         // about the 12 categories and returns it
 
@@ -114,14 +116,15 @@ public class GooglePath {
 
     /**
      * Saves Google Trends data for a specific location to the database.
-     * Converts the location to a location code and updates or inserts the JSON data.
+     * Converts the location to a location code and updates or inserts the JSON
+     * data.
      * Only processes the data if the JSON array contains more than one element.
      *
      * @param location The geographical location to save trend data for
-     * @param jsonData The trend data in JSON string format 
+     * @param jsonData The trend data in JSON string format
      * @throws SQLException If a database access error occurs
      */
-    private void setCurrentGoogleData(String location, String jsonData) throws SQLException {
+    public void setCurrentGoogleData(String location, String jsonData) throws SQLException {
         // Method that sets the sql database with the 12 categories and their data
         JsonArray jsonArray = JsonParser.parseString(jsonData).getAsJsonArray();
         if (jsonArray.size() == 12) {

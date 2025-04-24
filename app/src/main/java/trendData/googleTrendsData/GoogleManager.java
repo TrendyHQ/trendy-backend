@@ -155,7 +155,7 @@ public class GoogleManager {
             }
 
             HttpResponse<String> serpResponse = Unirest
-                    .get("https://searchapi.io/api/v1/search")
+                    .get("https://serpapi.com/search")
                     .queryString(parameters)
                     .header("Content-Type", "application/json")
                     .header("cache-control", "no-cache")

@@ -41,12 +41,17 @@ dependencies {
     // Optional: Spring Boot DevTools for better development experience
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-    // Optional: Testing dependencies
+    // Testing dependencies - ALIGNED TO 5.12.2
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.5.0'
 
+    // Align JUnit Platform components to same version
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-commons:1.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.12.2'
 }
 
 sourceSets {
@@ -75,7 +80,7 @@ application {
 testing {
     suites {
         test {
-            useJUnitJupiter('5.11.4')
+            useJUnitJupiter('5.12.2')
         }
     }
 }

@@ -38,7 +38,8 @@ public class RedditPath {
      * Uses user's favorite posts to personalize the content selection.
      * 
      * @param request TopRedditRequest object containing userId and requestAmount
-     * @return ResponseEntity with JSON array of personalized Reddit posts or error message
+     * @return ResponseEntity with JSON array of personalized Reddit posts or error
+     *         message
      * @throws SQLException If a database access error occurs
      */
     @PostMapping("/topReddit")
@@ -78,12 +79,13 @@ public class RedditPath {
 
             // Calculate total favorites and prepare for proportional allocation
             int totalFavorites = categoryCounts.values().stream().mapToInt(Integer::intValue).sum();
-            
+
             // Request more posts than needed to ensure we have enough after filtering
             int requestBuffer = Math.max(20, amount);
             int totalToAllocate = amount + requestBuffer;
 
-            // Request data from each subreddit with proportional limits - never skip subreddits
+            // Request data from each subreddit with proportional limits - never skip
+            // subreddits
             for (String subreddit : subreddits) {
                 // Calculate proportional limit based on user preferences
                 if (totalFavorites > 0) {
@@ -94,10 +96,10 @@ public class RedditPath {
                     // Equal distribution if no favorites
                     limitPerSubreddit = totalToAllocate / subreddits.length;
                 }
-                
+
                 // Ensure minimum value
                 limitPerSubreddit = Math.max(5, limitPerSubreddit);
-                
+
                 futures.add(requestDataFromReddit(redditData, subreddit, redditClient, limitPerSubreddit));
             }
 
@@ -180,7 +182,7 @@ public class RedditPath {
 
             // Take exactly the requested number of posts
             RedditPost[] topPosts = allPosts.stream().limit(amount).toArray(RedditPost[]::new);
-            
+
             // If we still don't have enough posts, log an error
             if (topPosts.length < amount) {
                 System.err.println("Warning: Requested " + amount + " posts but only returned " + topPosts.length);
@@ -197,7 +199,8 @@ public class RedditPath {
      * Retrieves top trends for a specific category/entity from Reddit.
      * 
      * @param entity The category or entity name to fetch trends for
-     * @return ResponseEntity with JSON array of posts from the specified category or error message
+     * @return ResponseEntity with JSON array of posts from the specified category
+     *         or error message
      */
     @PostMapping("/topTrendsForCategory")
     public ResponseEntity<String> getTopTrendsForCategory(@RequestBody RequestEntityForTrend entity) {
@@ -235,13 +238,14 @@ public class RedditPath {
     /**
      * Asynchronously requests Reddit data for a specific subreddit.
      * 
-     * @param redditData The RedditDataFetcher instance to use for fetching data
+     * @param redditData    The RedditDataFetcher instance to use for fetching data
      * @param subredditName The name of the subreddit to fetch data from
-     * @param redditClient The authenticated RedditClient instance
-     * @param amount The number of posts to request from the subreddit
-     * @return CompletableFuture that will contain the array of RedditPost objects when completed
+     * @param redditClient  The authenticated RedditClient instance
+     * @param amount        The number of posts to request from the subreddit
+     * @return CompletableFuture that will contain the array of RedditPost objects
+     *         when completed
      */
-    private CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
+    public CompletableFuture<RedditPost[]> requestDataFromReddit(RedditDataFetcher redditData, String subredditName,
             RedditClient redditClient, int amount) {
         return CompletableFuture.supplyAsync(() -> {
             try {

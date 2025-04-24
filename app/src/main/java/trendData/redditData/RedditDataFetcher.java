@@ -11,6 +11,7 @@ import net.dean.jraw.models.Subreddit;
 import net.dean.jraw.models.SubredditSearchSort;
 import net.dean.jraw.pagination.DefaultPaginator;
 import net.dean.jraw.pagination.Paginator;
+import net.dean.jraw.references.SubmissionReference;
 import net.dean.jraw.references.SubredditReference;
 import net.dean.jraw.models.SubredditSort;
 import structure.TrendyClasses.FavoritePostObject;
@@ -139,17 +140,22 @@ public class RedditDataFetcher {
     public SpecificPost getSpecificPost(String postId, RedditClient redditClient,
             boolean asSpecificPost) {
         if (redditClient != null && asSpecificPost) {
-            Submission post = redditClient.submission(postId).inspect();
+            
+            SubmissionReference submission = redditClient.submission(postId);
+            if (submission == null) {
+                return new SpecificPost("", 0, "", "", postId, "");
+            }
+            Submission fullData = submission.inspect();
 
-            String title = post.getTitle();
-            int score = post.getScore();
-            String moreInfo = post.getSelfText();
-            String link = post.getUrl();
-            String subredditName = post.getSubreddit();
+            String title = fullData.getTitle();
+            int score = fullData.getScore();
+            String moreInfo = fullData.getSelfText();
+            String link = fullData.getUrl();
+            String subredditName = fullData.getSubreddit();
 
             return new SpecificPost(title, score, moreInfo, link, postId, subredditName);
         }
 
-        return null;
+        return new SpecificPost("", 0, "", "", postId, "");
     }
 }

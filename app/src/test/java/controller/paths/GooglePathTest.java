@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import trendData.googleTrendsData.GoogleManager;
 
@@ -31,34 +30,37 @@ class GooglePathTest {
     
     @Test
     void testGetGoogleInfoWithExistingData() throws Exception {
-        // Simplify the test by mocking the response directly
-        String location = "47.6062,-122.3321";
+        // Simplify the test with generic mocking approach
+        String location = "35.776102,-78.885683";
         
-        // Create test JSON data
+        // Create mock response data
         JsonArray mockDataArray = new JsonArray();
         JsonObject testObj = new JsonObject();
         testObj.addProperty("title", "Technology");
         testObj.addProperty("isTrending", true);
         mockDataArray.add(testObj);
+
+        // timestamp in ISO‑8601 format without zone (matches LocalDateTime.parse after replace)
+        mockDataArray.add("2025-04-24T00:00:00");
+
+        // Create a spy of googlePath
+        GooglePath spyGooglePath = spy(googlePath);
+
+        // Mock the location code lookup
+        when(googleManager.getLocationCode(anyString())).thenReturn("US");
         
-        // First mock the GoogleManager to setup the test
-        when(googleManager.getLocationCode(anyString())).thenReturn("US-WA");
+        // Mock the private method calls
+        doReturn(mockDataArray).when(spyGooglePath).getCurrentGoogleData(anyString());
+        doNothing().when(spyGooglePath).setCurrentGoogleData(anyString(), anyString());
+        
+        // Mock the Google API call in case it's needed
         when(googleManager.fetchInfo(anyString(), anyString())).thenReturn(testObj);
         
-        // Create a spy to intercept the method call
-        GooglePath spyPath = spy(googlePath);
+        // Execute the method using the spy
+        ResponseEntity<String> response = spyGooglePath.getGoogleInfo(location);
         
-        // Mock the private method call to avoid database interaction
-        doReturn(mockDataArray).when(spyPath).getCurrentGoogleData(anyString());
-        doNothing().when(spyPath).setCurrentGoogleData(anyString(), anyString());
-        
-        // Execute the method
-        ResponseEntity<String> response = spyPath.getGoogleInfo(location);
-        
-        // Verify the result
+        // Basic verification
         assertEquals(200, response.getStatusCode().value());
-        
-        // Note: Since we're mocking getCurrentGoogleData, the actual content will be from that mock
         assertNotNull(response.getBody());
     }
 }

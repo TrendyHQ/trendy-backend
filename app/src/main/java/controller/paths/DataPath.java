@@ -41,6 +41,7 @@ public class DataPath {
     public ResponseEntity<String> getSpecificTrendData(@RequestParam String postId, @RequestParam String userId)
             throws SQLException {
         RedditDataFetcher redditData = new RedditDataFetcher();
+        
         try {
             if (redditClientManager.getClient() == null) {
                 redditClientManager.authorizeClient();

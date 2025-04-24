@@ -3,7 +3,6 @@ package controller.paths;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.CompletableFuture;
 
@@ -14,28 +13,22 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 
-import com.google.gson.Gson;
-
 import dataManagement.UserManager;
 import net.dean.jraw.RedditClient;
 import structure.TrendyClasses.FavoritePostObject;
 import structure.TrendyClasses.RedditPost;
 import structure.TrendyClasses.RequestEntityForTrend;
 import structure.TrendyClasses.TopRedditRequest;
-import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
 
 class RedditPathTest {
-
-    @Mock
-    private RedditClientManager redditClientManager;
-    
-    @Mock
-    private RedditClient redditClient;
     
     @Mock
     private RedditDataFetcher redditDataFetcher;
     
+    @Mock
+    private RedditClient redditClient;
+        
     @Mock
     private UserManager userManager;
     
@@ -43,10 +36,8 @@ class RedditPathTest {
     private RedditPath redditPath;
     
     @BeforeEach
-    void setUp() {
+    public void setup() {
         MockitoAnnotations.openMocks(this);
-        
-        when(redditClientManager.getClient()).thenReturn(redditClient);
     }
     
     @Test
@@ -58,12 +49,12 @@ class RedditPathTest {
         when(request.getCategoryName()).thenReturn(categoryName);
         
         RedditPost[] mockPosts = new RedditPost[] {
-            new RedditPost("Test Post 1", categoryName, 1, 1000, "Info", "link", "id1"),
-            new RedditPost("Test Post 2", categoryName, 0, 500, "Info", "link", "id2")
+            new RedditPost("Test Post 1", categoryName, 1, 1000, "Info", "link", "1c4afd2"),
+            new RedditPost("Test Post 2", categoryName, 0, 500, "Info", "link", "1c4afd4")
         };
         
         // Configure mock behavior for redditDataFetcher
-        when(redditDataFetcher.getData(anyString(), any(), anyInt())).thenReturn(mockPosts);
+        when(redditDataFetcher.getData(eq(categoryName), any(RedditClient.class), anyInt())).thenReturn(mockPosts);
         
         // Execute the method
         ResponseEntity<String> response = redditPath.getTopTrendsForCategory(request);
@@ -72,6 +63,9 @@ class RedditPathTest {
         assertEquals(200, response.getStatusCode().value());
         assertTrue(response.getBody().contains("Test Post 1"));
         assertTrue(response.getBody().contains("Test Post 2"));
+        
+        // Verify the interaction with the mocked dependencies
+        verify(redditDataFetcher).getData(eq(categoryName), any(RedditClient.class), anyInt());
     }
     
     @Test
@@ -88,12 +82,21 @@ class RedditPathTest {
         favorites.add(new FavoritePostObject("post1", "technology", "2023-05-20"));
         
         // Configure UserManager mock
-        when(userManager.getUsersFavoritePostsIds(anyString())).thenReturn(favorites);
+        when(userManager.getUsersFavoritePostsIds(eq(userId))).thenReturn(favorites);
         
-        // Create mock posts
-        RedditPost[] mockPosts = new RedditPost[] {
-            new RedditPost("Tech Post", "technology", 1, 1000, "Info", "link", "tech1")
-        };
+        // Create mock posts equal to requestAmount
+        RedditPost[] mockPosts = new RedditPost[requestAmount];
+        for (int i = 0; i < requestAmount; i++) {
+            mockPosts[i] = new RedditPost(
+                "Tech Post " + i,
+                "technology",
+                1,
+                1000,
+                "Info",
+                "link",
+                "tech" + i
+            );
+        }
         
         // Mock the CompletableFuture that would be returned by the private method
         CompletableFuture<RedditPost[]> futurePosts = CompletableFuture.completedFuture(mockPosts);
@@ -103,7 +106,7 @@ class RedditPathTest {
         
         // Use doReturn for the private method
         doReturn(futurePosts).when(spyRedditPath).requestDataFromReddit(
-                any(RedditDataFetcher.class), anyString(), any(RedditClient.class), anyInt());
+                any(RedditDataFetcher.class), anyString(), any(RedditClient.class), eq(requestAmount));
         
         // Execute the method using the spy
         ResponseEntity<String> response = spyRedditPath.getTopRedditData(request);

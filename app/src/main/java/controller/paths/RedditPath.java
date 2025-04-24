@@ -11,12 +11,15 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import dataManagement.UserManager;
@@ -29,10 +32,15 @@ import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
 
 @RestController
-@RequestMapping("/api/reddit") // Define the base URL for your endpoints
+@RequestMapping("/api/reddit")
 public class RedditPath {
-    RedditClientManager redditClientManager = new RedditClientManager();
-
+    
+    @Autowired
+    private RedditDataFetcher redditDataFetcher;
+    
+    @Autowired
+    private RedditClient redditClient;
+    
     /**
      * Retrieves top Reddit data based on user preferences and post popularity.
      * Uses user's favorite posts to personalize the content selection.
@@ -45,11 +53,11 @@ public class RedditPath {
     @PostMapping("/topReddit")
     public ResponseEntity<String> getTopRedditData(@RequestBody TopRedditRequest request) throws SQLException {
         try {
-            if (redditClientManager.getClient() == null) {
+            if (redditClient == null) {
+                RedditClientManager redditClientManager = new RedditClientManager();
                 redditClientManager.authorizeClient();
+                redditClient = redditClientManager.getClient();
             }
-
-            RedditClient redditClient = redditClientManager.getClient();
 
             int amount = request.getRequestAmount();
             RedditDataFetcher redditData = new RedditDataFetcher();
@@ -202,36 +210,30 @@ public class RedditPath {
      * @return ResponseEntity with JSON array of posts from the specified category
      *         or error message
      */
-    @PostMapping("/topTrendsForCategory")
-    public ResponseEntity<String> getTopTrendsForCategory(@RequestBody RequestEntityForTrend entity) {
+    @PostMapping("/category")
+    public ResponseEntity<String> getTopTrendsForCategory(@RequestBody RequestEntityForTrend request) {
         try {
-            if (redditClientManager.getClient() == null) {
-                redditClientManager.authorizeClient();
+            if (request == null || request.getCategoryName() == null || request.getCategoryName().isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid request: category name is required");
             }
-
-            RedditClient redditClient = redditClientManager.getClient();
-
-            int limit = 30;
-            RedditDataFetcher redditData = new RedditDataFetcher();
-            RedditPost[] posts = redditData.getData(entity.getCategoryName(), redditClient, limit);
-
-            // Collect all posts into a single list
-            List<RedditPost> allPosts = new ArrayList<>();
-            if (posts != null) {
-                Collections.addAll(allPosts, posts);
+            
+            String categoryName = request.getCategoryName();
+            
+            // Get data from Reddit for the specified category
+            RedditPost[] posts = redditDataFetcher.getData(categoryName, redditClient, 10); // Default to 10 posts
+            
+            if (posts == null || posts.length == 0) {
+                return ResponseEntity.status(HttpStatus.OK).body("[]");
             }
-
-            // Sort posts by score in descending order
-            allPosts.sort((p1, p2) -> {
-                if (p1 != null && p2 != null) {
-                    return Integer.compare(p2.getScore(), p1.getScore());
-                }
-                return 0; // If either p1 or p2 is null, consider them equal for sorting purposes
-            });
-
-            return ResponseEntity.ok(new Gson().toJson(allPosts));
+            
+            // Convert to JSON string
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonResponse = objectMapper.writeValueAsString(posts);
+            
+            return ResponseEntity.status(HttpStatus.OK).body(jsonResponse);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Failed to recieve data");
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error fetching Reddit trends: " + e.getMessage());
         }
     }
 

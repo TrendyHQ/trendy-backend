@@ -34,7 +34,7 @@ public class GooglePath {
 
     @GetMapping("/info")
     public ResponseEntity<String> getGoogleInfo(
-            @RequestParam(name = "location", required = true) String location) {
+            @RequestParam(required = true) String location) {
 
         try {
             JsonArray currentGoogleData = getCurrentGoogleData(location);
@@ -47,7 +47,7 @@ public class GooglePath {
                     LocalDateTime now = LocalDateTime.now();
 
                     // Only update data if it’s more than 1 day old or if the data size is not 13
-                    if (lastUpdatedTime.plusDays(1).isBefore(now) || currentGoogleData.size() != 13 && false) {
+                    if ((lastUpdatedTime.plusDays(1).isBefore(now) || currentGoogleData.size() != 13) && false) {
                         new Thread(() -> {
                             try {
                                 String newData = updateData(location);

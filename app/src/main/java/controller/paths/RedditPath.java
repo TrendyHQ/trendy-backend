@@ -3,7 +3,6 @@ package controller.paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,11 +33,20 @@ import trendData.redditData.RedditDataFetcher;
 @RequestMapping("/api/reddit")
 public class RedditPath {
     
-    @Autowired
     private RedditDataFetcher redditDataFetcher;
-    
-    @Autowired
     private RedditClient redditClient;
+    
+    public RedditPath() {
+        this.redditDataFetcher = new RedditDataFetcher();
+        try {
+            RedditClientManager redditClientManager = new RedditClientManager();
+            redditClientManager.authorizeClient();
+            this.redditClient = redditClientManager.getClient();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Failed to initialize Reddit client: " + e.getMessage());
+        }
+    }
     
     /**
      * Retrieves top Reddit data based on user preferences and post popularity.
@@ -60,8 +67,7 @@ public class RedditPath {
             }
 
             int amount = request.getRequestAmount();
-            RedditDataFetcher redditData = new RedditDataFetcher();
-
+            
             String[] subreddits = { "fashion", "technology", "food", "entertainment", "socialmedia",
                     "fitness", "health", "music", "politics", "travel", "science", "sports" };
 
@@ -108,7 +114,7 @@ public class RedditPath {
                 // Ensure minimum value
                 limitPerSubreddit = Math.max(5, limitPerSubreddit);
 
-                futures.add(requestDataFromReddit(redditData, subreddit, redditClient, limitPerSubreddit));
+                futures.add(requestDataFromReddit(redditDataFetcher, subreddit, redditClient, limitPerSubreddit));
             }
 
             // Wait for all futures to complete
@@ -178,7 +184,7 @@ public class RedditPath {
                 // If not present, add the most popular post from that category
                 if (!topCategoryPresent) {
                     try {
-                        RedditPost[] topCategoryPosts = redditData.getData(topFavoriteCategory, redditClient, 1);
+                        RedditPost[] topCategoryPosts = redditDataFetcher.getData(topFavoriteCategory, redditClient, 1);
                         if (topCategoryPosts != null && topCategoryPosts.length > 0) {
                             allPosts.add(topCategoryPosts[0]);
                         }

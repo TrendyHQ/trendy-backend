@@ -23,21 +23,34 @@ import trendData.redditData.RedditDataFetcher;
 
 class RedditPathTest {
     
-    @Mock
     private RedditDataFetcher redditDataFetcher;
-    
-    @Mock
     private RedditClient redditClient;
-        
-    @Mock
     private UserManager userManager;
-    
-    @InjectMocks
     private RedditPath redditPath;
     
     @BeforeEach
     public void setup() {
-        MockitoAnnotations.openMocks(this);
+        // Manual mocking instead of using annotations
+        redditDataFetcher = mock(RedditDataFetcher.class);
+        redditClient = mock(RedditClient.class);
+        userManager = mock(UserManager.class);
+        
+        // Create RedditPath with a test constructor or use reflection to set fields
+        redditPath = new RedditPath();
+        
+        // Use reflection to set the private fields
+        try {
+            java.lang.reflect.Field dataFetcherField = RedditPath.class.getDeclaredField("redditDataFetcher");
+            dataFetcherField.setAccessible(true);
+            dataFetcherField.set(redditPath, redditDataFetcher);
+            
+            java.lang.reflect.Field clientField = RedditPath.class.getDeclaredField("redditClient");
+            clientField.setAccessible(true);
+            clientField.set(redditPath, redditClient);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail("Test setup failed: " + e.getMessage());
+        }
     }
     
     @Test

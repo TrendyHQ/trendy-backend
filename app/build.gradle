@@ -37,9 +37,10 @@ dependencies {
     implementation 'net.dean.jraw:JRAW:1.1.0'
     implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'com.azure:azure-ai-inference:1.0.0-beta.2'
-
-    implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    
+    // Instead, use Spring Boot's managed versions
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'ch.qos.logback:logback-classic'
     
     // Optional: Spring Boot DevTools for better development experience
     developmentOnly 'org.springframework.boot:spring-boot-devtools'

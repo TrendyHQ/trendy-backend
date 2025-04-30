@@ -3,6 +3,7 @@ package controller.paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -45,6 +46,47 @@ public class RedditPath {
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("Failed to initialize Reddit client: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Retrieves top trends for a specific category/entity from Reddit.
+     * 
+     * @param entity The category or entity name to fetch trends for
+     * @return ResponseEntity with JSON array of posts from the specified category or error message
+     */
+    @PostMapping("/topTrendsForCategory")
+    public ResponseEntity<String> getTopTrendsForCategory(@RequestBody String entity) {
+        RedditClientManager redditClientManager = new RedditClientManager();
+
+        try {
+            if (redditClientManager.getClient() == null) {
+                redditClientManager.authorizeClient();
+            }
+
+            RedditClient redditClient = redditClientManager.getClient();
+
+            int limit = 30;
+            RedditDataFetcher redditData = new RedditDataFetcher();
+            RedditPost[] posts = redditData.getData(entity, redditClient, limit);
+
+            // Collect all posts into a single list
+            List<RedditPost> allPosts = new ArrayList<>();
+            if (posts != null) {
+                Collections.addAll(allPosts, posts);
+            }
+
+            // Sort posts by score in descending order
+            allPosts.sort((p1, p2) -> {
+                if (p1 != null && p2 != null) {
+                    return Integer.compare(p2.getScore(), p1.getScore());
+                }
+                return 0; // If either p1 or p2 is null, consider them equal for sorting purposes
+            });
+
+            return ResponseEntity.ok(new Gson().toJson(allPosts));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Failed to recieve data");
         }
     }
     

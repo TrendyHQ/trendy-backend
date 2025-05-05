@@ -40,9 +40,11 @@ public class UsersPath {
 
     /**
      * Updates user information in Auth0 based on the provided request.
-     * Filters out null, empty values, and only allows updates to predefined editable properties.
+     * Filters out null, empty values, and only allows updates to predefined
+     * editable properties.
      *
-     * @param request UpdateUserRequest containing userId and JSON string with fields to update
+     * @param request UpdateUserRequest containing userId and JSON string with
+     *                fields to update
      * @return ResponseEntity with the cleaned update JSON string or error message
      */
     @PatchMapping("/updateUserInformation")
@@ -62,8 +64,14 @@ public class UsersPath {
                 "picture", // URL to the user's avatar image
                 "user_metadata", // Custom, user-specific metadata (object)
                 "app_metadata", // Custom metadata used for application-specific info (object)
-                "multifactor" // Array for multi-factor authentication providers
+                "multifactor", // Array for multi-factor authentication providers
+                "emailNotifications", // User's email notification preferences
+                "pushNotifications", // User's push notification preferences
+                "profileVisibility", // User's profile visibility settings
+                "theme", // User's theme preference
         };
+
+        System.out.println("Received request to update user information: " + request.getToUpdate());
 
         try {
             String accessToken = AuthRequestManager.getAccessToken();
@@ -115,6 +123,8 @@ public class UsersPath {
 
             String cleanedUpdate = filteredJson.toString();
 
+            System.out.println(cleanedUpdate);
+
             AuthRequestManager.setUserInformation(cleanedUpdate, accessToken, request.getUserId());
 
             return ResponseEntity.ok(cleanedUpdate); // Update response to return cleanedUpdate instead of
@@ -126,11 +136,11 @@ public class UsersPath {
     }
 
     /**
-     * Updates a user's profile picture by uploading the provided file to S3 and 
+     * Updates a user's profile picture by uploading the provided file to S3 and
      * updating the user's Auth0 profile with the new picture URL.
      *
      * @param userId ID of the user whose picture is being updated
-     * @param file MultipartFile containing the new profile picture image
+     * @param file   MultipartFile containing the new profile picture image
      * @return ResponseEntity with success message or error message
      * @throws Exception If an error occurs during file upload or profile update
      */
@@ -162,16 +172,18 @@ public class UsersPath {
 
     /**
      * Retrieves a specific property from a user's Auth0 profile.
-     * Supports accessing properties from the main profile, app_metadata, or user_metadata.
+     * Supports accessing properties from the main profile, app_metadata, or
+     * user_metadata.
      *
-     * @param property Name of the property to retrieve (must be in predefined valid properties)
-     * @param userId ID of the user whose property is being requested
+     * @param property Name of the property to retrieve (must be in predefined valid
+     *                 properties)
+     * @param userId   ID of the user whose property is being requested
      * @return ResponseEntity with the property value as a string or error message
      */
     @GetMapping("/getUserProperty")
     public ResponseEntity<String> getUserProperty(
-            @RequestParam(name="property") String property, 
-            @RequestParam(name="userId") String userId) {
+            @RequestParam(name = "property") String property,
+            @RequestParam(name = "userId") String userId) {
         String[] validProperties = {
                 "picture",
         };
@@ -181,40 +193,44 @@ public class UsersPath {
         String[] validUserMetaDataProperties = {
                 "gender",
                 "birthDate",
+                "emailNotifications",
+                "pushNotifications",
+                "profileVisibility",
+                "theme"
         };
 
         try {
-            if (Arrays.asList(validProperties).contains(property)) {
-                JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
-                String requestedProperty = jsonResponse.get(property).getAsString();
+            JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
+            JsonObject resultObject = new JsonObject();
 
-                return ResponseEntity.ok(requestedProperty);
-            } else {
-                if (Arrays.asList(validAppMetaDataProperties).contains(property)) {
-                    JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
-                    String requestedProperty = "";
+            // Handle both single property and array of properties
+            if (property.contains(",")) {
+                String[] properties = property.split(",");
 
-                    if (jsonResponse.has("app_metadata") &&
-                            jsonResponse.get("app_metadata").getAsJsonObject().has(property)) {
-                        requestedProperty = jsonResponse.get("app_metadata").getAsJsonObject().get(property)
-                                .getAsString();
-                    }
-
-                    return ResponseEntity.ok(requestedProperty);
-                } else if (Arrays.asList(validUserMetaDataProperties).contains(property)) {
-                    JsonObject jsonResponse = AuthRequestManager.getAuth0Info(userId);
-                    String requestedProperty = "";
-
-                    if (jsonResponse.has("user_metadata") &&
-                            jsonResponse.get("user_metadata").getAsJsonObject().has(property)) {
-                        requestedProperty = jsonResponse.get("user_metadata").getAsJsonObject().get(property)
-                                .getAsString();
-                    }
-
-                    return ResponseEntity.ok(requestedProperty);
-                } else {
-                    return ResponseEntity.badRequest().body("Invalid user property");
+                for (String prop : properties) {
+                    addPropertyToResult(prop, jsonResponse, resultObject,
+                            validProperties, validAppMetaDataProperties, validUserMetaDataProperties);
                 }
+
+                return ResponseEntity.ok(resultObject.toString());
+            } else if (property instanceof String) {
+                String prop = (String) property;
+                addPropertyToResult(prop, jsonResponse, resultObject,
+                        validProperties, validAppMetaDataProperties, validUserMetaDataProperties);
+
+                // For backward compatibility, return just the string value for single property
+                // requests
+                if (resultObject.size() == 1) {
+                    JsonElement element = resultObject.get(prop);
+                    if (element != null && !element.isJsonNull()) {
+                        return ResponseEntity.ok(element.getAsString());
+                    }
+                    return ResponseEntity.ok("");
+                }
+
+                return ResponseEntity.ok(resultObject.toString());
+            } else {
+                return ResponseEntity.badRequest().body("Invalid property format");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -222,10 +238,31 @@ public class UsersPath {
         }
     }
 
+    private void addPropertyToResult(String property, JsonObject jsonResponse, JsonObject resultObject,
+            String[] validProperties, String[] validAppMetaDataProperties,
+            String[] validUserMetaDataProperties) {
+        if (Arrays.asList(validProperties).contains(property)) {
+            if (jsonResponse.has(property) && !jsonResponse.get(property).isJsonNull()) {
+                resultObject.add(property, jsonResponse.get(property));
+            }
+        } else if (Arrays.asList(validAppMetaDataProperties).contains(property)) {
+            if (jsonResponse.has("app_metadata") &&
+                    jsonResponse.get("app_metadata").getAsJsonObject().has(property)) {
+                resultObject.add(property, jsonResponse.get("app_metadata").getAsJsonObject().get(property));
+            }
+        } else if (Arrays.asList(validUserMetaDataProperties).contains(property)) {
+            if (jsonResponse.has("user_metadata") &&
+                    jsonResponse.get("user_metadata").getAsJsonObject().has(property)) {
+                resultObject.add(property, jsonResponse.get("user_metadata").getAsJsonObject().get(property));
+            }
+        }
+    }
+
     /**
      * Saves or removes a trend (post) as a favorite for a specific user.
      *
-     * @param request TrendSaveRequest containing userId, trendId, saveTrend flag, and trendCategory
+     * @param request TrendSaveRequest containing userId, trendId, saveTrend flag,
+     *                and trendCategory
      * @return ResponseEntity with success message or error message
      */
     @PatchMapping("/saveTrend")
@@ -245,7 +282,8 @@ public class UsersPath {
      * Retrieves all trends (posts) saved as favorites by a specific user.
      *
      * @param userId ID of the user whose saved trends are being requested
-     * @return ResponseEntity with JSON array of favorite post objects or error message
+     * @return ResponseEntity with JSON array of favorite post objects or error
+     *         message
      */
     @GetMapping("/getSavedTrends")
     public ResponseEntity<String> getSavedTrends(@RequestParam String userId) {
@@ -259,7 +297,8 @@ public class UsersPath {
      * Fetches complete post data from Reddit for each saved trend ID.
      *
      * @param userId ID of the user whose trends are being requested
-     * @return ResponseEntity with JSON array of specific post objects or error message
+     * @return ResponseEntity with JSON array of specific post objects or error
+     *         message
      * @throws SQLException If a database access error occurs
      */
     @GetMapping("/getUsersTrends")

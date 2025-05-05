@@ -27,6 +27,8 @@ public class SecurityConfig {
                     config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
                     config.setAllowCredentials(true);
                     config.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-XSRF-TOKEN"));
+                    config.setExposedHeaders(List.of("Authorization", "Content-Type", "Access-Control-Allow-Origin"));
+                    config.applyPermitDefaultValues();
                     return config;
                 }))
                 .csrf(AbstractHttpConfigurer::disable)

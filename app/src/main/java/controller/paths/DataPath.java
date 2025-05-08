@@ -18,12 +18,7 @@ import com.google.gson.Gson;
 import dataManagement.FeedbackManager;
 import dataManagement.StorageManager;
 import net.dean.jraw.RedditClient;
-import structure.TrendyClasses.CommentRequest;
-import structure.TrendyClasses.FeedbackObject;
-import structure.TrendyClasses.FeedbackRequest;
-import structure.TrendyClasses.LikeRequest;
-import structure.TrendyClasses.PostData;
-import structure.TrendyClasses.SpecificPost;
+import structure.TrendyClasses.*;
 import trendData.redditData.RedditClientManager;
 import trendData.redditData.RedditDataFetcher;
 

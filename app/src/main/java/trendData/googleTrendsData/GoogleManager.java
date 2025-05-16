@@ -233,9 +233,9 @@ public class GoogleManager {
         // range
         double relativeSlope = (range > 0) ? (slope * (n - 1)) / range : 0;
 
-        // Consider it trending if relative slope indicates at least 20% growth over the
+        // Consider it trending if relative slope indicates at least 10% growth over the
         // period
         // compared to the overall range of values
-        return relativeSlope > 0.15;
+        return relativeSlope > 0.1;
     }
 }

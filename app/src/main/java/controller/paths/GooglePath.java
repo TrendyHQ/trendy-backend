@@ -21,6 +21,7 @@ import com.google.gson.JsonSyntaxException;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import trendData.googleTrendsData.GoogleManager;
+import utils.Constants;
 
 @RestController
 @RequestMapping("/api/google")
@@ -32,6 +33,7 @@ public class GooglePath {
     private final String USER = dotenv.get("DB_USER");
     private final String PASSWORD = dotenv.get("DB_PASSWORD");
 
+    @SuppressWarnings("unused")
     @GetMapping("/info")
     public ResponseEntity<String> getGoogleInfo(
             @RequestParam(required = true) String location) {
@@ -47,7 +49,7 @@ public class GooglePath {
                     LocalDateTime now = LocalDateTime.now();
 
                     // Only update data if it’s more than 1 day old or if the data size is not 13
-                    if ((lastUpdatedTime.plusDays(1).isBefore(now) || currentGoogleData.size() != 13) && false) {
+                    if ((lastUpdatedTime.plusDays(1).isBefore(now) || currentGoogleData.size() != 13) && !Constants.testing) {
                         new Thread(() -> {
                             try {
                                 String newData = updateData(location);

@@ -64,4 +64,18 @@ public class AuthRequestManager {
 
         return JsonParser.parseString(auth0ApiResponse.getBody()).getAsJsonObject();
     }
+
+    public void deleteUser(String userId) throws Exception {
+        String accessToken = getAccessToken();
+
+        String encodedUserId = URLEncoder.encode(userId, StandardCharsets.UTF_8.toString());
+
+        @SuppressWarnings("unused")
+        HttpResponse<String> auth0ApiResponse = Unirest
+                .delete("https://" + DOMAIN + "/api/v2/users/" + encodedUserId)
+                .header("authorization", "Bearer " + accessToken)
+                .header("Content-Type", "application/json")
+                .header("cache-control", "no-cache")
+                .asString();
+    }
 }

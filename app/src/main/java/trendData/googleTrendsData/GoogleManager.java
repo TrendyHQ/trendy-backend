@@ -59,7 +59,7 @@ public class GoogleManager {
         }
 
         JsonObject countryData = JsonParser.parseString(geonamesResponse.getBody()).getAsJsonObject();
-        String countryCode = countryData.get("countryCode").getAsString();
+        String countryCode = countryData.get("countryCode") != null ? countryData.get("countryCode").getAsString() : "";
 
         // First try to find an exact match for the country code
         if (locationsData.has(countryCode)) {

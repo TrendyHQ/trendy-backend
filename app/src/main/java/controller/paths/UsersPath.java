@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -71,8 +72,6 @@ public class UsersPath {
                 "theme", // User's theme preference
         };
 
-        System.out.println("Received request to update user information: " + request.getToUpdate());
-
         try {
             String accessToken = AuthRequestManager.getAccessToken();
 
@@ -122,8 +121,6 @@ public class UsersPath {
             }
 
             String cleanedUpdate = filteredJson.toString();
-
-            System.out.println(cleanedUpdate);
 
             AuthRequestManager.setUserInformation(cleanedUpdate, accessToken, request.getUserId());
 
@@ -217,6 +214,10 @@ public class UsersPath {
                 String prop = (String) property;
                 addPropertyToResult(prop, jsonResponse, resultObject,
                         validProperties, validAppMetaDataProperties, validUserMetaDataProperties);
+
+                if (resultObject.size() == 0) {
+                    return ResponseEntity.ok(null);
+                }
 
                 // For backward compatibility, return just the string value for single property
                 // requests
@@ -316,5 +317,23 @@ public class UsersPath {
         String jsonResponse = new Gson().toJson(favoritePosts);
 
         return ResponseEntity.ok(jsonResponse);
+    }
+
+    /**
+     * Deletes a user from the system based on their user ID.
+     *
+     * @param userId ID of the user to be deleted
+     * @return ResponseEntity with success message or error message
+     */
+    @DeleteMapping("/deleteUser")
+    public ResponseEntity<String> deleteUser(@RequestBody Map<String, String> request) {
+        try {
+            String userId = request.get("userId");
+            new AuthRequestManager().deleteUser(userId);
+            return ResponseEntity.ok("User deleted successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.badRequest().body("Failed to delete user");
+        }
     }
 }

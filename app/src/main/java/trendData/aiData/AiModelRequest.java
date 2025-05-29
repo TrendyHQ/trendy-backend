@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
+import java.util.Base64.Encoder;
 
 import com.azure.ai.inference.ChatCompletionsClient;
 import com.azure.ai.inference.ChatCompletionsClientBuilder;
@@ -49,7 +51,7 @@ public class AiModelRequest {
         Dotenv dotenv = Dotenv.load();
         String key = dotenv.get("GITHUB_TOKEN");
         String endpoint = "https://models.inference.ai.azure.com";
-        String model = "Mistral-Nemo";
+        final String model = "Phi-4";
 
         // Preprocess user data: convert birthdate to age and coordinates to a friendly
         // location name

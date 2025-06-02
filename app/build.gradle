@@ -55,7 +55,7 @@ dependencies {
     // Align JUnit Platform components to same version
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.12.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-commons:1.12.2'
-    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.12.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-engine:1.13.0'
 }
 
 sourceSets {

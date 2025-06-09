@@ -48,7 +48,7 @@ dependencies {
     // Testing dependencies - ALIGNED TO 5.12.2
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.12.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.12.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.13.1'
     testImplementation 'org.mockito:mockito-core:5.18.0'
     testImplementation 'org.mockito:mockito-junit-jupiter:5.18.0'
 
